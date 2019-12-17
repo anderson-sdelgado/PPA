@@ -8,6 +8,11 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNotaFiscalBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.OSBean;
+
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	public static final String FORCA_DB_NAME = "ppa_db";
@@ -43,7 +48,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		
 		try{
 			
-//			TableUtils.createTable(cs, RAtivOSBean.class);
+			TableUtils.createTable(cs, EquipBean.class);
+			TableUtils.createTable(cs, ItemNotaFiscalBean.class);
+			TableUtils.createTable(cs, NotaFiscalBean.class);
+			TableUtils.createTable(cs, OSBean.class);
 			
 		}
 		catch(Exception e){

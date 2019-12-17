@@ -1,6 +1,5 @@
 package br.com.usinasantafe.ppa.util;
 
-
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,8 +13,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
-
-import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String>   {
 
@@ -73,8 +70,8 @@ public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String
 
 			Log.i("ECM", "VALOR RECEBIDO --> " + result);
 			if(result.trim().contains("GRAVOU")){
-				AbordagemCTR abordagemCTR = new AbordagemCTR();
-				abordagemCTR.deleteCabec(result);
+//				AbordagemCTR abordagemCTR = new AbordagemCTR();
+//				abordagemCTR.deleteCabec(result);
 			}
 			else{
 				EnvioDadosServ.getInstance().setEnviando(false);

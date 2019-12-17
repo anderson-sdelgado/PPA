@@ -23,30 +23,30 @@ import java.net.URL;
 
 public class AtualizarAplicativo extends AsyncTask<String ,Integer ,Boolean> {
 
-    private ProgressDialog bar;
+    private ProgressDialog progressDialog;
     private Context context;
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
-        bar = new ProgressDialog(context);
-        bar.setCancelable(false);
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setCancelable(false);
 
-        bar.setMessage("ABAIXANDO ATUALIZAÇÃO...");
+        progressDialog.setMessage("ABAIXANDO ATUALIZAÇÃO...");
 
-        bar.setIndeterminate(true);
-        bar.setCanceledOnTouchOutside(false);
-        bar.show();
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
     }
 
     protected void onProgressUpdate(Integer... progress) {
         super.onProgressUpdate(progress);
 
-        bar.setIndeterminate(false);
-        bar.setMax(100);
-        bar.setProgress(progress[0]);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setMax(100);
+        progressDialog.setProgress(progress[0]);
         String msg = "";
         if(progress[0]>99){
 
@@ -56,7 +56,7 @@ public class AtualizarAplicativo extends AsyncTask<String ,Integer ,Boolean> {
 
             msg="ABAIXANDO ATUALIZAÇÃO... "+progress[0]+"%";
         }
-        bar.setMessage(msg);
+        progressDialog.setMessage(msg);
 
     }
     @Override
@@ -64,7 +64,7 @@ public class AtualizarAplicativo extends AsyncTask<String ,Integer ,Boolean> {
 
         super.onPostExecute(result);
 
-        bar.dismiss();
+        progressDialog.dismiss();
 
         if(result){
 

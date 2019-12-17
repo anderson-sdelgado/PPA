@@ -22,7 +22,7 @@ public class EnvioDadosServ {
     public void dadosEnvio() {
 
 //        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
-//        AbordagemCTR abordagemCTR = new AbordagemCTR();
+//        PesagemCTR abordagemCTR = new PesagemCTR();
 //
 //        String[] dados = new String[7];
 //
@@ -48,7 +48,7 @@ public class EnvioDadosServ {
     //////////////////////VERIFICAÇÃO DE DADOS///////////////////////////
 
     public Boolean verifEnvioDados() {
-//        AbordagemCTR abordagemCTR = new AbordagemCTR();
+//        PesagemCTR abordagemCTR = new PesagemCTR();
 //        return abordagemCTR.verEnvioDados();
         return false;
     }

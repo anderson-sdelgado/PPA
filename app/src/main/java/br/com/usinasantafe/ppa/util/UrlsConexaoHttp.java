@@ -1,24 +1,21 @@
 package br.com.usinasantafe.ppa.util;
 
-import br.com.usinasantafe.pst.PSTContext;
+import br.com.usinasantafe.ppa.PPAContext;
 
 public class UrlsConexaoHttp {
 
-    public static String urlPrincipal = "http://www.usinasantafe.com.br/pst/view/";
-    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pst/view/";
+    public static String urlPrincipal = "http://www.usinasantafe.com.br/ppadev/view/";
+    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/ppadev/view/";
 
-    public static String localPSTEstatica = "br.com.usinasantafe.pst.bean.estaticas.";
-    public static String localUrl = "br.com.usinasantafe.pst.util.UrlsConexaoHttp";
+    public static String localPSTEstatica = "br.com.usinasantafe.ppa.model.bean.estaticas.";
+    public static String localUrl = "br.com.usinasantafe.ppa.util.UrlsConexaoHttp";
 
-    public static String put = "?versao=" + PSTContext.versaoAplic.replace(".", "_");
+    public static String put = "?versao=" + PPAContext.versaoAplic.replace(".", "_");
 
-    public static String AreaBean = urlPrincipal + "area.php" + put;
-    public static String SubAreaBean = urlPrincipal + "subarea.php" + put;
-    public static String ColabBean = urlPrincipal + "colab.php" + put;
-    public static String QuestaoBean = urlPrincipal + "questao.php" + put;
-    public static String TipoBean = urlPrincipal + "tipo.php" + put;
-    public static String TopicoBean = urlPrincipal + "topico.php" + put;
-    public static String TurnoBean = urlPrincipal + "turno.php" + put;
+    public static String EquipBean = urlPrincipal + "equip.php" + put;
+    public static String ItemNotaFiscalBean = urlPrincipal + "itemnotafiscal.php" + put;
+    public static String NotaFiscalBean = urlPrincipal + "notafiscal.php" + put;
+    public static String OSBean = urlPrincipal + "os.php" + put;
 
     public UrlsConexaoHttp() {
     }

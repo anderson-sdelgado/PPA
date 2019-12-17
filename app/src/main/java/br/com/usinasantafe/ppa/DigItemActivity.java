@@ -1,9 +1,8 @@
 package br.com.usinasantafe.ppa;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class DigItemActivity extends Activity {
+public class DigItemActivity extends ActivityGeneric {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,9 +1,8 @@
 package br.com.usinasantafe.ppa;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class ListaNotaFiscalActivity extends Activity {
+public class ListaNotaFiscalActivity extends ActivityGeneric {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

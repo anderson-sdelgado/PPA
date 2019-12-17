@@ -21,11 +21,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ComentFalhaActivity"></activity>
-        <activity android:name=".DigOSActivity" />
-        <activity android:name=".DigItemActivity" />
-        <activity android:name=".DigNotaFiscalActivity" />
-        <activity android:name=".DigVeiculoActivity" />
+        <activity
+            android:name=".ComentFalhaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DigOSActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DigItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DigNotaFiscalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DigVeiculoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CameraActivity"
             android:screenOrientation="portrait" />
@@ -56,11 +66,9 @@
         <activity android:name=".MenuInicialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <receiver android:name=".AlarmClass" />
     </application>
 

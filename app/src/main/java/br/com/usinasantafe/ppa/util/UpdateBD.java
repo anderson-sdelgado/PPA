@@ -33,7 +33,6 @@ public class UpdateBD {
 	private UrlsConexaoHttp urlsConexaoHttp;
 	
 	public UpdateBD() {
-
 		genericRecordable = new GenericRecordable();
 	}
 	
@@ -47,36 +46,26 @@ public class UpdateBD {
 	public void manipularDadosHttp(String tipo, String result){
 
 		if(!result.equals("")){
-
 			try{
-
 				Log.i("PMM", "TIPO -> " + tipo);
 				Log.i("PMM", "RESULT -> " + result);
-
 				JSONObject jObj = new JSONObject(result);
 				JSONArray jsonArray = jObj.getJSONArray("dados");
 				Class classe = Class.forName(manipLocalClasse(tipo));
 				genericRecordable.deleteAll(classe);
-
 				for(int i = 0; i < jsonArray.length(); i++){
-
 					JSONObject objeto = jsonArray.getJSONObject(i);
 					Gson gson = new Gson();
 					genericRecordable.insert(gson.fromJson(objeto.toString(), classe), classe);
-
 				}
-
 				Log.i("PMM", " SALVOU DADOS ");
-
 				if(contAtualBD > 0){
 					atualizandoBD();
 				}
-
 			}
 			catch (Exception e) {
-			Log.i("PMM", "Erro Manip = " + e);
+				Log.i("PMM", "Erro Manip = " + e);
 			}
-
 		}
 		else{
 			encerrar();
@@ -214,9 +203,7 @@ public class UpdateBD {
 	}
 
 	public void encerrar(){
-
 		if(this.tipoReceb == 1){
-
 			this.progressDialog.dismiss();
 			AlertDialog.Builder alerta = new AlertDialog.Builder(this.context);
 			alerta.setTitle("ATENCAO");
@@ -227,9 +214,7 @@ public class UpdateBD {
 
 				}
 			});
-
 			alerta.show();
-
 		}
 	}
 

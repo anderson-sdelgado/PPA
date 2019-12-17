@@ -1,13 +1,15 @@
 package br.com.usinasantafe.ppa;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class ListaVeiculoActivity extends Activity {
+public class ListaVeiculoActivity extends ActivityGeneric {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_veiculo);
+
+
+
     }
 }

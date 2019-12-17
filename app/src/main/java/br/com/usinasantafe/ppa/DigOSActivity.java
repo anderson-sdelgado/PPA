@@ -1,9 +1,8 @@
 package br.com.usinasantafe.ppa;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DigOSActivity extends AppCompatActivity {
+public class DigOSActivity extends ActivityGeneric {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

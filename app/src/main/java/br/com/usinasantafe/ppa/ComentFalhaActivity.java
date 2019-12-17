@@ -1,9 +1,8 @@
 package br.com.usinasantafe.ppa;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class ComentFalhaActivity extends Activity {
+public class ComentFalhaActivity extends ActivityGeneric {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
