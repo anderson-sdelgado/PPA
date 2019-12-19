@@ -17,21 +17,21 @@
         android:text="@string/texto_veiculo" />
 
     <ListView
-        android:id="@+id/listTurno"
+        android:id="@+id/listVeiculo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         />
 
     <Button
-        android:id="@+id/buttonAtualTurno"
+        android:id="@+id/buttonAtualVeiculo"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/texto_atualizar" />
 
     <Button
-        android:id="@+id/buttonRetTurno"
+        android:id="@+id/buttonRetVeiculo"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

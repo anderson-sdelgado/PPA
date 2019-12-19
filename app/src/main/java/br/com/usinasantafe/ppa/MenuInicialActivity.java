@@ -41,6 +41,8 @@ public class MenuInicialActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_inicial);
 
+        ppaContext = (PPAContext) getApplication();
+
         if (!checkPermission(Manifest.permission.INTERNET)) {
             String[] PERMISSIONS = {android.Manifest.permission.INTERNET};
             ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
@@ -63,47 +65,10 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         customHandler.postDelayed(updateTimerThread, 0);
 
-        EquipBean equipBean = new EquipBean();
-
-        if (!equipBean.hasElements()) {
-
-            ConexaoWeb conexaoWeb = new ConexaoWeb();
-
-            if(conexaoWeb.verificaConexao(MenuInicialActivity.this)){
-
-                progressBar = new ProgressDialog(MenuInicialActivity.this);
-                progressBar.setCancelable(true);
-                progressBar.setMessage("ATUALIZANDO ...");
-                progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                progressBar.setProgress(0);
-                progressBar.setMax(100);
-                progressBar.show();
-
-                UpdateBD.getInstance().atualizarBD(progressBar);
-                UpdateBD.getInstance().setContext(MenuInicialActivity.this);
-
-            }
-            else{
-
-                AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alerta.show();
-
-            }
-
-        }
-
         ArrayList<String> itens = new ArrayList<String>();
 
         itens.add("APONTA PESAGEM");
-        itens.add("ATUALIZAR DADOS");
+        itens.add("CONFIGURAÇÕES");
         itens.add("SAIR");
 
         AdapterList adapterList = new AdapterList(this, itens);
@@ -125,63 +90,11 @@ public class MenuInicialActivity extends ActivityGeneric {
                         startActivity(it);
                         finish();
 
-//                    ColabBean colabBean = new ColabBean();
-//
-//                    if (colabBean.hasElements()) {
-//
-//                        pstContext.getAbordagemCTR().clearBD();
-//
-//                        Intent it = new Intent(MenuInicialActivity.this, ObservadorDigActivity.class);
-//                        startActivity(it);
-//                        finish();
-//                    }
-//                    else{
-//
-//                        AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
-//                        alerta.setTitle("ATENÇÃO");
-//                        alerta.setMessage("BASE DE DADOS DESATUALIZADA! POR FAVOR, SELECIONE A OPÇÃO 'ATUALIZAR DADOS' PARA ATUALIZAR A BASE DE DADOS ANTES DE CRIAR UM NOVO FORMULÁRIO.");
-//                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                            }
-//                        });
-//                        alerta.show();
-//
-//                    }
+                } else if (text.equals("CONFIGURAÇÕES")) {
 
-                } else if (text.equals("ATUALIZAR DADOS")) {
-
-//                    ConexaoWeb conexaoWeb = new ConexaoWeb();
-//
-//                    if(conexaoWeb.verificaConexao(MenuInicialActivity.this)){
-//
-//                        progressBar = new ProgressDialog(v.getContext());
-//                        progressBar.setCancelable(true);
-//                        progressBar.setMessage("ATUALIZANDO BASE DE DADOS...");
-//                        progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//                        progressBar.setProgress(0);
-//                        progressBar.setMax(100);
-//                        progressBar.show();
-//
-//                        AtualDadosServ.getInstance().atualizarBD(progressBar);
-//                        AtualDadosServ.getInstance().setContext(MenuInicialActivity.this);
-//
-//                    }
-//                    else{
-//
-//                        AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
-//                        alerta.setTitle("ATENÇÃO");
-//                        alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-//                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                            }
-//                        });
-//                        alerta.show();
-//
-//                    }
+                    Intent it = new Intent(MenuInicialActivity.this, SenhaActivity.class);
+                    startActivity(it);
+                    finish();
 
                 } else if (text.equals("SAIR")) {
 

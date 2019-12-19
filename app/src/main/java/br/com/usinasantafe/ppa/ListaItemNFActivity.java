@@ -13,49 +13,49 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 
-public class ListaVeiculoActivity extends ActivityGeneric {
+public class ListaItemNFActivity extends ActivityGeneric {
 
-    private ListView veiculoListView;
-    private List equipList;
+    private ListView itemNFListView;
+    private List itemNFList;
     private PPAContext ppaContext;
     private ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_veiculo);
+        setContentView(R.layout.activity_lista_item_nf);
 
         ppaContext = (PPAContext) getApplication();
 
-        Button buttonAtualVeiculo = (Button) findViewById(R.id.buttonAtualVeiculo);
-        Button buttonRetVeiculo = (Button) findViewById(R.id.buttonRetVeiculo);
+        Button buttonAtualItemNF = (Button) findViewById(R.id.buttonAtualItemNF);
+        Button buttonRetItemNF = (Button) findViewById(R.id.buttonRetItemNF);
 
-        EquipBean equipBean = new EquipBean();
-        equipList = equipBean.orderBy("placaEquip", true);
+        ItemNFBean itemNFBean = new ItemNFBean();
+        itemNFList = itemNFBean.orderBy("codProd", true);
 
         ArrayList<String> itens = new ArrayList<String>();
-        for (int i = 0; i < equipList.size(); i++) {
-            equipBean = (EquipBean) equipList.get(i);
-            itens.add(equipBean.getPlacaEquip());
+        for (int i = 0; i < itemNFList.size(); i++) {
+            itemNFBean = (ItemNFBean) itemNFList.get(i);
+            itens.add(itemNFBean.getCodProd());
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        veiculoListView = (ListView) findViewById(R.id.listVeiculo);
-        veiculoListView.setAdapter(adapterList);
+        itemNFListView = (ListView) findViewById(R.id.listItemNF);
+        itemNFListView.setAdapter(adapterList);
 
-        veiculoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemNFListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                EquipBean equipBean = (EquipBean) equipList.get(position);
-                ppaContext.getConfigCTR().setVeiculoConfig(equipBean.getIdEquip());
+                ItemNFBean itemNFBean = (ItemNFBean) itemNFList.get(position);
+                ppaContext.getConfigCTR().setItemNFConfig(itemNFBean.getIdItemNF());
 
-                Intent it = new Intent(ListaVeiculoActivity.this, ListaNotaFiscalActivity.class);
+                Intent it = new Intent(ListaItemNFActivity.this, ListaOSActivity.class);
                 startActivity(it);
                 finish();
 
@@ -63,11 +63,11 @@ public class ListaVeiculoActivity extends ActivityGeneric {
 
         });
 
-        buttonAtualVeiculo.setOnClickListener(new View.OnClickListener() {
+        buttonAtualItemNF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder( ListaVeiculoActivity.this);
+                AlertDialog.Builder alerta = new AlertDialog.Builder( ListaItemNFActivity.this);
                 alerta.setTitle("ATENÇÃO");
                 alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
                 alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
@@ -76,9 +76,9 @@ public class ListaVeiculoActivity extends ActivityGeneric {
 
                         ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ListaVeiculoActivity.this)) {
+                        if (conexaoWeb.verificaConexao(ListaItemNFActivity.this)) {
 
-                            progressBar = new ProgressDialog(ListaVeiculoActivity.this);
+                            progressBar = new ProgressDialog(ListaItemNFActivity.this);
                             progressBar.setCancelable(true);
                             progressBar.setMessage("ATUALIZANDO ...");
                             progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -90,7 +90,7 @@ public class ListaVeiculoActivity extends ActivityGeneric {
 
                         } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaVeiculoActivity.this);
+                            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaItemNFActivity.this);
                             alerta.setTitle("ATENÇÃO");
                             alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
                             alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -116,10 +116,10 @@ public class ListaVeiculoActivity extends ActivityGeneric {
 
         });
 
-        buttonRetVeiculo.setOnClickListener(new View.OnClickListener() {
+        buttonRetItemNF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaVeiculoActivity.this, MenuInicialActivity.class);
+                Intent it = new Intent(ListaItemNFActivity.this, ListaNotaFiscalActivity.class);
                 startActivity(it);
                 finish();
             }

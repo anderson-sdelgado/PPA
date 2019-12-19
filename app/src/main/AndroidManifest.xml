@@ -49,7 +49,7 @@
             android:name=".ListaOSActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ListaItemActivity"
+            android:name=".ListaItemNFActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ListaNotaFiscalActivity"

@@ -9,29 +9,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ListaNotaFiscalActivity">
+    tools:context=".ListaItemNFActivity">
 
     <TextView
-        android:id="@+id/textViewNotaFiscal"
+        android:id="@+id/textViewItemNF"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_nota_fiscal" />
+        android:text="@string/texto_item_nota_fiscal" />
 
     <ListView
-        android:id="@+id/listNotaFiscal"
+        android:id="@+id/listItemNF"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         />
 
     <Button
-        android:id="@+id/buttonAtualNotaFiscal"
+        android:id="@+id/buttonAtualItemNF"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/texto_atualizar" />
 
     <Button
-        android:id="@+id/buttonRetNotaFiscal"
+        android:id="@+id/buttonRetItemNF"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

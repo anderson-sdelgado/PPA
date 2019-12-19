@@ -21,6 +21,14 @@
     <string name="texto_atual_bd">ATUALIZAR DADOS</string>
     <string name="texto_atualizar">ATUALIZAR</string>
     <string name="texto_menu_principal">PRINCIPAL - V 1.00</string>
-    <string name="texto_veiculo">VEÍCULO(S):</string>
-    <string name="texto_pesagem">PESAGEM:</string>
+    <string name="texto_veiculo">VEÍCULO</string>
+    <string name="texto_pesagem">PESAGEM</string>
+    <string name="texto_senha">SENHA:</string>
+    <string name="texto_matric_func">MATRIC COLABORADOR:</string>
+    <string name="texto_padrao_salvar">SALVAR</string>
+    <string name="texto_nota_fiscal">NOTA FISCAL</string>
+    <string name="texto_item_nota_fiscal">ITEM NOTA FISCAL</string>
+    <string name="texto_captura_bt">CAPTURA BLUETOOTH</string>
+    <string name="texto_captura_dig">DIGITAR PESAGEM</string>
+    <string name="texto_os">OS</string>
 </resources>

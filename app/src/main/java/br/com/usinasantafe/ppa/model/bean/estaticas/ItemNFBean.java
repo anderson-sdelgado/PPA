@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import br.com.usinasantafe.ppa.model.bean.db.Entidade;
 
 @DatabaseTable(tableName="tbitemnfest")
-public class ItemNotaFiscalBean extends Entidade {
+public class ItemNFBean extends Entidade {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public class ItemNotaFiscalBean extends Entidade {
     @DatabaseField
     private String codProd;
 
-    public ItemNotaFiscalBean() {
+    public ItemNFBean() {
     }
 
     public Long getIdItemNF() {
