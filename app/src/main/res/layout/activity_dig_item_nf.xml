@@ -9,21 +9,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".DigOSActivity">
+    tools:context=".DigItemNFActivity">
 
     <TextView
-        android:id="@+id/textViewOS"
+        android:id="@+id/textViewItemNF"
         style="@style/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/texto_os" />
+        android:text="@string/texto_item_nota_fiscal" />
 
     <EditText
-        android:id="@+id/editTextOS"
+        android:id="@+id/editTextItemNF"
         style="@style/EditView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal" >
+        android:inputType="textCapCharacters" >
         <requestFocus />
     </EditText>
 
@@ -34,7 +34,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonCancOS"
+            android:id="@+id/buttonCancItemNF"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -42,7 +42,7 @@
             android:text="@string/texto_padrao_cancelar" />
 
         <Button
-            android:id="@+id/buttonOkOS"
+            android:id="@+id/buttonOkItemNF"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"

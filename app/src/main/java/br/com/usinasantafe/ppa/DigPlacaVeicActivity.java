@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,57 +15,79 @@ import android.widget.EditText;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 import br.com.usinasantafe.ppa.util.VerifDadosServ;
 
-public class DigOSActivity extends ActivityGeneric {
+public class DigPlacaVeicActivity extends ActivityGeneric{
 
-    private EditText editTextOS;
+    private EditText editTextPlaca;
     private ProgressDialog progressBar;
     private Handler customHandler = new Handler();
-    private boolean verDados;
     private PPAContext ppaContext;
-    private String nroOS;
+    private boolean verDados;
+    private String placa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dig_os);
+        setContentView(R.layout.activity_dig_placa_veic);
 
-        editTextOS = (EditText)  findViewById(R.id.editTextOS);
-        Button buttonOkOS =  (Button) findViewById(R.id.buttonOkOS);
-        Button buttonCancOS =  (Button) findViewById(R.id.buttonCancOS);
+        editTextPlaca = (EditText)  findViewById(R.id.editTextPlaca);
+        Button buttonOkPlaca =  (Button) findViewById(R.id.buttonOkPlaca);
+        Button buttonCancPlaca =  (Button) findViewById(R.id.buttonCancPlaca);
 
         ppaContext = (PPAContext) getApplication();
 
-        buttonOkOS.setOnClickListener(new View.OnClickListener() {
+        editTextPlaca.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+
+            }
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+            }
+            @Override
+            public void afterTextChanged(Editable et) {
+                String s = et.toString();
+                if(!s.equals(s.toUpperCase()))
+                {
+                    s = s.toUpperCase();
+                    editTextPlaca.setText(s);
+                    editTextPlaca.setSelection(editTextPlaca.length()); //fix reverse texting
+                }
+            }
+        });
+
+        buttonOkPlaca.setOnClickListener(new View.OnClickListener() {
 
             @SuppressWarnings("unchecked")
             @Override
             public void onClick(View v) {
 
-                if (!editTextOS.getText().toString().equals("")) {
+                if (!editTextPlaca.getText().toString().equals("")) {
 
-                    nroOS = editTextOS.getText().toString().trim();
+                    placa = editTextPlaca.getText().toString().trim();
 
-                    if(ppaContext.getPesagemCTR().verOSBD(nroOS)){
+                    if(ppaContext.getPesagemCTR().verPlacaVeicBD(placa)){
 
                         Long statusCon;
                         ConexaoWeb conexaoWeb = new ConexaoWeb();
-                        if (conexaoWeb.verificaConexao(DigOSActivity.this)) {
+                        if (conexaoWeb.verificaConexao(DigPlacaVeicActivity.this)) {
                             statusCon = 1L;
                         }
                         else{
                             statusCon = 0L;
                         }
 
-                        ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), statusCon);
+                        ppaContext.getPesagemCTR().criarCabecPes(placa, statusCon);
 
-                        Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+                        Intent it = new Intent(DigPlacaVeicActivity.this, ListaNotaFiscalActivity.class);
                         startActivity(it);
                         finish();
 
                     }
                     else{
                         ConexaoWeb conexaoWeb = new ConexaoWeb();
-                        if (conexaoWeb.verificaConexao(DigOSActivity.this)) {
+                        if (conexaoWeb.verificaConexao(DigPlacaVeicActivity.this)) {
 
                             progressBar = new ProgressDialog(v.getContext());
                             progressBar.setCancelable(true);
@@ -74,14 +98,16 @@ public class DigOSActivity extends ActivityGeneric {
 
                             verDados = true;
 
-                            ppaContext.getPesagemCTR().verOSServ(nroOS, DigOSActivity.this);
+                            ppaContext.getPesagemCTR().verPlacaVeicServ(placa, DigPlacaVeicActivity.this);
 
                         }
                         else{
 
-                            ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 0L);
+                            ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
 
-                            Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+                            msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
+
+                            Intent it = new Intent(DigPlacaVeicActivity.this, DigNotaFiscalActivity.class);
                             startActivity(it);
                             finish();
 
@@ -93,27 +119,18 @@ public class DigOSActivity extends ActivityGeneric {
             }
         });
 
-        buttonCancOS.setOnClickListener(new View.OnClickListener() {
+        buttonCancPlaca.setOnClickListener(new View.OnClickListener() {
 
             @SuppressWarnings("unchecked")
             @Override
             public void onClick(View v) {
-                if(ppaContext.getPesagemCTR().verStatusConPlacaVeic()){
-                    Intent it = new Intent(DigOSActivity.this, ListaItemNFActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-                else{
-                    Intent it = new Intent(DigOSActivity.this, DigItemNFActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-
+                Intent it = new Intent(DigPlacaVeicActivity.this, MenuInicialActivity.class);
+                startActivity(it);
+                finish();
             }
         });
 
     }
-
 
     public void onBackPressed()  {
     }
@@ -123,8 +140,8 @@ public class DigOSActivity extends ActivityGeneric {
         if (progressBar.isShowing()) {
             progressBar.dismiss();
         }
-        ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 1L);
-        Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+        ppaContext.getPesagemCTR().criarCabecPes(placa, 1L);
+        Intent it = new Intent(DigPlacaVeicActivity.this, ListaNotaFiscalActivity.class);
         startActivity(it);
         finish();
     }
@@ -132,7 +149,7 @@ public class DigOSActivity extends ActivityGeneric {
     public void msg(String texto){
         verDados = false;
         this.progressBar.dismiss();
-        AlertDialog.Builder alerta = new AlertDialog.Builder(DigOSActivity.this);
+        AlertDialog.Builder alerta = new AlertDialog.Builder(DigPlacaVeicActivity.this);
         alerta.setTitle("ATENÇÃO");
         alerta.setMessage(texto);
         alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -158,8 +175,11 @@ public class DigOSActivity extends ActivityGeneric {
                     progressBar.dismiss();
                 }
 
-                ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 0L);
-                Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+                msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
+
+                ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
+
+                Intent it = new Intent(DigPlacaVeicActivity.this, DigNotaFiscalActivity.class);
                 startActivity(it);
                 finish();
 

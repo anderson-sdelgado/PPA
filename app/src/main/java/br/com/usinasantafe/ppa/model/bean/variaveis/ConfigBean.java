@@ -17,13 +17,13 @@ public class ConfigBean extends Entidade {
     @DatabaseField
     private String senhaConfig;
     @DatabaseField
-    private Long veiculoConfig;
-    @DatabaseField
     private Long notaFiscalConfig;
     @DatabaseField
-    private Long itemNFConfig;
+    private String itemNFConfig;
     @DatabaseField
-    private Long osConfig;
+    private Long nroOSConfig;
+    @DatabaseField
+    private Long statusConOSConfig;
 
     public ConfigBean() {
     }
@@ -52,14 +52,6 @@ public class ConfigBean extends Entidade {
         this.senhaConfig = senhaConfig;
     }
 
-    public Long getVeiculoConfig() {
-        return veiculoConfig;
-    }
-
-    public void setVeiculoConfig(Long veiculoConfig) {
-        this.veiculoConfig = veiculoConfig;
-    }
-
     public Long getNotaFiscalConfig() {
         return notaFiscalConfig;
     }
@@ -68,19 +60,27 @@ public class ConfigBean extends Entidade {
         this.notaFiscalConfig = notaFiscalConfig;
     }
 
-    public Long getItemNFConfig() {
+    public String getItemNFConfig() {
         return itemNFConfig;
     }
 
-    public void setItemNFConfig(Long itemNFConfig) {
+    public void setItemNFConfig(String itemNFConfig) {
         this.itemNFConfig = itemNFConfig;
     }
 
-    public Long getOsConfig() {
-        return osConfig;
+    public Long getNroOSConfig() {
+        return nroOSConfig;
     }
 
-    public void setOsConfig(Long osConfig) {
-        this.osConfig = osConfig;
+    public void setNroOSConfig(Long nroOSConfig) {
+        this.nroOSConfig = nroOSConfig;
+    }
+
+    public Long getStatusConOSConfig() {
+        return statusConOSConfig;
+    }
+
+    public void setStatusConOSConfig(Long statusConOSConfig) {
+        this.statusConOSConfig = statusConOSConfig;
     }
 }

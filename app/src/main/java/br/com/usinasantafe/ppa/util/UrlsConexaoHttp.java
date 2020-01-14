@@ -14,7 +14,7 @@ public class UrlsConexaoHttp {
 
     public static String EquipBean = urlPrincipal + "equip.php" + put;
     public static String FuncBean = urlPrincipal + "func.php" + put;
-    public static String ItemNotaFiscalBean = urlPrincipal + "itemnotafiscal.php" + put;
+    public static String ItemNFBean = urlPrincipal + "itemnotafiscal.php" + put;
     public static String NotaFiscalBean = urlPrincipal + "notafiscal.php" + put;
     public static String OSBean = urlPrincipal + "os.php" + put;
 

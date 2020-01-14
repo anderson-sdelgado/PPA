@@ -14,6 +14,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
 
+import br.com.usinasantafe.ppa.control.PesagemCTR;
+
 public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String>   {
 
     private static ConHttpPostMultipartGenerico instance = null;
@@ -35,10 +37,6 @@ public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String
         String url = params[0];
         String cabec = params[1];
         String item = params[2];
-		String foto1 = params[3];
-		String foto2 = params[4];
-		String foto3 = params[5];
-		String foto4 = params[6];
 
 		try{
 
@@ -48,10 +46,6 @@ public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String
             ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
             valores.add(new BasicNameValuePair("cabec", cabec));
 			valores.add(new BasicNameValuePair("item", item));
-            valores.add(new BasicNameValuePair("foto1", foto1));
-			valores.add(new BasicNameValuePair("foto2", foto2));
-			valores.add(new BasicNameValuePair("foto3", foto3));
-			valores.add(new BasicNameValuePair("foto4", foto4));
 
             httpPost.setEntity(new UrlEncodedFormEntity(valores));
             HttpResponse resposta = httpClient.execute(httpPost);
@@ -69,9 +63,9 @@ public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String
 		try {
 
 			Log.i("ECM", "VALOR RECEBIDO --> " + result);
-			if(result.trim().contains("GRAVOU")){
-//				AbordagemCTR abordagemCTR = new AbordagemCTR();
-//				abordagemCTR.deleteCabec(result);
+			if(result.trim().startsWith("GRAVOU")){
+				PesagemCTR pesagemCTR = new PesagemCTR();
+				pesagemCTR.deleteCabec(result);
 			}
 			else{
 				EnvioDadosServ.getInstance().setEnviando(false);

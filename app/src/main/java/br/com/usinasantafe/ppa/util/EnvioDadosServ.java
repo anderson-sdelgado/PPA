@@ -3,6 +3,8 @@ package br.com.usinasantafe.ppa.util;
 import android.content.Context;
 import android.util.Log;
 
+import br.com.usinasantafe.ppa.control.PesagemCTR;
+
 
 public class EnvioDadosServ {
 
@@ -21,36 +23,31 @@ public class EnvioDadosServ {
 
     public void dadosEnvio() {
 
-//        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
-//        PesagemCTR abordagemCTR = new PesagemCTR();
-//
-//        String[] dados = new String[7];
-//
-//        String cabec = abordagemCTR.dadosCabecFechEnvio();
-//        String item = abordagemCTR.dadosItemFechEnvio();
-//
-//        Log.i("PST", "CABECALHO = " + cabec);
-//        Log.i("PST", "ITEM = " + item);
-//
-//        dados[0] = urlsConexaoHttp.getsInserirDados();
-//        dados[1] = cabec;
-//        dados[2] = item;
-//        dados[3] = abordagemCTR.dadosFotoFechEnvio(1);
-//        dados[4] = abordagemCTR.dadosFotoFechEnvio(2);
-//        dados[5] = abordagemCTR.dadosFotoFechEnvio(3);
-//        dados[6] = abordagemCTR.dadosFotoFechEnvio(4);
-//
-//        ConHttpPostMultipartGenerico conHttpPostMultipartGenerico = new ConHttpPostMultipartGenerico();
-//        conHttpPostMultipartGenerico.execute(dados);
+        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
+        PesagemCTR pesagemCTR = new PesagemCTR();
+
+        String[] dados = new String[7];
+
+        String cabec = pesagemCTR.dadosCabecFechEnvio();
+        String item = pesagemCTR.dadosItemFechEnvio();
+
+        Log.i("PST", "CABECALHO = " + cabec);
+        Log.i("PST", "ITEM = " + item);
+
+        dados[0] = urlsConexaoHttp.getsInserirDados();
+        dados[1] = cabec;
+        dados[2] = item;
+
+        ConHttpPostMultipartGenerico conHttpPostMultipartGenerico = new ConHttpPostMultipartGenerico();
+        conHttpPostMultipartGenerico.execute(dados);
 
     }
 
     //////////////////////VERIFICAÇÃO DE DADOS///////////////////////////
 
     public Boolean verifEnvioDados() {
-//        PesagemCTR abordagemCTR = new PesagemCTR();
-//        return abordagemCTR.verEnvioDados();
-        return false;
+        PesagemCTR pesagemCTR = new PesagemCTR();
+        return pesagemCTR.verEnvioDados();
     }
 
     /////////////////////////MECANISMO DE ENVIO//////////////////////////////////

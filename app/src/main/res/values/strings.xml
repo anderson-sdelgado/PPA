@@ -20,8 +20,10 @@
     <string name="texto_item_list">TESTE</string>
     <string name="texto_atual_bd">ATUALIZAR DADOS</string>
     <string name="texto_atualizar">ATUALIZAR</string>
+    <string name="texto_padrao_nao">NÃO</string>
+    <string name="texto_padrao_sim">SIM</string>
     <string name="texto_menu_principal">PRINCIPAL - V 1.00</string>
-    <string name="texto_veiculo">VEÍCULO</string>
+    <string name="texto_veiculo">PLACA VEÍCULO</string>
     <string name="texto_pesagem">PESAGEM</string>
     <string name="texto_senha">SENHA:</string>
     <string name="texto_matric_func">MATRIC COLABORADOR:</string>
@@ -31,4 +33,9 @@
     <string name="texto_captura_bt">CAPTURA BLUETOOTH</string>
     <string name="texto_captura_dig">DIGITAR PESAGEM</string>
     <string name="texto_os">OS</string>
+    <string name="texto_coment_falha">POR FAVOR, COMENTE O MOTIVO QUE TE LEVOU A DIGITAR O VALOR DA PESAGEM E NÃO CAPTURA O MESMO VIA BLUETOOTH.</string>
+    <string name="texto_padrao_retornar">RETORNAR</string>
+    <string name="texto_msg_pesagem">DESEJA INSERIR OUTRA PESAGEM?</string>
+    <string name="texto_botao_camera">ACIONAR CAMERA</string>
+    <string name="texto_foto">FOTO</string>
 </resources>

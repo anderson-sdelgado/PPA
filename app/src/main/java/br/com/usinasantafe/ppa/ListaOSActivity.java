@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +53,9 @@ public class ListaOSActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                OSBean osBean = (OSBean) osList.get(position);
-                ppaContext.getConfigCTR().setOSConfig(osBean.getIdOS());
+                TextView textView = v.findViewById(R.id.textViewItemList);
+                String nroOS = textView.getText().toString();
+                ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS));
 
                 Intent it = new Intent(ListaOSActivity.this, BTPesagemActivity.class);
                 startActivity(it);

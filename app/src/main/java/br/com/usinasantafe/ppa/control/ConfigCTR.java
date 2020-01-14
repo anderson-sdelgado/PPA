@@ -34,24 +34,19 @@ public class ConfigCTR {
         configDAO.insConfig(matricFunc, senha);
     }
 
-    public void setVeiculoConfig(Long veiculoConfig){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setVeiculoConfig(veiculoConfig);
-    }
-
     public void setNotaFiscalConfig(Long notaFiscalConfig){
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.setNotaFiscalConfig(notaFiscalConfig);
     }
 
-    public void setItemNFConfig(Long itemNFConfig){
+    public void setItemNFConfig(String itemNFConfig){
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.setItemNFConfig(itemNFConfig);
     }
 
-    public void setOSConfig(Long osConfig){
+    public void setNroOSConfig(Long nroOSConfig, Long statusCon){
         ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setOSConfig(osConfig);
+        configDAO.setNroOSConfig(nroOSConfig, statusCon);
     }
 
 }

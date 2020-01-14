@@ -2,6 +2,7 @@ package br.com.usinasantafe.ppa.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -11,9 +12,13 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.usinasantafe.ppa.DigOSActivity;
+import br.com.usinasantafe.ppa.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.MenuInicialActivity;
 import br.com.usinasantafe.ppa.model.bean.db.GenericRecordable;
 import br.com.usinasantafe.ppa.model.bean.variaveis.AtualAplicBean;
+import br.com.usinasantafe.ppa.model.dao.OSDAO;
+import br.com.usinasantafe.ppa.model.dao.PlacaVeicDAO;
 
 
 /**
@@ -22,24 +27,14 @@ import br.com.usinasantafe.ppa.model.bean.variaveis.AtualAplicBean;
 public class VerifDadosServ {
 
     private static VerifDadosServ instance = null;
-    private GenericRecordable genericRecordable;
     private UrlsConexaoHttp urlsConexaoHttp;
-    private Context telaAtual;
-    private Class telaProx1;
-    private Class telaProx2;
     private ProgressDialog progressDialog;
     private String dado;
     private String tipo;
-    private AtualAplicBean atualAplicBean;
     private MenuInicialActivity menuInicialActivity;
+    private DigPlacaVeicActivity digPlacaVeicActivity;
+    private DigOSActivity digOSActivity;
     private ConHttpPostVerGenerico conHttpPostVerGenerico;
-    private boolean verTerm;
-    private String senha;
-    private int verTelaAtualPerda = 0;
-
-    public VerifDadosServ() {
-        //genericRecordable = new GenericRecordable();
-    }
 
     public static VerifDadosServ getInstance() {
         if (instance == null)
@@ -50,7 +45,7 @@ public class VerifDadosServ {
     public void manipularDadosHttp(String result) {
         try {
 
-        if (!result.equals("")) {
+            if (!result.equals("")) {
                 if (this.tipo.equals("Atualiza")) {
                     String verAtualizacao = result.trim();
                     if (verAtualizacao.equals("S")) {
@@ -60,6 +55,12 @@ public class VerifDadosServ {
                     } else {
                         this.menuInicialActivity.startTimer();
                     }
+                } else if (this.tipo.equals("Placa")) {
+                    PlacaVeicDAO placaVeicDAO = new PlacaVeicDAO();
+                    placaVeicDAO.recDados(result, digPlacaVeicActivity);
+                } else if (this.tipo.equals("OS")) {
+                    OSDAO osdao = new OSDAO();
+                    osdao.recDados(result, digOSActivity);
                 }
             }
 
@@ -97,6 +98,47 @@ public class VerifDadosServ {
         conHttpPostVerGenerico.setParametrosPost(parametrosPost);
         conHttpPostVerGenerico.execute(url);
 
+    }
+
+    public void verDados(String dado, String tipo, DigPlacaVeicActivity digPlacaVeicActivity) {
+
+        this.dado = dado;
+        this.tipo = tipo;
+        this.digPlacaVeicActivity = digPlacaVeicActivity;
+
+        envioDados();
+
+    }
+
+    public void verDados(String dado, String tipo, DigOSActivity digOSActivity) {
+
+        this.dado = dado;
+        this.tipo = tipo;
+        this.digOSActivity = digOSActivity;
+
+        envioDados();
+
+    }
+
+    public void envioDados() {
+
+        this.urlsConexaoHttp = new UrlsConexaoHttp();
+        String[] url = {urlsConexaoHttp.urlVerifica(tipo)};
+        Map<String, Object> parametrosPost = new HashMap<String, Object>();
+        parametrosPost.put("dado", String.valueOf(dado));
+
+        Log.i("PMM", "VERIFICA = " + String.valueOf(dado));
+
+        conHttpPostVerGenerico = new ConHttpPostVerGenerico();
+        conHttpPostVerGenerico.setParametrosPost(parametrosPost);
+        conHttpPostVerGenerico.execute(url);
+
+    }
+
+    public void cancelVer() {
+        if (conHttpPostVerGenerico.getStatus() == AsyncTask.Status.RUNNING) {
+            conHttpPostVerGenerico.cancel(true);
+        }
     }
 
 }

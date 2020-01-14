@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +53,9 @@ public class ListaNotaFiscalActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                NotaFiscalBean notaFiscalBean = (NotaFiscalBean) notaFiscalList.get(position);
-                ppaContext.getConfigCTR().setNotaFiscalConfig(notaFiscalBean.getIdNF());
+                TextView textView = v.findViewById(R.id.textViewItemList);
+                String notaFiscal = textView.getText().toString();
+                ppaContext.getConfigCTR().setNotaFiscalConfig(Long.parseLong(notaFiscal));
 
                 Intent it = new Intent(ListaNotaFiscalActivity.this, ListaItemNFActivity.class);
                 startActivity(it);
@@ -119,7 +121,7 @@ public class ListaNotaFiscalActivity extends ActivityGeneric {
         buttonRetNotaFiscal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaNotaFiscalActivity.this, ListaVeiculoActivity.class);
+                Intent it = new Intent(ListaNotaFiscalActivity.this, ListaPlacaVeicActivity.class);
                 startActivity(it);
                 finish();
             }

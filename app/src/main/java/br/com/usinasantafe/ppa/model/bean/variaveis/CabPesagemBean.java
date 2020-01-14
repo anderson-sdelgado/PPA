@@ -13,11 +13,18 @@ public class CabPesagemBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idCabPes;
     @DatabaseField
-    private Long idVeicCabPes;
+    private Long matricFuncCabPes;
+    @DatabaseField
+    private String placaVeicCabPes;
     @DatabaseField
     private String fotoCabPes;
     @DatabaseField
     private String dthrCabPes;
+    @DatabaseField
+    private Long statusConVeicCabPes;  //0 - OffLine; 1 - OnLine
+    @DatabaseField
+    private Long statusCabPes; //1 - Aberto; 2 - Fechado;
+
 
     public CabPesagemBean() {
     }
@@ -30,12 +37,12 @@ public class CabPesagemBean extends Entidade {
         this.idCabPes = idCabPes;
     }
 
-    public Long getIdVeicCabPes() {
-        return idVeicCabPes;
+    public String getPlacaVeicCabPes() {
+        return placaVeicCabPes;
     }
 
-    public void setIdVeicCabPes(Long idVeicCabPes) {
-        this.idVeicCabPes = idVeicCabPes;
+    public void setPlacaVeicCabPes(String placaVeicCabPes) {
+        this.placaVeicCabPes = placaVeicCabPes;
     }
 
     public String getFotoCabPes() {
@@ -53,4 +60,29 @@ public class CabPesagemBean extends Entidade {
     public void setDthrCabPes(String dthrCabPes) {
         this.dthrCabPes = dthrCabPes;
     }
+
+    public Long getStatusCabPes() {
+        return statusCabPes;
+    }
+
+    public void setStatusCabPes(Long statusCabPes) {
+        this.statusCabPes = statusCabPes;
+    }
+
+    public Long getMatricFuncCabPes() {
+        return matricFuncCabPes;
+    }
+
+    public void setMatricFuncCabPes(Long matricFuncCabPes) {
+        this.matricFuncCabPes = matricFuncCabPes;
+    }
+
+    public Long getStatusConVeicCabPes() {
+        return statusConVeicCabPes;
+    }
+
+    public void setStatusConVeicCabPes(Long statusConVeicCabPes) {
+        this.statusConVeicCabPes = statusConVeicCabPes;
+    }
+
 }

@@ -9,45 +9,41 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".DigOSActivity">
+    tools:context=".MsgPesagemActivity">
 
     <TextView
-        android:id="@+id/textViewOS"
-        style="@style/TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/texto_os" />
-
-    <EditText
-        android:id="@+id/editTextOS"
-        style="@style/EditView"
+        android:id="@+id/textViewMsgPesagem"
+        style="@style/TextViewTituloLista"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal" >
-        <requestFocus />
-    </EditText>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:text="@string/texto_msg_pesagem" />
+
 
     <LinearLayout
-        android:id="@+id/rightRelativeLayout"
+        android:id="@+id/layoutLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonCancOS"
+            android:id="@+id/buttonNaoMsgPesagem"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/texto_padrao_cancelar" />
+            android:text="@string/texto_padrao_nao" />
 
         <Button
-            android:id="@+id/buttonOkOS"
+            android:id="@+id/buttonSimMsgPesagem"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/texto_padrao_ok" />
+            android:text="@string/texto_padrao_sim" />
 
     </LinearLayout>
 

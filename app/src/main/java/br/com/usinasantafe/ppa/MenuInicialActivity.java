@@ -3,10 +3,8 @@ package br.com.usinasantafe.ppa;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -24,8 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
-import br.com.usinasantafe.ppa.util.ConexaoWeb;
-import br.com.usinasantafe.ppa.util.UpdateBD;
+import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 
 public class MenuInicialActivity extends ActivityGeneric {
 
@@ -42,6 +39,7 @@ public class MenuInicialActivity extends ActivityGeneric {
         setContentView(R.layout.activity_menu_inicial);
 
         ppaContext = (PPAContext) getApplication();
+        textViewProcesso = (TextView) findViewById(R.id.textViewProcesso);
 
         if (!checkPermission(Manifest.permission.INTERNET)) {
             String[] PERMISSIONS = {android.Manifest.permission.INTERNET};
@@ -65,6 +63,8 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         customHandler.postDelayed(updateTimerThread, 0);
 
+        startTimer();
+
         ArrayList<String> itens = new ArrayList<String>();
 
         itens.add("APONTA PESAGEM");
@@ -86,9 +86,13 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                 if (text.equals("APONTA PESAGEM")) {
 
-                        Intent it = new Intent(MenuInicialActivity.this, ListaVeiculoActivity.class);
+//                    EquipBean equipBean = new EquipBean();
+//                    if(equipBean.hasElements()){
+                        Intent it = new Intent(MenuInicialActivity.this, DigPlacaVeicActivity.class);
+//                        Intent it = new Intent(MenuInicialActivity.this, ListaPlacaVeicActivity.class);
                         startActivity(it);
                         finish();
+//                    }
 
                 } else if (text.equals("CONFIGURAÇÕES")) {
 
@@ -116,13 +120,13 @@ public class MenuInicialActivity extends ActivityGeneric {
         Intent intent = new Intent(this, AlarmClass.class);
         boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_NO_CREATE) == null);
 
-        if (progressBar.isShowing()) {
-            progressBar.dismiss();
-        }
+//        if (progressBar.isShowing()) {
+//            progressBar.dismiss();
+//        }
 
         if (alarmeAtivo) {
 
-            Log.i("PST", "NOVO TIMER");
+            Log.i("PPA", "NOVO TIMER");
             PendingIntent p = PendingIntent.getBroadcast(getApplicationContext(), 0,
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -134,7 +138,7 @@ public class MenuInicialActivity extends ActivityGeneric {
             alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 60000, p);
 
         } else {
-            Log.i("PMM", "TIMER já ativo");
+            Log.i("PPA", "TIMER já ativo");
         }
     }
 
@@ -146,7 +150,7 @@ public class MenuInicialActivity extends ActivityGeneric {
     private Runnable updateTimerThread = new Runnable() {
 
         public void run() {
-            int status = 0;//EnvioDadosServ.getInstance().getStatusEnvio();
+            int status = EnvioDadosServ.getInstance().getStatusEnvio();
             if (status == 1) {
                 textViewProcesso.setTextColor(Color.YELLOW);
                 textViewProcesso.setText("Enviando Dados...");

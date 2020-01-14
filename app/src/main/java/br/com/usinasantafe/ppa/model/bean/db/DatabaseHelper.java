@@ -13,7 +13,9 @@ import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OSBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ConfigBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
@@ -57,6 +59,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, OSBean.class);
 
 			TableUtils.createTable(cs, ConfigBean.class);
+			TableUtils.createTable(cs, CabPesagemBean.class);
+			TableUtils.createTable(cs, ItemPesagemBean.class);
 
 		}
 		catch(Exception e){

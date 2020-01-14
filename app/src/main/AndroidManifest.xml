@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MsgPesagemActivity"></activity>
         <activity
             android:name=".ComentFalhaActivity"
             android:screenOrientation="portrait" />
@@ -28,13 +29,13 @@
             android:name=".DigOSActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigItemActivity"
+            android:name=".DigItemNFActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DigNotaFiscalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigVeiculoActivity"
+            android:name=".DigPlacaVeicActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".CameraActivity"
@@ -55,7 +56,7 @@
             android:name=".ListaNotaFiscalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ListaVeiculoActivity"
+            android:name=".ListaPlacaVeicActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConfigActivity"

@@ -34,18 +34,11 @@ public class ConfigDAO {
         ConfigBean configBean = new ConfigBean();
         configBean.setMatricFuncConfig(matricFunc);
         configBean.setSenhaConfig(senha);
-        configBean.setVeiculoConfig(0L);
         configBean.setNotaFiscalConfig(0L);
-        configBean.setItemNFConfig(0L);
-        configBean.setOsConfig(0L);
+        configBean.setItemNFConfig("");
+        configBean.setNroOSConfig(0L);
         configBean.deleteAll();
         configBean.insert();
-    }
-
-    public void setVeiculoConfig(Long veiculoConfig){
-        ConfigBean configBean = getConfig();
-        configBean.setVeiculoConfig(veiculoConfig);
-        configBean.update();
     }
 
     public void setNotaFiscalConfig(Long notaFiscalConfig){
@@ -54,15 +47,16 @@ public class ConfigDAO {
         configBean.update();
     }
 
-    public void setItemNFConfig(Long itemNFConfig){
+    public void setItemNFConfig(String itemNFConfig){
         ConfigBean configBean = getConfig();
         configBean.setItemNFConfig(itemNFConfig);
         configBean.update();
     }
 
-    public void setOSConfig(Long osConfig){
+    public void setNroOSConfig(Long nroOSConfig, Long statusCon){
         ConfigBean configBean = getConfig();
-        configBean.setOsConfig(osConfig);;
+        configBean.setNroOSConfig(nroOSConfig);
+        configBean.setStatusConOSConfig(statusCon);
         configBean.update();
     }
 

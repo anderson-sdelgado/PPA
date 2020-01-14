@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +53,10 @@ public class ListaItemNFActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                ItemNFBean itemNFBean = (ItemNFBean) itemNFList.get(position);
-                ppaContext.getConfigCTR().setItemNFConfig(itemNFBean.getIdItemNF());
+                TextView textView = v.findViewById(R.id.textViewItemList);
+                String itemNF = textView.getText().toString();
+
+                ppaContext.getConfigCTR().setItemNFConfig(itemNF);
 
                 Intent it = new Intent(ListaItemNFActivity.this, ListaOSActivity.class);
                 startActivity(it);

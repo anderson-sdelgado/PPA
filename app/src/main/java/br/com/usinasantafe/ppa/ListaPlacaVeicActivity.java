@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 
-public class ListaVeiculoActivity extends ActivityGeneric {
+public class ListaPlacaVeicActivity extends ActivityGeneric {
 
     private ListView veiculoListView;
     private List equipList;
@@ -26,7 +27,7 @@ public class ListaVeiculoActivity extends ActivityGeneric {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_veiculo);
+        setContentView(R.layout.activity_lista_placa_veic);
 
         ppaContext = (PPAContext) getApplication();
 
@@ -52,10 +53,12 @@ public class ListaVeiculoActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                EquipBean equipBean = (EquipBean) equipList.get(position);
-                ppaContext.getConfigCTR().setVeiculoConfig(equipBean.getIdEquip());
+                TextView textView = v.findViewById(R.id.textViewItemList);
+                String placa = textView.getText().toString();
 
-                Intent it = new Intent(ListaVeiculoActivity.this, ListaNotaFiscalActivity.class);
+                ppaContext.getPesagemCTR().criarCabecPes(placa);
+
+                Intent it = new Intent(ListaPlacaVeicActivity.this, ListaNotaFiscalActivity.class);
                 startActivity(it);
                 finish();
 
@@ -67,7 +70,7 @@ public class ListaVeiculoActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder( ListaVeiculoActivity.this);
+                AlertDialog.Builder alerta = new AlertDialog.Builder( ListaPlacaVeicActivity.this);
                 alerta.setTitle("ATENÇÃO");
                 alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
                 alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
@@ -76,9 +79,9 @@ public class ListaVeiculoActivity extends ActivityGeneric {
 
                         ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ListaVeiculoActivity.this)) {
+                        if (conexaoWeb.verificaConexao(ListaPlacaVeicActivity.this)) {
 
-                            progressBar = new ProgressDialog(ListaVeiculoActivity.this);
+                            progressBar = new ProgressDialog(ListaPlacaVeicActivity.this);
                             progressBar.setCancelable(true);
                             progressBar.setMessage("ATUALIZANDO ...");
                             progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -90,7 +93,7 @@ public class ListaVeiculoActivity extends ActivityGeneric {
 
                         } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaVeiculoActivity.this);
+                            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaPlacaVeicActivity.this);
                             alerta.setTitle("ATENÇÃO");
                             alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
                             alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -119,7 +122,7 @@ public class ListaVeiculoActivity extends ActivityGeneric {
         buttonRetVeiculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaVeiculoActivity.this, MenuInicialActivity.class);
+                Intent it = new Intent(ListaPlacaVeicActivity.this, MenuInicialActivity.class);
                 startActivity(it);
                 finish();
             }
