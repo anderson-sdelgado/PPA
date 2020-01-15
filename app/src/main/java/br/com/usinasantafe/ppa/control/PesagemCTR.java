@@ -15,7 +15,7 @@ import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 import br.com.usinasantafe.ppa.model.dao.CabPesagemDAO;
 import br.com.usinasantafe.ppa.model.dao.ItemPesagemDAO;
 import br.com.usinasantafe.ppa.model.dao.OSDAO;
-import br.com.usinasantafe.ppa.model.dao.PlacaVeicDAO;
+import br.com.usinasantafe.ppa.model.dao.VeiculoDAO;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 import br.com.usinasantafe.ppa.util.Imagem;
 
@@ -106,13 +106,13 @@ public class PesagemCTR {
     }
 
     public void verPlacaVeicServ(String dado, DigPlacaVeicActivity digPlacaVeicActivity){
-        PlacaVeicDAO placaVeicDAO = new PlacaVeicDAO();
-        placaVeicDAO.verDados(dado, digPlacaVeicActivity);
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
+        veiculoDAO.verDados(dado, digPlacaVeicActivity);
     }
 
     public boolean verPlacaVeicBD(String placa){
-        PlacaVeicDAO placaVeicDAO = new PlacaVeicDAO();
-        return placaVeicDAO.verBD(placa);
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
+        return veiculoDAO.verBD(placa);
     }
 
     public void verOSServ(String dado, DigOSActivity digOSActivity){
@@ -121,8 +121,8 @@ public class PesagemCTR {
     }
 
     public boolean verOSBD(String placa){
-        PlacaVeicDAO placaVeicDAO = new PlacaVeicDAO();
-        return placaVeicDAO.verBD(placa);
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
+        return veiculoDAO.verBD(placa);
     }
 
     public boolean verStatusConPlacaVeic(){

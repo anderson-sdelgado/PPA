@@ -35,7 +35,7 @@ public class DigNotaFiscalActivity extends ActivityGeneric {
             @SuppressWarnings("unchecked")
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(DigNotaFiscalActivity.this, DigNotaFiscalActivity.class);
+                Intent it = new Intent(DigNotaFiscalActivity.this, DigPlacaVeicActivity.class);
                 startActivity(it);
                 finish();
             }

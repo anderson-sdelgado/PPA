@@ -1,7 +1,6 @@
 package br.com.usinasantafe.ppa.util;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,10 +14,9 @@ import java.util.Map;
 import br.com.usinasantafe.ppa.DigOSActivity;
 import br.com.usinasantafe.ppa.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.MenuInicialActivity;
-import br.com.usinasantafe.ppa.model.bean.db.GenericRecordable;
 import br.com.usinasantafe.ppa.model.bean.variaveis.AtualAplicBean;
 import br.com.usinasantafe.ppa.model.dao.OSDAO;
-import br.com.usinasantafe.ppa.model.dao.PlacaVeicDAO;
+import br.com.usinasantafe.ppa.model.dao.VeiculoDAO;
 
 
 /**
@@ -55,9 +53,9 @@ public class VerifDadosServ {
                     } else {
                         this.menuInicialActivity.startTimer();
                     }
-                } else if (this.tipo.equals("Placa")) {
-                    PlacaVeicDAO placaVeicDAO = new PlacaVeicDAO();
-                    placaVeicDAO.recDados(result, digPlacaVeicActivity);
+                } else if (this.tipo.equals("Veiculo")) {
+                    VeiculoDAO veiculoDAO = new VeiculoDAO();
+                    veiculoDAO.recDados(result, digPlacaVeicActivity);
                 } else if (this.tipo.equals("OS")) {
                     OSDAO osdao = new OSDAO();
                     osdao.recDados(result, digOSActivity);

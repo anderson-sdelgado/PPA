@@ -58,7 +58,7 @@ public class ListaItemNFActivity extends ActivityGeneric {
 
                 ppaContext.getConfigCTR().setItemNFConfig(itemNF);
 
-                Intent it = new Intent(ListaItemNFActivity.this, ListaOSActivity.class);
+                Intent it = new Intent(ListaItemNFActivity.this, DigOSActivity.class);
                 startActivity(it);
                 finish();
 

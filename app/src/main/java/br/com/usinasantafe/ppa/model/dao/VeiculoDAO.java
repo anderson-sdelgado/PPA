@@ -1,8 +1,5 @@
 package br.com.usinasantafe.ppa.model.dao;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -11,19 +8,18 @@ import org.json.JSONObject;
 import java.util.List;
 
 import br.com.usinasantafe.ppa.DigPlacaVeicActivity;
-import br.com.usinasantafe.ppa.control.ConfigCTR;
-import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;
 import br.com.usinasantafe.ppa.util.VerifDadosServ;
 
-public class PlacaVeicDAO {
+public class VeiculoDAO {
 
-    public PlacaVeicDAO() {
+    public VeiculoDAO() {
     }
 
     public void verDados(String dado, DigPlacaVeicActivity digPlacaVeicActivity){
-        VerifDadosServ.getInstance().verDados(dado, "Placa", digPlacaVeicActivity);
+        VerifDadosServ.getInstance().verDados(dado, "Veiculo", digPlacaVeicActivity);
     }
 
     public void recDados(String result, DigPlacaVeicActivity digPlacaVeicActivity){
@@ -34,9 +30,7 @@ public class PlacaVeicDAO {
 
             if (!result.contains("exceeded")) {
 
-                ConfigCTR configCTR = new ConfigCTR();
-
-                int pos1 = result.indexOf("_") + 1;
+                int pos1 = result.indexOf("#") + 1;
                 int pos2 = result.indexOf("|") + 1;
                 String objPrim = result.substring(0, (pos1 - 1));
                 String objSeg = result.substring(pos1, (pos2 - 1));
@@ -47,25 +41,29 @@ public class PlacaVeicDAO {
 
                 if (jsonArray.length() > 0) {
 
-                    EquipBean equipBean = new EquipBean();
+                    VeiculoBean veiculoBean = new VeiculoBean();
+                    veiculoBean.deleteAll();
 
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(i);
                         Gson gson = new Gson();
-                        equipBean = gson.fromJson(objeto.toString(), EquipBean.class);
-                        equipBean.insert();
+                        veiculoBean = gson.fromJson(objeto.toString(), VeiculoBean.class);
+                        veiculoBean.insert();
 
                     }
 
                     jObj = new JSONObject(objSeg);
                     jsonArray = jObj.getJSONArray("dados");
 
+                    NotaFiscalBean notaFiscalBean = new NotaFiscalBean();
+                    notaFiscalBean.deleteAll();
+
                     for (int j = 0; j < jsonArray.length(); j++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(j);
                         Gson gson = new Gson();
-                        NotaFiscalBean notaFiscalBean = gson.fromJson(objeto.toString(), NotaFiscalBean.class);
+                        notaFiscalBean = gson.fromJson(objeto.toString(), NotaFiscalBean.class);
                         notaFiscalBean.insert();
 
                     }
@@ -73,11 +71,14 @@ public class PlacaVeicDAO {
                     jObj = new JSONObject(objTerc);
                     jsonArray = jObj.getJSONArray("dados");
 
+                    ItemNFBean itemNFBean = new ItemNFBean();
+                    itemNFBean.deleteAll();
+
                     for (int j = 0; j < jsonArray.length(); j++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(j);
                         Gson gson = new Gson();
-                        ItemNFBean itemNFBean = gson.fromJson(objeto.toString(), ItemNFBean.class);
+                        itemNFBean = gson.fromJson(objeto.toString(), ItemNFBean.class);
                         itemNFBean.insert();
 
                     }
@@ -100,12 +101,12 @@ public class PlacaVeicDAO {
     }
 
     public boolean verBD(String placa){
-        EquipBean equipBean = new EquipBean();
-        if(!equipBean.hasElements()){
+        VeiculoBean veiculoBean = new VeiculoBean();
+        if(!veiculoBean.hasElements()){
             return false;
         }
         else{
-            List equipList = equipBean.get("placaEquip", placa);
+            List equipList = veiculoBean.get("placaVeiculo", placa);
             boolean retorno = equipList.size() > 0;
             equipList.clear();
             return retorno;

@@ -21,7 +21,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 
 public class MenuInicialActivity extends ActivityGeneric {
@@ -86,13 +87,13 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                 if (text.equals("APONTA PESAGEM")) {
 
-//                    EquipBean equipBean = new EquipBean();
-//                    if(equipBean.hasElements()){
+                    FuncBean funcBean = new FuncBean();
+                    if(funcBean.hasElements()){
                         Intent it = new Intent(MenuInicialActivity.this, DigPlacaVeicActivity.class);
 //                        Intent it = new Intent(MenuInicialActivity.this, ListaPlacaVeicActivity.class);
                         startActivity(it);
                         finish();
-//                    }
+                    }
 
                 } else if (text.equals("CONFIGURAÇÕES")) {
 

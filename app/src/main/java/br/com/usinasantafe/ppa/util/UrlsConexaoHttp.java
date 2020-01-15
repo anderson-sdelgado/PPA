@@ -12,11 +12,11 @@ public class UrlsConexaoHttp {
 
     public static String put = "?versao=" + PPAContext.versaoAplic.replace(".", "_");
 
-    public static String EquipBean = urlPrincipal + "equip.php" + put;
+//    public static String EquipBean = urlPrincipal + "equip.php" + put;
     public static String FuncBean = urlPrincipal + "func.php" + put;
-    public static String ItemNFBean = urlPrincipal + "itemnotafiscal.php" + put;
-    public static String NotaFiscalBean = urlPrincipal + "notafiscal.php" + put;
-    public static String OSBean = urlPrincipal + "os.php" + put;
+//    public static String ItemNFBean = urlPrincipal + "itemnotafiscal.php" + put;
+//    public static String NotaFiscalBean = urlPrincipal + "notafiscal.php" + put;
+//    public static String OSBean = urlPrincipal + "os.php" + put;
 
     public UrlsConexaoHttp() {
     }
@@ -29,6 +29,12 @@ public class UrlsConexaoHttp {
         String retorno = "";
         if (classe.equals("Atualiza")) {
             retorno = urlPrincipal + "atualaplic.php" + put;
+        }
+        else if (classe.equals("OS")) {
+            retorno = urlPrincipal + "pesqos.php" + put;
+        }
+        else if (classe.equals("Veiculo")) {
+            retorno = urlPrincipal + "pesqveic.php" + put;
         }
         return retorno;
     }

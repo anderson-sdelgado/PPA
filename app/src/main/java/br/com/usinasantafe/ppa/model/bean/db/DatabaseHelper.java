@@ -8,7 +8,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;
@@ -52,7 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		
 		try{
 			
-			TableUtils.createTable(cs, EquipBean.class);
+			TableUtils.createTable(cs, VeiculoBean.class);
 			TableUtils.createTable(cs, FuncBean.class);
 			TableUtils.createTable(cs, ItemNFBean.class);
 			TableUtils.createTable(cs, NotaFiscalBean.class);

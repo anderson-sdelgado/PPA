@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,7 +95,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric{
                             progressBar.setMessage("PESQUISANDO OS...");
                             progressBar.show();
 
-                            customHandler.postDelayed(updateTimerThread, 10000);
+//                            customHandler.postDelayed(updateTimerThread, 10000);
 
                             verDados = true;
 
@@ -136,6 +137,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric{
     }
 
     public void avancaSucesso(){
+        Log.i("PPA", "CHEGOU AKI 1");
         verDados = false;
         if (progressBar.isShowing()) {
             progressBar.dismiss();
@@ -147,6 +149,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric{
     }
 
     public void msg(String texto){
+        Log.i("PPA", "CHEGOU AKI 2");
         verDados = false;
         this.progressBar.dismiss();
         AlertDialog.Builder alerta = new AlertDialog.Builder(DigPlacaVeicActivity.this);
@@ -165,8 +168,10 @@ public class DigPlacaVeicActivity extends ActivityGeneric{
 
         public void run() {
 
+            Log.i("PPA", "CHEGOU AKI 3");
             if(verDados) {
 
+                Log.i("PPA", "CHEGOU AKI 4");
                 verDados = false;
 
                 VerifDadosServ.getInstance().cancelVer();

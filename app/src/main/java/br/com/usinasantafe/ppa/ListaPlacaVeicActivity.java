@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 
 public class ListaPlacaVeicActivity extends ActivityGeneric {
@@ -34,13 +34,13 @@ public class ListaPlacaVeicActivity extends ActivityGeneric {
         Button buttonAtualVeiculo = (Button) findViewById(R.id.buttonAtualVeiculo);
         Button buttonRetVeiculo = (Button) findViewById(R.id.buttonRetVeiculo);
 
-        EquipBean equipBean = new EquipBean();
-        equipList = equipBean.orderBy("placaEquip", true);
+        VeiculoBean veiculoBean = new VeiculoBean();
+        equipList = veiculoBean.orderBy("placaEquip", true);
 
         ArrayList<String> itens = new ArrayList<String>();
         for (int i = 0; i < equipList.size(); i++) {
-            equipBean = (EquipBean) equipList.get(i);
-            itens.add(equipBean.getPlacaEquip());
+            veiculoBean = (VeiculoBean) equipList.get(i);
+            itens.add(veiculoBean.getPlacaVeiculo());
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
@@ -56,7 +56,7 @@ public class ListaPlacaVeicActivity extends ActivityGeneric {
                 TextView textView = v.findViewById(R.id.textViewItemList);
                 String placa = textView.getText().toString();
 
-                ppaContext.getPesagemCTR().criarCabecPes(placa);
+//                ppaContext.getPesagemCTR().criarCabecPes(placa);
 
                 Intent it = new Intent(ListaPlacaVeicActivity.this, ListaNotaFiscalActivity.class);
                 startActivity(it);
