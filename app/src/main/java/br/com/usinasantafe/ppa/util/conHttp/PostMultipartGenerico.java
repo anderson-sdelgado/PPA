@@ -1,4 +1,4 @@
-package br.com.usinasantafe.ppa.util;
+package br.com.usinasantafe.ppa.util.conHttp;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -15,17 +15,18 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 
 import br.com.usinasantafe.ppa.control.PesagemCTR;
+import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 
-public class ConHttpPostMultipartGenerico extends AsyncTask<String, Void, String>   {
+public class PostMultipartGenerico extends AsyncTask<String, Void, String>   {
 
-    private static ConHttpPostMultipartGenerico instance = null;
+    private static PostMultipartGenerico instance = null;
 
-    public ConHttpPostMultipartGenerico() {
+    public PostMultipartGenerico() {
     }
 
-    public static ConHttpPostMultipartGenerico getInstance() {
+    public static PostMultipartGenerico getInstance() {
         if (instance == null)
-            instance = new ConHttpPostMultipartGenerico();
+            instance = new PostMultipartGenerico();
         return instance;
     }
 

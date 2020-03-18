@@ -1,4 +1,4 @@
-package br.com.usinasantafe.ppa.util;
+package br.com.usinasantafe.ppa.util.conHttp;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -9,20 +9,22 @@ import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConHttpGetBDGenerico extends AsyncTask<String, Void, String> {
+import br.com.usinasantafe.ppa.util.UpdateBD;
 
-	private static ConHttpGetBDGenerico instance = null;
+public class GetBDGenerico extends AsyncTask<String, Void, String> {
+
+	private static GetBDGenerico instance = null;
 	private String tipo = null;
 	
 	private UrlsConexaoHttp urlsConexaoHttp;
 
-	public ConHttpGetBDGenerico() {
+	public GetBDGenerico() {
 
 	}
 
-    public static ConHttpGetBDGenerico getInstance() {
+    public static GetBDGenerico getInstance() {
         if (instance == null)
-        instance = new ConHttpGetBDGenerico();
+        instance = new GetBDGenerico();
         return instance;
     }
 

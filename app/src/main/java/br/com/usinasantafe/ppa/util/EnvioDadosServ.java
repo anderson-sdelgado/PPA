@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import br.com.usinasantafe.ppa.control.PesagemCTR;
+import br.com.usinasantafe.ppa.util.conHttp.PostMultipartGenerico;
+import br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp;
 
 
 public class EnvioDadosServ {
@@ -38,8 +40,8 @@ public class EnvioDadosServ {
         dados[1] = cabec;
         dados[2] = item;
 
-        ConHttpPostMultipartGenerico conHttpPostMultipartGenerico = new ConHttpPostMultipartGenerico();
-        conHttpPostMultipartGenerico.execute(dados);
+        PostMultipartGenerico postMultipartGenerico = new PostMultipartGenerico();
+        postMultipartGenerico.execute(dados);
 
     }
 

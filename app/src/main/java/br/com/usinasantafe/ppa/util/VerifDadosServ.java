@@ -17,6 +17,8 @@ import br.com.usinasantafe.ppa.MenuInicialActivity;
 import br.com.usinasantafe.ppa.model.bean.variaveis.AtualAplicBean;
 import br.com.usinasantafe.ppa.model.dao.OSDAO;
 import br.com.usinasantafe.ppa.model.dao.VeiculoDAO;
+import br.com.usinasantafe.ppa.util.conHttp.PostVerGenerico;
+import br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp;
 
 
 /**
@@ -32,7 +34,7 @@ public class VerifDadosServ {
     private MenuInicialActivity menuInicialActivity;
     private DigPlacaVeicActivity digPlacaVeicActivity;
     private DigOSActivity digOSActivity;
-    private ConHttpPostVerGenerico conHttpPostVerGenerico;
+    private PostVerGenerico postVerGenerico;
 
     public static VerifDadosServ getInstance() {
         if (instance == null)
@@ -92,9 +94,9 @@ public class VerifDadosServ {
         Map<String, Object> parametrosPost = new HashMap<String, Object>();
         parametrosPost.put("dado", json.toString());
 
-        conHttpPostVerGenerico = new ConHttpPostVerGenerico();
-        conHttpPostVerGenerico.setParametrosPost(parametrosPost);
-        conHttpPostVerGenerico.execute(url);
+        postVerGenerico = new PostVerGenerico();
+        postVerGenerico.setParametrosPost(parametrosPost);
+        postVerGenerico.execute(url);
 
     }
 
@@ -127,15 +129,15 @@ public class VerifDadosServ {
 
         Log.i("PMM", "VERIFICA = " + String.valueOf(dado));
 
-        conHttpPostVerGenerico = new ConHttpPostVerGenerico();
-        conHttpPostVerGenerico.setParametrosPost(parametrosPost);
-        conHttpPostVerGenerico.execute(url);
+        postVerGenerico = new PostVerGenerico();
+        postVerGenerico.setParametrosPost(parametrosPost);
+        postVerGenerico.execute(url);
 
     }
 
     public void cancelVer() {
-        if (conHttpPostVerGenerico.getStatus() == AsyncTask.Status.RUNNING) {
-            conHttpPostVerGenerico.cancel(true);
+        if (postVerGenerico.getStatus() == AsyncTask.Status.RUNNING) {
+            postVerGenerico.cancel(true);
         }
     }
 

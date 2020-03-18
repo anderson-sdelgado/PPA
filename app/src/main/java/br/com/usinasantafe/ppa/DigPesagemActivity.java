@@ -53,7 +53,7 @@ public class DigPesagemActivity extends ActivityGeneric {
     }
 
     public void onBackPressed() {
-            Intent it = new Intent(DigPesagemActivity.this, BTPesagemActivity.class);
+            Intent it = new Intent(DigPesagemActivity.this, MenuPesagemActivity.class);
             startActivity(it);
             finish();
     }

@@ -1,4 +1,4 @@
-package br.com.usinasantafe.ppa.util;
+package br.com.usinasantafe.ppa.util.conHttp;
 
 import br.com.usinasantafe.ppa.PPAContext;
 
@@ -8,7 +8,7 @@ public class UrlsConexaoHttp {
     public static String urlPrincEnvio = "http://www.usinasantafe.com.br/ppadev/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.ppa.model.bean.estaticas.";
-    public static String localUrl = "br.com.usinasantafe.ppa.util.UrlsConexaoHttp";
+    public static String localUrl = "br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp";
 
     public static String put = "?versao=" + PPAContext.versaoAplic.replace(".", "_");
 

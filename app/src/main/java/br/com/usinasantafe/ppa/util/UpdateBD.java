@@ -15,11 +15,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import br.com.usinasantafe.ppa.model.bean.db.GenericRecordable;
+import br.com.usinasantafe.ppa.util.conHttp.GetBDGenerico;
+import br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp;
 
 
 public class UpdateBD {
 
-	private ArrayList tabAtualArrayList;
+	private ArrayList<String> tabAtualArrayList;
 	private static UpdateBD instance = null;
 	private int contAtualBD = 0;
 	private String classe = "";
@@ -80,7 +82,7 @@ public class UpdateBD {
 
 			this.tipoReceb = 1;
 			this.progressDialog = progressDialog;
-			tabAtualArrayList = new ArrayList();
+			tabAtualArrayList = new ArrayList<String>();
 	        Class<?> retClasse = Class.forName(urlsConexaoHttp.localUrl);
 
 	        for (Field field : retClasse.getDeclaredFields()) {
@@ -98,8 +100,8 @@ public class UpdateBD {
 
 		    contAtualBD++;
 
-	        ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-	        conHttpGetBDGenerico.execute(url);
+	        GetBDGenerico getBDGenerico = new GetBDGenerico();
+	        getBDGenerico.execute(url);
 
 		} catch (Exception e) {
 			Log.i("PMM", "ERRO Manip2 = " + e);
@@ -134,8 +136,8 @@ public class UpdateBD {
 			String[] url = {classe};
 			contAtualBD++;
 
-			ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-			conHttpGetBDGenerico.execute(url);
+			GetBDGenerico getBDGenerico = new GetBDGenerico();
+			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
 			Log.i("PMM", "ERRO = " + e);
@@ -156,8 +158,8 @@ public class UpdateBD {
 				String[] url = {classe};
 				contAtualBD++;
 
-				ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-		        conHttpGetBDGenerico.execute(url);
+				GetBDGenerico getBDGenerico = new GetBDGenerico();
+		        getBDGenerico.execute(url);
 
 			}
 			else{
@@ -189,8 +191,8 @@ public class UpdateBD {
 				String[] url = {classe};
 				contAtualBD++;
 
-				ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-		        conHttpGetBDGenerico.execute(url);
+				GetBDGenerico getBDGenerico = new GetBDGenerico();
+		        getBDGenerico.execute(url);
 
 			}
 			else

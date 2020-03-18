@@ -24,13 +24,13 @@
     <string name="texto_padrao_sim">SIM</string>
     <string name="texto_menu_principal">PRINCIPAL - V 1.00</string>
     <string name="texto_veiculo">PLACA VEÍCULO</string>
-    <string name="texto_pesagem">PESAGEM</string>
+    <string name="texto_peso">PESO</string>
     <string name="texto_senha">SENHA:</string>
     <string name="texto_matric_func">MATRIC COLABORADOR:</string>
     <string name="texto_padrao_salvar">SALVAR</string>
     <string name="texto_nota_fiscal">NOTA FISCAL</string>
     <string name="texto_item_nota_fiscal">ITEM NOTA FISCAL</string>
-    <string name="texto_captura_bt">CAPTURA BLUETOOTH</string>
+    <string name="texto_captura_bt">CAPTURAR</string>
     <string name="texto_captura_dig">DIGITAR PESAGEM</string>
     <string name="texto_os">OS</string>
     <string name="texto_coment_falha">POR FAVOR, COMENTE O MOTIVO QUE TE LEVOU A DIGITAR O VALOR DA PESAGEM E NÃO CAPTURA O MESMO VIA BLUETOOTH.</string>
@@ -38,4 +38,8 @@
     <string name="texto_msg_pesagem">DESEJA INSERIR OUTRA PESAGEM?</string>
     <string name="texto_botao_camera">ACIONAR CAMERA</string>
     <string name="texto_foto">FOTO</string>
+    <string name="texto_balanca">BALANÇA(S)</string>
+    <string name="texto_valor_peso">1000.00</string>
+    <string name="texto_status_peso">ESTÁVEL</string>
+    <string name="texto_menu_pesagem">MENU PESAGEM</string>
 </resources>

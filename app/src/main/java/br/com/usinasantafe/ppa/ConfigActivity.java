@@ -103,7 +103,6 @@ public class ConfigActivity extends ActivityGeneric {
 
                         }
                     });
-
                     alerta.show();
                 }
             }

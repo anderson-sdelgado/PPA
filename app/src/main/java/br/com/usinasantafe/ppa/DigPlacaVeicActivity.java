@@ -16,7 +16,7 @@ import android.widget.EditText;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 import br.com.usinasantafe.ppa.util.VerifDadosServ;
 
-public class DigPlacaVeicActivity extends ActivityGeneric{
+public class DigPlacaVeicActivity extends ActivityGeneric {
 
     private EditText editTextPlaca;
     private ProgressDialog progressBar;

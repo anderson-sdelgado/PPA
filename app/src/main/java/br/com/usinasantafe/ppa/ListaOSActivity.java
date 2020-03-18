@@ -57,7 +57,7 @@ public class ListaOSActivity extends ActivityGeneric {
                 String nroOS = textView.getText().toString();
 //                ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS));
 
-                Intent it = new Intent(ListaOSActivity.this, BTPesagemActivity.class);
+                Intent it = new Intent(ListaOSActivity.this, MenuPesagemActivity.class);
                 startActivity(it);
                 finish();
 

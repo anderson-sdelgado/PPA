@@ -33,16 +33,6 @@ public class ComentFalhaActivity extends ActivityGeneric {
 
                 if (!editTextComent.getText().toString().equals("")) {
 
-                    ConexaoWeb conexaoWeb = new ConexaoWeb();
-
-                    Long statusCon;
-                    if(conexaoWeb.verificaConexao(ComentFalhaActivity.this)){
-                        statusCon = 1L;
-                    }
-                    else{
-                        statusCon = 0L;
-                    }
-
                     ppaContext.getPesagemCTR().insItemPes(ppaContext.getPesagem(), editTextComent.getText().toString(), getLatitude(), getLatitude());
 
                     Intent it = new Intent(ComentFalhaActivity.this, MsgPesagemActivity.class);

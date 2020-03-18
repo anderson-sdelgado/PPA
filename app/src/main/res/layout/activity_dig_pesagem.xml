@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/textViewPadrao"
         style="@style/TextView"
-        android:text="@string/texto_pesagem" />
+        android:text="@string/texto_peso" />
 
     <EditText
         android:id="@+id/editTextPadrao"

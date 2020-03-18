@@ -56,7 +56,7 @@ public class DigOSActivity extends ActivityGeneric {
 
                         ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), statusCon);
 
-                        Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+                        Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
                         startActivity(it);
                         finish();
 
@@ -81,7 +81,7 @@ public class DigOSActivity extends ActivityGeneric {
 
                             ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 0L);
 
-                            Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+                            Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
                             startActivity(it);
                             finish();
 
@@ -124,7 +124,7 @@ public class DigOSActivity extends ActivityGeneric {
             progressBar.dismiss();
         }
         ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 1L);
-        Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+        Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
         startActivity(it);
         finish();
     }
@@ -159,7 +159,7 @@ public class DigOSActivity extends ActivityGeneric {
                 }
 
                 ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 0L);
-                Intent it = new Intent(DigOSActivity.this, BTPesagemActivity.class);
+                Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
                 startActivity(it);
                 finish();
 

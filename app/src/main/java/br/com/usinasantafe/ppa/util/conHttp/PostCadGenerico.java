@@ -1,4 +1,4 @@
-package br.com.usinasantafe.ppa.util;
+package br.com.usinasantafe.ppa.util.conHttp;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -11,19 +11,19 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ConHttpPostCadGenerico extends AsyncTask<String, Void, String> {
+public class PostCadGenerico extends AsyncTask<String, Void, String> {
 
 
-	private static ConHttpPostCadGenerico instance = null;
+	private static PostCadGenerico instance = null;
 	private Map<String, Object> parametrosPost = null;
 
-	public ConHttpPostCadGenerico() {
+	public PostCadGenerico() {
 
 	}
 
-    public static ConHttpPostCadGenerico getInstance() {
+    public static PostCadGenerico getInstance() {
         if (instance == null)
-        instance = new ConHttpPostCadGenerico();
+        instance = new PostCadGenerico();
         return instance;
     }
 
