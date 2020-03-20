@@ -55,7 +55,7 @@ public class ListaNotaFiscalActivity extends ActivityGeneric {
 
                 TextView textView = v.findViewById(R.id.textViewItemList);
                 String notaFiscal = textView.getText().toString();
-                ppaContext.getConfigCTR().setNotaFiscalConfig(Long.parseLong(notaFiscal));
+                ppaContext.getPesagemCTR().getItemPesagemBean().setNroNFItemPes(Long.parseLong(notaFiscal));
 
                 Intent it = new Intent(ListaNotaFiscalActivity.this, ListaItemNFActivity.class);
                 startActivity(it);
@@ -121,9 +121,31 @@ public class ListaNotaFiscalActivity extends ActivityGeneric {
         buttonRetNotaFiscal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaNotaFiscalActivity.this, ListaPlacaVeicActivity.class);
-                startActivity(it);
-                finish();
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(ListaNotaFiscalActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("DESEJA REALMENTE RETORNAR, O RETORNO CAUSARAM A PERDA DE TODAS AS INFORMAÇÕES DE PESAGEM?");
+
+                alerta.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ppaContext.getPesagemCTR().deleteCabecAberto();
+
+                        Intent it = new Intent(ListaNotaFiscalActivity.this, MenuInicialActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                });
+
+                alerta.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alerta.show();
             }
         });
 

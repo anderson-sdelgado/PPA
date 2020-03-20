@@ -14,6 +14,7 @@ import java.util.Map;
 import br.com.usinasantafe.ppa.DigOSActivity;
 import br.com.usinasantafe.ppa.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.MenuInicialActivity;
+import br.com.usinasantafe.ppa.control.ConfigCTR;
 import br.com.usinasantafe.ppa.model.bean.variaveis.AtualAplicBean;
 import br.com.usinasantafe.ppa.model.dao.OSDAO;
 import br.com.usinasantafe.ppa.model.dao.VeiculoDAO;
@@ -77,8 +78,10 @@ public class VerifDadosServ {
         this.tipo = "Atualiza";
         this.menuInicialActivity = menuInicialActivity;
 
+        ConfigCTR configCTR = new ConfigCTR();
         AtualAplicBean atualAplicBean = new AtualAplicBean();
         atualAplicBean.setVersaoAtual(versaoAplic);
+        atualAplicBean.setMatricFunc(String.valueOf(configCTR.getConfig().getMatricFuncConfig()));
 
         JsonArray jsonArray = new JsonArray();
 

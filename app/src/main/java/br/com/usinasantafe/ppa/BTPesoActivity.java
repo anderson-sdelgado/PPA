@@ -1,6 +1,5 @@
 package br.com.usinasantafe.ppa;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -16,12 +15,9 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.UUID;
 
-import br.com.usinasantafe.ppa.util.ConexaoWeb;
-
-public class BTPesagemActivity extends ActivityGeneric {
+public class BTPesoActivity extends ActivityGeneric {
 
     private static final UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private BluetoothDevice device;
@@ -34,23 +30,29 @@ public class BTPesagemActivity extends ActivityGeneric {
     private Button buttonRetBTPesagem;
     private boolean capturaPeso;
     private PPAContext ppaContext;
+    private Double peso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bt_pesagem);
+        setContentView(R.layout.activity_bt_peso);
 
         ppaContext = (PPAContext) getApplication();
 
         buttonCapturaPeso = (Button) findViewById(R.id.buttonCapturaPeso);
-        buttonAvancaBTPesagem = (Button) findViewById(R.id.buttonCapturaPeso);
+        buttonAvancaBTPesagem = (Button) findViewById(R.id.buttonAvancaBTPesagem);
         buttonRetBTPesagem = (Button) findViewById(R.id.buttonRetBTPesagem);
         textViewPeso = (TextView) findViewById(R.id.textViewPeso);
         textViewStatus = (TextView) findViewById(R.id.textViewStatus);
 
+        textViewStatus.setText("CONECTANDO A BALANÇA...");
+        textViewStatus.setTextColor(Color.BLACK);
+
         device = getIntent().getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         TextView textViewTitBTPesagem = (TextView) findViewById(R.id.textViewTitBTPesagem);
         textViewTitBTPesagem.setText(device.getName());
+
+        textViewPeso.setText("0.0");
 
         capturaPeso = true;
 
@@ -58,26 +60,27 @@ public class BTPesagemActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
-                if(textViewStatus.getText().equals("ESTÁVEL")) {
+                if (capturaPeso) {
 
-                    if (capturaPeso) {
+                    String pesoString = textViewPeso.getText().toString();
+                    peso = Double.valueOf(pesoString);
 
+                    if(textViewStatus.getText().equals("ESTÁVEL") && (peso > 0D)){
                         textViewStatus.setText("PESO CAPTURADO");
                         textViewStatus.setTextColor(Color.GREEN);
                         capturaPeso = false;
                         buttonCapturaPeso.setText("RECAPTURAR");
-
-                    } else {
-
-                        textViewStatus.setText("");
-                        capturaPeso = true;
-                        buttonCapturaPeso.setText("CAPTURAR");
-
+                    }
+                    else{
+                        Toast.makeText(getBaseContext(), "FALHOU A CAPTURA, BALANÇA INSTÁVEL!", Toast.LENGTH_LONG).show();
                     }
 
-                }
-                else{
-                    Toast.makeText(getBaseContext(), "FALHOU A CAPTURA, BALANÇA INSTÁVEL!", Toast.LENGTH_LONG).show();
+                } else {
+
+                    textViewStatus.setText("");
+                    capturaPeso = true;
+                    buttonCapturaPeso.setText("CAPTURAR");
+
                 }
 
             }
@@ -88,21 +91,19 @@ public class BTPesagemActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
-                if (capturaPeso) {
+                if (!capturaPeso) {
 
-                    String pesoString = textViewPeso.getText().toString();
-                    Double peso = Double.valueOf(pesoString);
                     ppaContext.getPesagemCTR().insItemPes(peso, "", getLatitude(), getLatitude());
 
                     closeCon();
 
-                    Intent it = new Intent(BTPesagemActivity.this, MsgPesagemActivity.class);
+                    Intent it = new Intent(BTPesoActivity.this, MsgPesagemActivity.class);
                     startActivity(it);
                     finish();
 
                 } else {
 
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(BTPesagemActivity.this);
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(BTPesoActivity.this);
                     alerta.setTitle("ATENÇÃO");
                     alerta.setMessage("POR FAVOR, CAPTURE A PESAGEM ANTES DE CONTINUAR A PESAGEM.");
                     alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -125,7 +126,7 @@ public class BTPesagemActivity extends ActivityGeneric {
 
                 closeCon();
 
-                Intent it = new Intent(BTPesagemActivity.this, MsgPesagemActivity.class);
+                Intent it = new Intent(BTPesoActivity.this, MenuPesagemActivity.class);
                 startActivity(it);
                 finish();
 
@@ -196,13 +197,33 @@ public class BTPesagemActivity extends ActivityGeneric {
                         }
                         peso = "";
                     }
-//
                 }
 
             } catch (IOException e) {
-                Log.i("PPA", "Erro ao conectar: " + e.getMessage());
+                error(e);
             }
         }
+    }
+
+    private void error(final IOException e) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder alerta = new AlertDialog.Builder(BTPesoActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("FALHA NA CONEXÃO BLUETOOTH. POR FAVOR, CONTINUE A PESAGEM DIGITANDO O PESO.");
+                alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        closeCon();
+                        Intent it = new Intent(BTPesoActivity.this, DigPesoActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                });
+                alerta.show();
+            }
+        });
     }
 
 

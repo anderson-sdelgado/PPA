@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BTPesagemActivity"></activity>
+        <activity android:name=".BTPesoActivity"></activity>
         <activity android:name=".ListaBalancaBTActivity" />
 
         <uses-library
@@ -53,7 +53,7 @@
             android:name=".CameraActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigPesagemActivity"
+            android:name=".DigPesoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MenuPesagemActivity"

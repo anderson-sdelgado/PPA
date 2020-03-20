@@ -47,7 +47,7 @@ public class MenuPesagemActivity extends ActivityGeneric {
 
                 } else if (text.equals("DIGITAR VALOR DE PESAGEM")) {
 
-                    Intent it = new Intent(MenuPesagemActivity.this, DigPesagemActivity.class);
+                    Intent it = new Intent(MenuPesagemActivity.this, DigPesoActivity.class);
                     startActivity(it);
                     finish();
 
@@ -60,7 +60,7 @@ public class MenuPesagemActivity extends ActivityGeneric {
         buttonRetCapturaPesagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MenuPesagemActivity.this, ListaOSActivity.class);
+                Intent it = new Intent(MenuPesagemActivity.this, DigOSActivity.class);
                 startActivity(it);
                 finish();
             }

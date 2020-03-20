@@ -21,7 +21,7 @@ public class ItemPesagemBean extends Entidade {
     @DatabaseField
     private String nroOSItemPes;
     @DatabaseField
-    private Double valorItemPes;
+    private Double pesoItemPes;
     @DatabaseField
     private String comentFalhaItemPes;
     @DatabaseField
@@ -31,7 +31,7 @@ public class ItemPesagemBean extends Entidade {
     @DatabaseField
     private Double longitudeItemPes;
     @DatabaseField
-    private Long statusConOSCabPes;  //0 - OffLine; 1 - OnLine
+    private Long statusConOSItemPes;  //0 - OffLine; 1 - OnLine
 
     public ItemPesagemBean() {
     }
@@ -68,12 +68,12 @@ public class ItemPesagemBean extends Entidade {
         this.codItNFItemPes = codItNFItemPes;
     }
 
-    public Double getValorItemPes() {
-        return valorItemPes;
+    public Double getPesoItemPes() {
+        return pesoItemPes;
     }
 
-    public void setValorItemPes(Double valorItemPes) {
-        this.valorItemPes = valorItemPes;
+    public void setPesoItemPes(Double pesoItemPes) {
+        this.pesoItemPes = pesoItemPes;
     }
 
     public String getComentFalhaItemPes() {
@@ -108,12 +108,12 @@ public class ItemPesagemBean extends Entidade {
         this.longitudeItemPes = longitudeItemPes;
     }
 
-    public Long getStatusConOSCabPes() {
-        return statusConOSCabPes;
+    public Long getStatusConOSItemPes() {
+        return statusConOSItemPes;
     }
 
-    public void setStatusConOSCabPes(Long statusConOSCabPes) {
-        this.statusConOSCabPes = statusConOSCabPes;
+    public void setStatusConOSItemPes(Long statusConOSItemPes) {
+        this.statusConOSItemPes = statusConOSItemPes;
     }
 
     public String getNroOSItemPes() {

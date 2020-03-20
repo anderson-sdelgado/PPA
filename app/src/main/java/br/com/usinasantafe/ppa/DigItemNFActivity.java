@@ -11,11 +11,14 @@ import android.widget.EditText;
 public class DigItemNFActivity extends ActivityGeneric {
 
     private EditText editTextItemNF;
+    private PPAContext ppaContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dig_item_nf);
+
+        ppaContext = (PPAContext) getApplication();
 
         editTextItemNF = (EditText)  findViewById(R.id.editTextItemNF);
         Button buttonOkItemNF =  (Button) findViewById(R.id.buttonOkItemNF);
@@ -48,9 +51,17 @@ public class DigItemNFActivity extends ActivityGeneric {
             @SuppressWarnings("unchecked")
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(DigItemNFActivity.this, DigOSActivity.class);
-                startActivity(it);
-                finish();
+
+                if (!editTextItemNF.getText().toString().equals("")) {
+
+                    String notaFiscal = editTextItemNF.getText().toString().trim();
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroNFItemPes(Long.parseLong(notaFiscal));
+
+                    Intent it = new Intent(DigItemNFActivity.this, DigOSActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+
             }
         });
 

@@ -55,8 +55,7 @@ public class ListaItemNFActivity extends ActivityGeneric {
 
                 TextView textView = v.findViewById(R.id.textViewItemList);
                 String itemNF = textView.getText().toString();
-
-                ppaContext.getConfigCTR().setItemNFConfig(itemNF);
+                ppaContext.getPesagemCTR().getItemPesagemBean().setCodItNFItemPes(itemNF);
 
                 Intent it = new Intent(ListaItemNFActivity.this, DigOSActivity.class);
                 startActivity(it);

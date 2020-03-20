@@ -8,6 +8,7 @@ public class AtualAplicBean {
 
     private String versaoAtual;
     private String versaoNova;
+    private String matricFunc;
 
     public AtualAplicBean() {
     }
@@ -26,5 +27,13 @@ public class AtualAplicBean {
 
     public void setVersaoNova(String versaoNova) {
         this.versaoNova = versaoNova;
+    }
+
+    public String getMatricFunc() {
+        return matricFunc;
+    }
+
+    public void setMatricFunc(String matricFunc) {
+        this.matricFunc = matricFunc;
     }
 }

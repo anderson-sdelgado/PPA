@@ -10,12 +10,12 @@ public class CabPesagemDAO {
     public CabPesagemDAO() {
     }
 
-    public CabPesagemBean getCabPesagem(){
-        CabPesagemBean cabPesagemBean = new CabPesagemBean();
-        List cabPesagemList = cabPesagemBean.all();
-        cabPesagemBean = (CabPesagemBean) cabPesagemList.get(0);
+
+    public boolean verCabecPesAberto(){
+        List cabPesagemList = cabPesAbertoList();
+        boolean ret = cabPesagemList.size() > 0;
         cabPesagemList.clear();
-        return cabPesagemBean;
+        return ret;
     }
 
     public void criarCabPesagem(String placaVeicCabPes, Long matricFunc, Long statusCon){
@@ -28,11 +28,15 @@ public class CabPesagemDAO {
     }
 
     public CabPesagemBean getCabPesAberto(){
-        CabPesagemBean cabPesagemBean = new CabPesagemBean();
-        List cabPesagemList = cabPesagemBean.get("statusCabPes",1L);
-        cabPesagemBean = (CabPesagemBean) cabPesagemList.get(0);
+        List cabPesagemList = cabPesAbertoList();
+        CabPesagemBean cabPesagemBean = (CabPesagemBean) cabPesagemList.get(0);
         cabPesagemList.clear();
         return cabPesagemBean;
+    }
+
+    private List cabPesAbertoList(){
+        CabPesagemBean cabPesagemBean = new CabPesagemBean();
+        return cabPesagemBean.get("statusCabPes",1L);
     }
 
     public void fechCabPesagem(String imagem){
@@ -78,6 +82,10 @@ public class CabPesagemDAO {
         else{
             return false;
         }
+    }
+
+    public Long getStatusConVeicCabPes(){
+        return getCabPesAberto().getStatusConVeicCabPes();
     }
 
 }

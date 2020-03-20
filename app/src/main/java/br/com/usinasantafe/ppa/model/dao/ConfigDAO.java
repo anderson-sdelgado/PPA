@@ -34,29 +34,14 @@ public class ConfigDAO {
         ConfigBean configBean = new ConfigBean();
         configBean.setMatricFuncConfig(matricFunc);
         configBean.setSenhaConfig(senha);
-        configBean.setNotaFiscalConfig(0L);
-        configBean.setItemNFConfig("");
-        configBean.setNroOSConfig(0L);
+        configBean.setDataClearConfig("");
         configBean.deleteAll();
         configBean.insert();
     }
 
-    public void setNotaFiscalConfig(Long notaFiscalConfig){
+    public void setDataClearConfig(String dataClearConfig){
         ConfigBean configBean = getConfig();
-        configBean.setNotaFiscalConfig(notaFiscalConfig);
-        configBean.update();
-    }
-
-    public void setItemNFConfig(String itemNFConfig){
-        ConfigBean configBean = getConfig();
-        configBean.setItemNFConfig(itemNFConfig);
-        configBean.update();
-    }
-
-    public void setNroOSConfig(Long nroOSConfig, Long statusCon){
-        ConfigBean configBean = getConfig();
-        configBean.setNroOSConfig(nroOSConfig);
-        configBean.setStatusConOSConfig(statusCon);
+        configBean.setDataClearConfig(dataClearConfig);
         configBean.update();
     }
 

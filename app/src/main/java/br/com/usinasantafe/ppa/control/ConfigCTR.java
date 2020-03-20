@@ -34,19 +34,9 @@ public class ConfigCTR {
         configDAO.insConfig(matricFunc, senha);
     }
 
-    public void setNotaFiscalConfig(Long notaFiscalConfig){
+    public void setDataClearConfig(String dataClearConfig){
         ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setNotaFiscalConfig(notaFiscalConfig);
-    }
-
-    public void setItemNFConfig(String itemNFConfig){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setItemNFConfig(itemNFConfig);
-    }
-
-    public void setNroOSConfig(Long nroOSConfig, Long statusCon){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setNroOSConfig(nroOSConfig, statusCon);
+        configDAO.setDataClearConfig(dataClearConfig);
     }
 
 }

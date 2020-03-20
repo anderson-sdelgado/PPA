@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ import java.util.Set;
 
 public class ListaBalancaBTActivity extends ActivityGeneric {
 
-    protected BluetoothAdapter  btfAdapter;
+    protected BluetoothAdapter bluetoothAdapter;
     protected List<BluetoothDevice> listBtd;
     private ListView listBalancaBT;
 
@@ -28,10 +29,11 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_balanca_bt);
 
-        btfAdapter = BluetoothAdapter.getDefaultAdapter();
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         listBalancaBT = (ListView) findViewById(R.id.listBalancaBT);
+        Button buttonRetBalancaBT = (Button) findViewById(R.id.buttonRetBalancaBT);
 
-        if (btfAdapter == null) {
+        if (bluetoothAdapter == null) {
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(ListaBalancaBTActivity.this);
             alerta.setTitle("ATENÇÃO");
@@ -39,7 +41,7 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
             alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent it = new Intent(ListaBalancaBTActivity.this, DigPesagemActivity.class);
+                    Intent it = new Intent(ListaBalancaBTActivity.this, DigPesoActivity.class);
                     startActivity(it);
                     finish();
                 }
@@ -49,25 +51,33 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
 
         }
 
+        buttonRetBalancaBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(ListaBalancaBTActivity.this, MenuPesagemActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (btfAdapter.isEnabled()) {
+        if (bluetoothAdapter.isEnabled()) {
             Toast.makeText(this, "BLUETOOTH LIGADO!", Toast.LENGTH_LONG).show();
 
-            if (btfAdapter != null) {
+            if (bluetoothAdapter != null) {
 
-                Set<BluetoothDevice> pareados = btfAdapter.getBondedDevices();
+                Set<BluetoothDevice> pareados = bluetoothAdapter.getBondedDevices();
                 listBtd = new ArrayList<BluetoothDevice>(pareados);
 
                 updateLista();
             }
 
         } else {
-            //  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent, 0);
         }
@@ -79,7 +89,6 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Aqui você pode conferir se o usuário ativou ou não o bluetooth
         if (resultCode != Activity.RESULT_OK) {
 
             AlertDialog.Builder alerta = new AlertDialog.Builder(ListaBalancaBTActivity.this);
@@ -88,26 +97,23 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
             alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent it = new Intent(ListaBalancaBTActivity.this, DigPesagemActivity.class);
+                    Intent it = new Intent(ListaBalancaBTActivity.this, DigPesoActivity.class);
                     startActivity(it);
                     finish();
                 }
             });
 
             alerta.show();
-
-            Toast.makeText(this, "O bluetooth não foi ativado.", Toast.LENGTH_SHORT).show();
         }
     }
 
     protected void updateLista() {
-        // Cria o array com o nome de cada device
+
         List<String> nomes = new ArrayList<String>();
         for (BluetoothDevice device : listBtd) {
             nomes.add(device.getName());
         }
 
-        // Cria o adapter para popular o ListView
         int layout = android.R.layout.simple_list_item_1;
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, layout, nomes);
         listBalancaBT.setAdapter(adapter);
@@ -119,7 +125,7 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
 
                 BluetoothDevice device = listBtd.get(pos);
 
-                Intent intent = new Intent(ListaBalancaBTActivity.this, BTPesagemActivity.class);
+                Intent intent = new Intent(ListaBalancaBTActivity.this, BTPesoActivity.class);
                 intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
                 startActivity(intent);
 

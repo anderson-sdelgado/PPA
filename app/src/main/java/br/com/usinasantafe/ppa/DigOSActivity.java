@@ -54,7 +54,8 @@ public class DigOSActivity extends ActivityGeneric {
                             statusCon = 0L;
                         }
 
-                        ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), statusCon);
+                        ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPes(nroOS);
+                        ppaContext.getPesagemCTR().getItemPesagemBean().setStatusConOSItemPes(statusCon);
 
                         Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
                         startActivity(it);
@@ -79,7 +80,8 @@ public class DigOSActivity extends ActivityGeneric {
                         }
                         else{
 
-                            ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 0L);
+                            ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPes(nroOS);
+                            ppaContext.getPesagemCTR().getItemPesagemBean().setStatusConOSItemPes(0L);
 
                             Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
                             startActivity(it);
@@ -123,7 +125,8 @@ public class DigOSActivity extends ActivityGeneric {
         if (progressBar.isShowing()) {
             progressBar.dismiss();
         }
-        ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 1L);
+        ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPes(nroOS);
+        ppaContext.getPesagemCTR().getItemPesagemBean().setStatusConOSItemPes(1L);
         Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
         startActivity(it);
         finish();
@@ -158,7 +161,8 @@ public class DigOSActivity extends ActivityGeneric {
                     progressBar.dismiss();
                 }
 
-                ppaContext.getConfigCTR().setNroOSConfig(Long.parseLong(nroOS), 0L);
+                ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPes(nroOS);
+                ppaContext.getPesagemCTR().getItemPesagemBean().setStatusConOSItemPes(0L);
                 Intent it = new Intent(DigOSActivity.this, MenuPesagemActivity.class);
                 startActivity(it);
                 finish();

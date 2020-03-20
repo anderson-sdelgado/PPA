@@ -17,13 +17,7 @@ public class ConfigBean extends Entidade {
     @DatabaseField
     private String senhaConfig;
     @DatabaseField
-    private Long notaFiscalConfig;
-    @DatabaseField
-    private String itemNFConfig;
-    @DatabaseField
-    private Long nroOSConfig;
-    @DatabaseField
-    private Long statusConOSConfig;
+    private String dataClearConfig;
 
     public ConfigBean() {
     }
@@ -52,35 +46,11 @@ public class ConfigBean extends Entidade {
         this.senhaConfig = senhaConfig;
     }
 
-    public Long getNotaFiscalConfig() {
-        return notaFiscalConfig;
+    public String getDataClearConfig() {
+        return dataClearConfig;
     }
 
-    public void setNotaFiscalConfig(Long notaFiscalConfig) {
-        this.notaFiscalConfig = notaFiscalConfig;
-    }
-
-    public String getItemNFConfig() {
-        return itemNFConfig;
-    }
-
-    public void setItemNFConfig(String itemNFConfig) {
-        this.itemNFConfig = itemNFConfig;
-    }
-
-    public Long getNroOSConfig() {
-        return nroOSConfig;
-    }
-
-    public void setNroOSConfig(Long nroOSConfig) {
-        this.nroOSConfig = nroOSConfig;
-    }
-
-    public Long getStatusConOSConfig() {
-        return statusConOSConfig;
-    }
-
-    public void setStatusConOSConfig(Long statusConOSConfig) {
-        this.statusConOSConfig = statusConOSConfig;
+    public void setDataClearConfig(String dataClearConfig) {
+        this.dataClearConfig = dataClearConfig;
     }
 }

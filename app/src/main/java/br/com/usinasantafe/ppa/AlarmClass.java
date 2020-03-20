@@ -20,8 +20,8 @@ public class AlarmClass extends BroadcastReceiver {
 		}
 
 		Log.i("PST", "DATA HORA = " + Tempo.getInstance().dataComHora());
-		Log.i("PST", "STATUS = " + EnvioDadosServ.getInstance().isEnviando());
-		if(!EnvioDadosServ.getInstance().isEnviando()){
+		Log.i("PST", "STATUS = " + EnvioDadosServ.getInstance(). verifDadosEnvio());
+		if(EnvioDadosServ.getInstance(). verifDadosEnvio()){
 			Log.i("PST", "ENVIANDO");
 			EnvioDadosServ.getInstance().envioDados(context);
 		}

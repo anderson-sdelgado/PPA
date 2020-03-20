@@ -41,14 +41,11 @@ public class VeiculoDAO {
 
                 if (jsonArray.length() > 0) {
 
-                    VeiculoBean veiculoBean = new VeiculoBean();
-                    veiculoBean.deleteAll();
-
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(i);
                         Gson gson = new Gson();
-                        veiculoBean = gson.fromJson(objeto.toString(), VeiculoBean.class);
+                        VeiculoBean veiculoBean = gson.fromJson(objeto.toString(), VeiculoBean.class);
                         veiculoBean.insert();
 
                     }
@@ -56,14 +53,11 @@ public class VeiculoDAO {
                     jObj = new JSONObject(objSeg);
                     jsonArray = jObj.getJSONArray("dados");
 
-                    NotaFiscalBean notaFiscalBean = new NotaFiscalBean();
-                    notaFiscalBean.deleteAll();
-
                     for (int j = 0; j < jsonArray.length(); j++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(j);
                         Gson gson = new Gson();
-                        notaFiscalBean = gson.fromJson(objeto.toString(), NotaFiscalBean.class);
+                        NotaFiscalBean notaFiscalBean = gson.fromJson(objeto.toString(), NotaFiscalBean.class);
                         notaFiscalBean.insert();
 
                     }
@@ -71,14 +65,11 @@ public class VeiculoDAO {
                     jObj = new JSONObject(objTerc);
                     jsonArray = jObj.getJSONArray("dados");
 
-                    ItemNFBean itemNFBean = new ItemNFBean();
-                    itemNFBean.deleteAll();
-
                     for (int j = 0; j < jsonArray.length(); j++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(j);
                         Gson gson = new Gson();
-                        itemNFBean = gson.fromJson(objeto.toString(), ItemNFBean.class);
+                        ItemNFBean itemNFBean = gson.fromJson(objeto.toString(), ItemNFBean.class);
                         itemNFBean.insert();
 
                     }

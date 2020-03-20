@@ -92,10 +92,10 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
 
                             progressBar = new ProgressDialog(v.getContext());
                             progressBar.setCancelable(true);
-                            progressBar.setMessage("PESQUISANDO OS...");
+                            progressBar.setMessage("PESQUISANDO PLACA...");
                             progressBar.show();
 
-//                            customHandler.postDelayed(updateTimerThread, 10000);
+                            customHandler.postDelayed(updateTimerThread, 10000);
 
                             verDados = true;
 
@@ -107,10 +107,6 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
                             ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
 
                             msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
-
-                            Intent it = new Intent(DigPlacaVeicActivity.this, DigNotaFiscalActivity.class);
-                            startActivity(it);
-                            finish();
 
                         }
                     }
@@ -137,7 +133,6 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
     }
 
     public void avancaSucesso(){
-        Log.i("PPA", "CHEGOU AKI 1");
         verDados = false;
         if (progressBar.isShowing()) {
             progressBar.dismiss();
@@ -149,7 +144,6 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
     }
 
     public void msg(String texto){
-        Log.i("PPA", "CHEGOU AKI 2");
         verDados = false;
         this.progressBar.dismiss();
         AlertDialog.Builder alerta = new AlertDialog.Builder(DigPlacaVeicActivity.this);
@@ -159,6 +153,11 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
+
+                Intent it = new Intent(DigPlacaVeicActivity.this, DigNotaFiscalActivity.class);
+                startActivity(it);
+                finish();
+
             }
         });
         alerta.show();
@@ -168,10 +167,8 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
 
         public void run() {
 
-            Log.i("PPA", "CHEGOU AKI 3");
             if(verDados) {
 
-                Log.i("PPA", "CHEGOU AKI 4");
                 verDados = false;
 
                 VerifDadosServ.getInstance().cancelVer();
@@ -180,13 +177,9 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
                     progressBar.dismiss();
                 }
 
-                msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
-
                 ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
 
-                Intent it = new Intent(DigPlacaVeicActivity.this, DigNotaFiscalActivity.class);
-                startActivity(it);
-                finish();
+                msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
 
             }
 

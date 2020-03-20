@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import br.com.usinasantafe.ppa.util.ConexaoWeb;
-
 public class ComentFalhaActivity extends ActivityGeneric {
 
     private PPAContext ppaContext;
@@ -63,7 +61,7 @@ public class ComentFalhaActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent it = new Intent(ComentFalhaActivity.this, DigPesagemActivity.class);
+                Intent it = new Intent(ComentFalhaActivity.this, DigPesoActivity.class);
                 startActivity(it);
                 finish();
             }

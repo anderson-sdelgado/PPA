@@ -47,7 +47,7 @@ public class EnvioDadosServ {
 
     //////////////////////VERIFICAÇÃO DE DADOS///////////////////////////
 
-    public Boolean verifEnvioDados() {
+    public Boolean verifCabecFechado() {
         PesagemCTR pesagemCTR = new PesagemCTR();
         return pesagemCTR.verEnvioDados();
     }
@@ -58,26 +58,17 @@ public class EnvioDadosServ {
         ConexaoWeb conexaoWeb = new ConexaoWeb();
         if (conexaoWeb.verificaConexao(context)) {
             enviando = true;
-            envioDados();
-        }
-        else{
-            enviando = false;
-        }
-
-    }
-
-    public void envioDados() {
-        if(verifEnvioDados()){
-            enviando = true;
             dadosEnvio();
         }
         else{
             enviando = false;
         }
+
     }
 
+
     public boolean verifDadosEnvio() {
-        if (!verifEnvioDados()){
+        if (!verifCabecFechado()){
             enviando = false;
             return false;
         } else {

@@ -1,10 +1,14 @@
 package br.com.usinasantafe.ppa.control;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -21,7 +25,11 @@ import br.com.usinasantafe.ppa.util.Imagem;
 
 public class PesagemCTR {
 
+    private ItemPesagemBean itemPesagemBean;
+
     public PesagemCTR() {
+        if (itemPesagemBean == null)
+            itemPesagemBean = new ItemPesagemBean();
     }
 
     public void criarCabecPes(String placaVeicCabPes, Long statusCon){
@@ -30,20 +38,16 @@ public class PesagemCTR {
         cabPesagemDAO.criarCabPesagem(placaVeicCabPes, configCTR.getConfig().getMatricFuncConfig(), statusCon);
     }
 
-    public void insItemPes(Double pesagem, String comentario, Double latitude, Double logitude){
-        ConfigCTR configCTR = new ConfigCTR();
+    public boolean verCabecPesAberto(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesagem().getIdCabPes(), configCTR.getConfig(), pesagem, comentario, latitude, logitude);
+        return cabPesagemDAO.verCabecPesAberto();
     }
 
-    public void insItemPes(Double pesagem, Double latitude, Double logitude){
-        ConfigCTR configCTR = new ConfigCTR();
+    public void insItemPes(Double peso, String comentario, Double latitude, Double logitude){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesagem().getIdCabPes(), configCTR.getConfig(), pesagem, "", latitude, logitude);
+        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesAberto().getIdCabPes(), itemPesagemBean, peso, comentario, latitude, logitude);
     }
-
     public void fechCabPesagem(Bitmap bitmap){
         Imagem imagem = new Imagem();
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
@@ -88,15 +92,35 @@ public class PesagemCTR {
         try{
 
             int pos1 = retorno.indexOf("_") + 1;
-            Long idCabec = Long.valueOf(retorno.substring(pos1));
+            String objPrinc = retorno.substring(pos1);
 
-            CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-            cabPesagemDAO.delCabec(idCabec);
+            JSONObject cabecJsonObject = new JSONObject(objPrinc);
+            JSONArray cabecJsonArray = cabecJsonObject.getJSONArray("cabec");
 
-            ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-            itemPesagemDAO.delItemCabec(idCabec);
+            for (int i = 0; i < cabecJsonArray.length(); i++) {
 
-            EnvioDadosServ.getInstance().envioDados();
+                JSONObject objBol = cabecJsonArray.getJSONObject(i);
+                Gson gsonBol = new Gson();
+                CabPesagemBean cabPesagemBean = gsonBol.fromJson(objBol.toString(), CabPesagemBean.class);
+
+                List cabecList = cabPesagemBean.get("idCabPes", cabPesagemBean.getIdCabPes());
+                CabPesagemBean cabPesagemBeanDB = (CabPesagemBean) cabecList.get(0);
+                cabecList.clear();
+
+                ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
+                List itemPesagemList = itemPesagemBean.get("idCabItemPes", cabPesagemBeanDB.getIdCabPes());
+
+                for (int j = 0; j < itemPesagemList.size(); j++) {
+
+                    itemPesagemBean = (ItemPesagemBean) itemPesagemList.get(j);
+                    itemPesagemBean.delete();
+
+                }
+
+                itemPesagemList.clear();
+                cabPesagemBeanDB.delete();
+
+            }
 
         }
         catch(Exception e){
@@ -128,6 +152,35 @@ public class PesagemCTR {
     public boolean verStatusConPlacaVeic(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         return cabPesagemDAO.verStatusConPlacaVeic();
+    }
+
+    public ItemPesagemBean getItemPesagemBean() {
+        return itemPesagemBean;
+    }
+
+    public Long getStatusConVeicCabPes(){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        return cabPesagemDAO.getStatusConVeicCabPes();
+    }
+
+    public void deleteCabecAberto() {
+
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        CabPesagemBean cabPesagemBean = cabPesagemDAO.getCabPesAberto();
+
+        ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
+        List itemPesagemList = itemPesagemBean.get("idCabItemPes", cabPesagemBean.getIdCabPes());
+
+        for (int j = 0; j < itemPesagemList.size(); j++) {
+
+            itemPesagemBean = (ItemPesagemBean) itemPesagemList.get(j);
+            itemPesagemBean.delete();
+
+        }
+
+        itemPesagemList.clear();
+        cabPesagemBean.delete();
+
     }
 
 }

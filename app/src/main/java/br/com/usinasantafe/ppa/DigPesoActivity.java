@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class DigPesagemActivity extends ActivityGeneric {
+public class DigPesoActivity extends ActivityGeneric {
 
     private PPAContext ppaContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dig_pesagem);
+        setContentView(R.layout.activity_dig_peso);
 
         ppaContext = (PPAContext) getApplication();
 
@@ -29,7 +29,7 @@ public class DigPesagemActivity extends ActivityGeneric {
                     Double pesagem = Double.valueOf(pesagemString.replace(",", "."));
                     ppaContext.setPesagem(pesagem);
 
-                    Intent it = new Intent(DigPesagemActivity.this, ComentFalhaActivity.class);
+                    Intent it = new Intent(DigPesoActivity.this, ComentFalhaActivity.class);
                     startActivity(it);
                     finish();
 
@@ -53,7 +53,7 @@ public class DigPesagemActivity extends ActivityGeneric {
     }
 
     public void onBackPressed() {
-            Intent it = new Intent(DigPesagemActivity.this, MenuPesagemActivity.class);
+            Intent it = new Intent(DigPesoActivity.this, MenuPesagemActivity.class);
             startActivity(it);
             finish();
     }

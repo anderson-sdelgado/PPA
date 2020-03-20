@@ -21,10 +21,10 @@ public class ConexaoBT {
 		
 //		Log.i("TESTE", "CHEGOU AKI 1");
 //
-//		btfAdapter = BluetoothAdapter.getDefaultAdapter();
+//		bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 //		Log.i("TESTE", "CHEGOU AKI 2");
 //
-//		if (btfAdapter != null && btfAdapter.isEnabled()) {
+//		if (bluetoothAdapter != null && bluetoothAdapter.isEnabled()) {
 //			Log.i("TESTE", "CHEGOU AKI 3");
 //			new ThreadServidor().start();
 //			running = true;
@@ -37,7 +37,7 @@ public class ConexaoBT {
 //		@Override
 //		public void run() {
 //			try {
-//				BluetoothServerSocket serverSocket = btfAdapter
+//				BluetoothServerSocket serverSocket = bluetoothAdapter
 //						.listenUsingRfcommWithServiceRecord("LivroAndroid", uuid);
 //				try {
 //					socket = serverSocket.accept();

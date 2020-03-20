@@ -1,5 +1,7 @@
 package br.com.usinasantafe.ppa;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -44,7 +46,6 @@ public class CameraActivity extends ActivityGeneric {
 
                 if(capt){
                     ppaContext.getPesagemCTR().fechCabPesagem(bitmap);
-                    EnvioDadosServ.getInstance().envioDados(CameraActivity.this);
                     Intent it = new Intent(CameraActivity.this, MenuInicialActivity.class);
                     startActivity(it);
                     finish();
@@ -56,9 +57,31 @@ public class CameraActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
-                Intent it = new Intent(CameraActivity.this, MsgPesagemActivity.class);
-                startActivity(it);
-                finish();
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(CameraActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("DESEJA REALMENTE RETORNAR, O RETORNO CAUSARAM A PERDA DE TODAS AS INFORMAÇÕES DE PESAGEM?");
+
+                alerta.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ppaContext.getPesagemCTR().deleteCabecAberto();
+
+                        Intent it = new Intent(CameraActivity.this, MenuInicialActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                });
+
+                alerta.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alerta.show();
 
             }
         });

@@ -33,14 +33,11 @@ public class OSDAO {
 
                 if (jsonArray.length() > 0) {
 
-                    OSBean osBean = new OSBean();
-                    osBean.deleteAll();
-
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(i);
                         Gson gson = new Gson();
-                        osBean = gson.fromJson(objeto.toString(), OSBean.class);
+                        OSBean osBean = gson.fromJson(objeto.toString(), OSBean.class);
                         osBean.insert();
 
                     }

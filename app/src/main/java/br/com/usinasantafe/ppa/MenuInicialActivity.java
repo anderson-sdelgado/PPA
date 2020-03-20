@@ -22,8 +22,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.OSBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
+import br.com.usinasantafe.ppa.util.ConexaoWeb;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
+import br.com.usinasantafe.ppa.util.Tempo;
+import br.com.usinasantafe.ppa.util.VerifDadosServ;
 
 public class MenuInicialActivity extends ActivityGeneric {
 
@@ -41,6 +47,8 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         ppaContext = (PPAContext) getApplication();
         textViewProcesso = (TextView) findViewById(R.id.textViewProcesso);
+
+        progressBar = new ProgressDialog(this);
 
         if (!checkPermission(Manifest.permission.INTERNET)) {
             String[] PERMISSIONS = {android.Manifest.permission.INTERNET};
@@ -64,11 +72,25 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         customHandler.postDelayed(updateTimerThread, 0);
 
-        startTimer();
+        if(ppaContext.getPesagemCTR().verCabecPesAberto()){
+            if(ppaContext.getPesagemCTR().getStatusConVeicCabPes() == 1L){
+                Intent it = new Intent(MenuInicialActivity.this, ListaNotaFiscalActivity.class);
+                startActivity(it);
+                finish();
+            }
+            else{
+                Intent it = new Intent(MenuInicialActivity.this, DigNotaFiscalActivity.class);
+                startActivity(it);
+                finish();
+            }
+        }
+        else {
+            atualizarAplic();
+        }
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        itens.add("APONTA PESAGEM");
+        itens.add("PESAGEM");
         itens.add("CONFIGURAÇÕES");
         itens.add("SAIR");
 
@@ -85,12 +107,17 @@ public class MenuInicialActivity extends ActivityGeneric {
                 TextView textView = (TextView) v.findViewById(R.id.textViewItemList);
                 String text = textView.getText().toString();
 
-                if (text.equals("APONTA PESAGEM")) {
+                if (text.equals("PESAGEM")) {
 
                     FuncBean funcBean = new FuncBean();
-                    if(funcBean.hasElements()){
+                    if(funcBean.hasElements() && ppaContext.getConfigCTR().hasElements()){
+
+                        if(!ppaContext.getConfigCTR().getConfig().getDataClearConfig().equals(Tempo.getInstance().dataSHora())){
+                            clearBD();
+                            ppaContext.getConfigCTR().setDataClearConfig(Tempo.getInstance().dataSHora());
+                        }
+
                         Intent it = new Intent(MenuInicialActivity.this, DigPlacaVeicActivity.class);
-//                        Intent it = new Intent(MenuInicialActivity.this, ListaPlacaVeicActivity.class);
                         startActivity(it);
                         finish();
                     }
@@ -116,14 +143,28 @@ public class MenuInicialActivity extends ActivityGeneric {
 
     }
 
+    public void atualizarAplic(){
+        ConexaoWeb conexaoWeb = new ConexaoWeb();
+        if (conexaoWeb.verificaConexao(this)) {
+            if (ppaContext.getConfigCTR().hasElements()) {
+                progressBar.setCancelable(true);
+                progressBar.setMessage("BUSCANDO ATUALIZAÇÃO...");
+                progressBar.show();
+                VerifDadosServ.getInstance().verAtualAplic(ppaContext.versaoAplic, this, progressBar);
+            }
+        } else {
+            startTimer();
+        }
+    }
+
     public void startTimer() {
 
         Intent intent = new Intent(this, AlarmClass.class);
         boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_NO_CREATE) == null);
 
-//        if (progressBar.isShowing()) {
-//            progressBar.dismiss();
-//        }
+        if (progressBar.isShowing()) {
+            progressBar.dismiss();
+        }
 
         if (alarmeAtivo) {
 
@@ -167,5 +208,21 @@ public class MenuInicialActivity extends ActivityGeneric {
             customHandler.postDelayed(this, 10000);
         }
     };
+
+    public void clearBD(){
+
+        VeiculoBean veiculoBean = new VeiculoBean();
+        veiculoBean.deleteAll();
+
+        NotaFiscalBean notaFiscalBean = new NotaFiscalBean();
+        notaFiscalBean.deleteAll();
+
+        ItemNFBean itemNFBean = new ItemNFBean();
+        itemNFBean.deleteAll();
+
+        OSBean osBean = new OSBean();
+        osBean.deleteAll();
+
+    }
 
 }
