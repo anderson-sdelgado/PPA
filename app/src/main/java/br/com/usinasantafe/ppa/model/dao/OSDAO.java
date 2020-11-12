@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import br.com.usinasantafe.ppa.DigOSActivity;
+import br.com.usinasantafe.ppa.view.DigOSActivity;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OSBean;
 import br.com.usinasantafe.ppa.util.VerifDadosServ;
 

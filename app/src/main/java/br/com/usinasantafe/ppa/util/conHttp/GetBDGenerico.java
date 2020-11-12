@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import br.com.usinasantafe.ppa.util.UpdateBD;
+import br.com.usinasantafe.ppa.util.AtualDadosServ;
 
 public class GetBDGenerico extends AsyncTask<String, Void, String> {
 
@@ -95,7 +95,7 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 
 		try {
-			UpdateBD.getInstance().manipularDadosHttp(tipo, result);
+			AtualDadosServ.getInstance().manipularDadosHttp(tipo, result);
 		} catch (Exception e) {
 			Log.i("PMM", "Erro2 = " + e);
 		}

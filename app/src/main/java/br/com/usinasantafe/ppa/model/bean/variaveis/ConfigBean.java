@@ -3,7 +3,7 @@ package br.com.usinasantafe.ppa.model.bean.variaveis;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import br.com.usinasantafe.ppa.model.bean.db.Entidade;
+import br.com.usinasantafe.ppa.model.pst.Entidade;
 
 @DatabaseTable(tableName="tbconfigvar")
 public class ConfigBean extends Entidade {
@@ -12,6 +12,8 @@ public class ConfigBean extends Entidade {
 
     @DatabaseField(generatedId=true)
     private Long idConfig;
+    @DatabaseField
+    private Long idEquipConfig;
     @DatabaseField
     private Long matricFuncConfig;
     @DatabaseField
@@ -28,6 +30,14 @@ public class ConfigBean extends Entidade {
 
     public void setIdConfig(Long idConfig) {
         this.idConfig = idConfig;
+    }
+
+    public Long getIdEquipConfig() {
+        return idEquipConfig;
+    }
+
+    public void setIdEquipConfig(Long idEquipConfig) {
+        this.idEquipConfig = idEquipConfig;
     }
 
     public Long getMatricFuncConfig() {

@@ -24,59 +24,52 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BTPesoActivity"></activity>
-        <activity android:name=".ListaBalancaBTActivity" />
+        <activity android:name=".view.ListaEquipPesagActivity"></activity>
+        <activity android:name=".view.DigFuncActivity" />
+        <activity android:name=".view.LeitorFuncActivity" />
+        <activity android:name=".view.DigProdutoActivity" />
+        <activity android:name=".view.ListaProdutoActivity" />
+        <activity
+            android:name=".view.ListaOSActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.BTPesoActivity" />
+        <activity android:name=".view.ListaBalancaBTActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity
-            android:name=".MsgPesagemActivity"
+            android:name=".view.MsgPesagemActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ComentFalhaActivity"
+            android:name=".view.ComentFalhaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigOSActivity"
+            android:name=".view.DigOSActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigItemNFActivity"
+            android:name=".view.DigPlacaVeicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigNotaFiscalActivity"
+            android:name=".view.CameraActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DigPlacaVeicActivity"
+            android:name=".view.DigPesoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CameraActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".DigPesoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MenuPesagemActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ListaOSActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ListaItemNFActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ListaNotaFiscalActivity"
+            android:name=".view.MenuPesagemActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ListaPlacaVeicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ConfigActivity"
+            android:name=".view.ConfigActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SenhaActivity"
+            android:name=".view.SenhaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MenuInicialActivity">
+        <activity android:name=".view.MenuInicialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

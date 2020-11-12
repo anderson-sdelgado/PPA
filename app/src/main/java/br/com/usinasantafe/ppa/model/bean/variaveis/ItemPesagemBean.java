@@ -3,7 +3,7 @@ package br.com.usinasantafe.ppa.model.bean.variaveis;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import br.com.usinasantafe.ppa.model.bean.db.Entidade;
+import br.com.usinasantafe.ppa.model.pst.Entidade;
 
 @DatabaseTable(tableName="tbitempesvar")
 public class ItemPesagemBean extends Entidade {

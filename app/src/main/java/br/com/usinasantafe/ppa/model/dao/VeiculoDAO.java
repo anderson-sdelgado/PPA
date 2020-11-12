@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import br.com.usinasantafe.ppa.DigPlacaVeicActivity;
+import br.com.usinasantafe.ppa.view.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;

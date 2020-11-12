@@ -3,7 +3,7 @@ package br.com.usinasantafe.ppa.model.bean.variaveis;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import br.com.usinasantafe.ppa.model.bean.db.Entidade;
+import br.com.usinasantafe.ppa.model.pst.Entidade;
 
 @DatabaseTable(tableName="tbcabpesvar")
 public class CabPesagemBean extends Entidade {
@@ -13,18 +13,17 @@ public class CabPesagemBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idCabPes;
     @DatabaseField
+    private Long idEquipCabPes;
+    @DatabaseField
     private Long matricFuncCabPes;
     @DatabaseField
     private String placaVeicCabPes;
-    @DatabaseField
-    private String fotoCabPes;
     @DatabaseField
     private String dthrCabPes;
     @DatabaseField
     private Long statusConVeicCabPes;  //0 - OffLine; 1 - OnLine
     @DatabaseField
     private Long statusCabPes; //1 - Aberto; 2 - Fechado;
-
 
     public CabPesagemBean() {
     }
@@ -37,20 +36,20 @@ public class CabPesagemBean extends Entidade {
         this.idCabPes = idCabPes;
     }
 
+    public Long getIdEquipCabPes() {
+        return idEquipCabPes;
+    }
+
+    public void setIdEquipCabPes(Long idEquipCabPes) {
+        this.idEquipCabPes = idEquipCabPes;
+    }
+
     public String getPlacaVeicCabPes() {
         return placaVeicCabPes;
     }
 
     public void setPlacaVeicCabPes(String placaVeicCabPes) {
         this.placaVeicCabPes = placaVeicCabPes;
-    }
-
-    public String getFotoCabPes() {
-        return fotoCabPes;
-    }
-
-    public void setFotoCabPes(String fotoCabPes) {
-        this.fotoCabPes = fotoCabPes;
     }
 
     public String getDthrCabPes() {

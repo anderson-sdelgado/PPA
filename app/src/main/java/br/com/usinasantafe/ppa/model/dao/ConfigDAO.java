@@ -30,9 +30,9 @@ public class ConfigDAO {
         return configBean;
     }
 
-    public void insConfig(Long matricFunc, String senha){
+    public void insConfig(Long idEquip, String senha){
         ConfigBean configBean = new ConfigBean();
-        configBean.setMatricFuncConfig(matricFunc);
+        configBean.setIdEquipConfig(idEquip);
         configBean.setSenhaConfig(senha);
         configBean.setDataClearConfig("");
         configBean.deleteAll();
@@ -42,6 +42,12 @@ public class ConfigDAO {
     public void setDataClearConfig(String dataClearConfig){
         ConfigBean configBean = getConfig();
         configBean.setDataClearConfig(dataClearConfig);
+        configBean.update();
+    }
+
+    public void setMatricFuncConfig(Long matricFunc){
+        ConfigBean configBean = getConfig();
+        configBean.setMatricFuncConfig(matricFunc);
         configBean.update();
     }
 
