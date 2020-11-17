@@ -34,15 +34,9 @@ public class ConfigDAO {
         ConfigBean configBean = new ConfigBean();
         configBean.setIdEquipConfig(idEquip);
         configBean.setSenhaConfig(senha);
-        configBean.setDataClearConfig("");
+        configBean.setMatricFuncConfig(0L);
         configBean.deleteAll();
         configBean.insert();
-    }
-
-    public void setDataClearConfig(String dataClearConfig){
-        ConfigBean configBean = getConfig();
-        configBean.setDataClearConfig(dataClearConfig);
-        configBean.update();
     }
 
     public void setMatricFuncConfig(Long matricFunc){

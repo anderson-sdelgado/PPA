@@ -169,6 +169,12 @@ public class ActivityGeneric extends OrmLiteBaseActivity<DatabaseHelper>implemen
             Button buttonVirg = (Button) findViewById(R.id.buttonVirg);
             buttonVirg.setOnClickListener(new EventoBotao(","));
         }
+
+        if ((Button) findViewById(R.id.buttonLetraA) != null) {
+            Button buttonVirg = (Button) findViewById(R.id.buttonVirg);
+            buttonVirg.setOnClickListener(new EventoBotao("A"));
+        }
+
     }
 
     private ArrayList<String> permissionsToRequest(ArrayList<String> wantedPermissions) {

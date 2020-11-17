@@ -1,7 +1,10 @@
 package br.com.usinasantafe.ppa.control;
 
+import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.ppa.model.dao.ConfigDAO;
+import br.com.usinasantafe.ppa.model.dao.EquipDAO;
 import br.com.usinasantafe.ppa.model.dao.FuncDAO;
 
 public class ConfigCTR {
@@ -24,19 +27,39 @@ public class ConfigCTR {
         return configDAO.getConfig();
     }
 
+    public EquipBean getEquip(Long nroEquip){
+        EquipDAO equipDAO = new EquipDAO();
+        return equipDAO.getNroEquip(nroEquip);
+    }
+
+    public EquipBean getEquip(){
+        EquipDAO equipDAO = new EquipDAO();
+        return equipDAO.getIdEquip(getConfig().getIdEquipConfig());
+    }
+
+    public boolean verEquip(Long nroEquip){
+        EquipDAO equipDAO = new EquipDAO();
+        return equipDAO.verNroEquip(nroEquip);
+    }
+
     public boolean verFunc(Long matricFunc){
         FuncDAO funcDAO = new FuncDAO();
         return funcDAO.verFunc(matricFunc);
     }
 
-    public void insConfig(Long matricFunc, String senha){
+    public void insConfig(Long nroEquip, String senha){
         ConfigDAO configDAO = new ConfigDAO();
-        configDAO.insConfig(matricFunc, senha);
+        configDAO.insConfig(getEquip(nroEquip).getIdEquip(), senha);
     }
 
-    public void setDataClearConfig(String dataClearConfig){
+    public FuncBean getFunc(Long matricFunc){
+        FuncDAO funcDAO = new FuncDAO();
+        return funcDAO.getFunc(matricFunc);
+    }
+
+    public void setFuncConfig(Long matricFunc){
         ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setDataClearConfig(dataClearConfig);
+        configDAO.setMatricFuncConfig(matricFunc);
     }
 
 }

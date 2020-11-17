@@ -16,8 +16,8 @@
 
 package br.com.usinasantafe.ppa.zxing.result;
 
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.LocaleManager;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.zxing.LocaleManager;
+import br.com.usinasantafe.ppa.R;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.URIParsedResult;
 

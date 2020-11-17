@@ -22,15 +22,15 @@ import java.util.Collection;
 
 import android.content.Context;
 import android.widget.TextView;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.HttpHelper;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.LocaleManager;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.zxing.HttpHelper;
+import br.com.usinasantafe.ppa.zxing.LocaleManager;
+import br.com.usinasantafe.ppa.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.history.HistoryManager;
+import br.com.usinasantafe.ppa.zxing.history.HistoryManager;
 
 /**
  * @author Kamil Kaczmarczyk

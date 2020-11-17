@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing;
+package br.com.usinasantafe.ppa.zxing;
 
 /**
  * This class provides the constants to use when sending an Intent to Barcode Scanner.
@@ -34,7 +34,7 @@ public final class Intents {
      * Send this intent to open the Barcodes app in scanning mode, find a barcode, and return
      * the results.
      */
-    public static final String ACTION = "br.com.usinasantafe.testeleitorcodigobarra.zxing.SCAN";
+    public static final String ACTION = "br.com.usinasantafe.ppa.zxing.SCAN";
 
     /**
      * By default, sending this will decode all barcodes that we understand. However it
@@ -196,7 +196,7 @@ public final class Intents {
      * Send this intent to encode a piece of data as a QR code and display it full screen, so
      * that another person can scan the barcode from your screen.
      */
-    public static final String ACTION = "br.com.usinasantafe.testeleitorcodigobarra.zxing.ENCODE";
+    public static final String ACTION = "br.com.usinasantafe.ppa.zxing.ENCODE";
 
     /**
      * The data to encode. Use {@link android.content.Intent#putExtra(String, String)} or
@@ -236,7 +236,7 @@ public final class Intents {
     /**
      * Use Google Book Search to search the contents of the book provided.
      */
-    public static final String ACTION = "br.com.usinasantafe.testeleitorcodigobarra.zxing.SEARCH_BOOK_CONTENTS";
+    public static final String ACTION = "br.com.usinasantafe.ppa.zxing.SEARCH_BOOK_CONTENTS";
 
     /**
      * The book to search, identified by ISBN number.
@@ -259,7 +259,7 @@ public final class Intents {
     /**
      * Internal intent used to trigger connection to a wi-fi network.
      */
-    public static final String ACTION = "br.com.usinasantafe.testeleitorcodigobarra.zxing.WIFI_CONNECT";
+    public static final String ACTION = "br.com.usinasantafe.ppa.zxing.WIFI_CONNECT";
 
     /**
      * The network to connect to, all the configuration provided here.
@@ -288,7 +288,7 @@ public final class Intents {
      * Give the user a choice of items to encode as a barcode, then render it as a QR Code and
      * display onscreen for a friend to scan with their phone.
      */
-    public static final String ACTION = "br.com.usinasantafe.testeleitorcodigobarra.zxing.SHARE";
+    public static final String ACTION = "br.com.usinasantafe.ppa.zxing.SHARE";
 
     private Share() {
     }

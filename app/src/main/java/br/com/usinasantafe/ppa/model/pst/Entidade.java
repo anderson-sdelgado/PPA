@@ -85,13 +85,13 @@ public abstract class Entidade implements Serializable {
 		}
 	}
 	
-	public List get(ArrayList<PesqBean> pesquisaList) {
+	public List get(ArrayList<EspecificaPesquisa> pesquisaList) {
 		try {
 			QueryBuilder<String, Object> queryBuilder =
 					this.daoImpl().queryBuilder();
 			Where<String, Object> where = queryBuilder.where();
 			for(int i = 0; i < pesquisaList.size(); i++) {
-				PesqBean pesquisa = pesquisaList.get(i);
+				EspecificaPesquisa pesquisa = pesquisaList.get(i);
 				if(i > 0){
 					where.and();
 				}
@@ -123,13 +123,13 @@ public abstract class Entidade implements Serializable {
 		}
 	}
 
-	public List getAndOrderBy(ArrayList<PesqBean> pesquisaList, String campo, boolean order) {
+	public List getAndOrderBy(ArrayList<EspecificaPesquisa> pesquisaList, String campo, boolean order) {
 		try {
 			QueryBuilder<String, Object> queryBuilder =
 					this.daoImpl().queryBuilder();
 			Where<String, Object> where = queryBuilder.where();
 			for(int i = 0; i < pesquisaList.size(); i++) {
-				PesqBean pesquisa = pesquisaList.get(i);
+				EspecificaPesquisa pesquisa = pesquisaList.get(i);
 				if(i > 0){
 					where.and();
 				}

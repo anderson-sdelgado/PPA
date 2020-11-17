@@ -90,10 +90,9 @@ public class DigFuncActivity extends ActivityGeneric {
 
                 if (!editTextPadrao.getText().toString().equals("")) {
 
-                    if (ppaContext.getPesagemCTR().verMatricFunc(Long.parseLong(editTextPadrao.getText().toString()))) {
+                    if (ppaContext.getConfigCTR().verFunc(Long.parseLong(editTextPadrao.getText().toString()))) {
 
-                        ppaContext.getPesagemCTR().setCabPesagemBean();
-                        ppaContext.getPesagemCTR().getCabPesagemBean().setMatricFuncCabPes(Long.parseLong(editTextPadrao.getText().toString()));
+                        ppaContext.getConfigCTR().setFuncConfig(Long.parseLong(editTextPadrao.getText().toString()));
 
                         Intent it = new Intent(DigFuncActivity.this, ListaEquipPesagActivity.class);
                         startActivity(it);

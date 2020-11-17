@@ -19,7 +19,6 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 	private UrlsConexaoHttp urlsConexaoHttp;
 
 	public GetBDGenerico() {
-
 	}
 
     public static GetBDGenerico getInstance() {
@@ -38,7 +37,7 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 		String url = "";
 		
 		try {
-			
+
 			Object o = new Object();
             Class<?> retClasse = Class.forName(urlsConexaoHttp.localUrl); 
 			
@@ -46,6 +45,7 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
                 String campo = field.getName();
                 if(campo.equals(tipo)){
                 	url = "" + retClasse.getField(campo).get(o);
+					Log.i("PMM", "URL = " + url);
                }
             }
 
@@ -69,11 +69,12 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 			connection.disconnect();
             
 		} catch (Exception e) {
+			Log.i("PMM", "Erro 1 = " + e);
 			if(bufferedReader != null){
 				try {
 					bufferedReader.close();
 				} catch (Exception erro) {
-					
+					Log.i("PMM", "Erro 2 = " + erro);
 				}
 			}
 		}
@@ -83,7 +84,7 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 				try {
 					bufferedReader.close();
 				} catch (Exception e) {
-					
+					Log.i("PMM", "Erro 3 = " + e);
 				}
 			}
 			

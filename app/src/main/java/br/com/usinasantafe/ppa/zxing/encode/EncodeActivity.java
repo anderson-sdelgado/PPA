@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.encode;
+package br.com.usinasantafe.ppa.zxing.encode;
 
 import android.graphics.Point;
 import android.view.Display;
 import android.view.MenuInflater;
 import android.view.WindowManager;
 import com.google.zxing.WriterException;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Contents;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.FinishListener;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Intents;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.zxing.Contents;
+import br.com.usinasantafe.ppa.zxing.FinishListener;
+import br.com.usinasantafe.ppa.zxing.Intents;
+import br.com.usinasantafe.ppa.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

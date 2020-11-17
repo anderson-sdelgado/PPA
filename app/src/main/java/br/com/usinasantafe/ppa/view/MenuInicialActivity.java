@@ -24,11 +24,6 @@ import java.util.Calendar;
 import br.com.usinasantafe.ppa.AlarmClass;
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
-import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
-import br.com.usinasantafe.ppa.model.bean.estaticas.ItemNFBean;
-import br.com.usinasantafe.ppa.model.bean.estaticas.NotaFiscalBean;
-import br.com.usinasantafe.ppa.model.bean.estaticas.OSBean;
-import br.com.usinasantafe.ppa.model.bean.estaticas.VeiculoBean;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 import br.com.usinasantafe.ppa.util.Tempo;
@@ -114,14 +109,10 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                     if(ppaContext.getPesagemCTR().hasElementsFunc() && ppaContext.getConfigCTR().hasElements()){
 
-                        if(!ppaContext.getConfigCTR().getConfig().getDataClearConfig().equals(Tempo.getInstance().dataSHora())){
-                            clearBD();
-                            ppaContext.getConfigCTR().setDataClearConfig(Tempo.getInstance().dataSHora());
-                        }
-
                         Intent it = new Intent(MenuInicialActivity.this, LeitorFuncActivity.class);
                         startActivity(it);
                         finish();
+
                     }
 
                 } else if (text.equals("CONFIGURAÇÕES")) {
@@ -210,21 +201,5 @@ public class MenuInicialActivity extends ActivityGeneric {
             customHandler.postDelayed(this, 10000);
         }
     };
-
-    public void clearBD(){
-
-        VeiculoBean veiculoBean = new VeiculoBean();
-        veiculoBean.deleteAll();
-
-        NotaFiscalBean notaFiscalBean = new NotaFiscalBean();
-        notaFiscalBean.deleteAll();
-
-        ItemNFBean itemNFBean = new ItemNFBean();
-        itemNFBean.deleteAll();
-
-        OSBean osBean = new OSBean();
-        osBean.deleteAll();
-
-    }
 
 }

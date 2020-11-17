@@ -33,9 +33,9 @@ public class ComentFalhaActivity extends ActivityGeneric {
 
                 if (!editTextComent.getText().toString().equals("")) {
 
-                    ppaContext.getPesagemCTR().insItemPes(ppaContext.getPesagem(), editTextComent.getText().toString(), getLatitude(), getLatitude());
+                    ppaContext.getPesagemCTR().insItemPes(editTextComent.getText().toString(), getLatitude(), getLatitude());
 
-                    Intent it = new Intent(ComentFalhaActivity.this, MsgPesagemActivity.class);
+                    Intent it = new Intent(ComentFalhaActivity.this, MenuPesagemActivity.class);
                     startActivity(it);
                     finish();
 

@@ -1,12 +1,12 @@
 package br.com.usinasantafe.ppa.model.pst;
 
-public class PesqBean {
+public class EspecificaPesquisa {
 
 	private String campo;
 	private Object valor;
 	private int tipo;
 	
-	public PesqBean() {
+	public EspecificaPesquisa() {
 	}
 
 	public String getCampo() {

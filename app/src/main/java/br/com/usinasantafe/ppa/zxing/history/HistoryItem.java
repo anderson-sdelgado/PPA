@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.history;
+package br.com.usinasantafe.ppa.zxing.history;
 
 import com.google.zxing.Result;
 

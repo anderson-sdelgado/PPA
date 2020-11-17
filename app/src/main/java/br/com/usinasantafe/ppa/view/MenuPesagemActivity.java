@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +14,7 @@ import br.com.usinasantafe.ppa.R;
 
 public class MenuPesagemActivity extends ActivityGeneric {
 
+    private ListView menuPesagemListView;
     private PPAContext ppaContext;
 
     @Override
@@ -22,18 +22,17 @@ public class MenuPesagemActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_pesagem);
 
-        Button buttonRetCapturaPesagem = (Button) findViewById(R.id.buttonRetCapturaPesagem);
-
         ArrayList<String> itens = new ArrayList<String>();
 
-        itens.add("CAPTURA PESAGEM VIA BLUETOOTH");
-        itens.add("DIGITAR VALOR DE PESAGEM");
+        itens.add("PESAGEM");
+        itens.add("HISTÓRICO");
+        itens.add("FECHAR");
 
         AdapterList adapterList = new AdapterList(this, itens);
-        ListView menuListView = (ListView) findViewById(R.id.listaMenuPesagem);
-        menuListView.setAdapter(adapterList);
+        menuPesagemListView = (ListView) findViewById(R.id.listaMenuPesagem);
+        menuPesagemListView.setAdapter(adapterList);
 
-        menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        menuPesagemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> l, View v, int position,
@@ -42,15 +41,28 @@ public class MenuPesagemActivity extends ActivityGeneric {
                 TextView textView = (TextView) v.findViewById(R.id.textViewItemList);
                 String text = textView.getText().toString();
 
-                if (text.equals("CAPTURA PESAGEM VIA BLUETOOTH")) {
+                if (text.equals("PESAGEM")) {
 
-                    Intent it = new Intent(MenuPesagemActivity.this, ListaBalancaBTActivity.class);
+                    if(ppaContext.getPesagemCTR().verStatusConCabecPes()){
+                        Intent it = new Intent(MenuPesagemActivity.this, ListaOSActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                    else{
+                        Intent it = new Intent(MenuPesagemActivity.this, DigOSActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+
+                } else if (text.equals("HISTÓRICO")) {
+
+                    Intent it = new Intent(MenuPesagemActivity.this, ListaHistoricoActivity.class);
                     startActivity(it);
                     finish();
 
-                } else if (text.equals("DIGITAR VALOR DE PESAGEM")) {
+                } else if (text.equals("FECHAR")) {
 
-                    Intent it = new Intent(MenuPesagemActivity.this, DigPesoActivity.class);
+                    Intent it = new Intent(MenuPesagemActivity.this, ListaEquipPesagActivity.class);
                     startActivity(it);
                     finish();
 
@@ -60,14 +72,10 @@ public class MenuPesagemActivity extends ActivityGeneric {
 
         });
 
-        buttonRetCapturaPesagem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(MenuPesagemActivity.this, DigOSActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
-
     }
+
+    public void onBackPressed() {
+    }
+
 }
+

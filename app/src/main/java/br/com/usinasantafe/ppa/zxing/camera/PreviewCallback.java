@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.camera;
+package br.com.usinasantafe.ppa.zxing.camera;
 
 import android.graphics.Point;
 import android.hardware.Camera;

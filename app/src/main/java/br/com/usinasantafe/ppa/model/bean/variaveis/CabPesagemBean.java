@@ -21,7 +21,9 @@ public class CabPesagemBean extends Entidade {
     @DatabaseField
     private String dthrCabPes;
     @DatabaseField
-    private Long statusConVeicCabPes;  //0 - OffLine; 1 - OnLine
+    private Long statusConCabPes; //0 - OffLine; 1 - OnLine
+    @DatabaseField
+    private Long statusApontCabPes; //0 - Aberto; 1 - Apont;
     @DatabaseField
     private Long statusCabPes; //1 - Aberto; 2 - Fechado;
 
@@ -76,12 +78,19 @@ public class CabPesagemBean extends Entidade {
         this.matricFuncCabPes = matricFuncCabPes;
     }
 
-    public Long getStatusConVeicCabPes() {
-        return statusConVeicCabPes;
+    public Long getStatusConCabPes() {
+        return statusConCabPes;
     }
 
-    public void setStatusConVeicCabPes(Long statusConVeicCabPes) {
-        this.statusConVeicCabPes = statusConVeicCabPes;
+    public void setStatusConCabPes(Long statusConCabPes) {
+        this.statusConCabPes = statusConCabPes;
     }
 
+    public Long getStatusApontCabPes() {
+        return statusApontCabPes;
+    }
+
+    public void setStatusApontCabPes(Long statusApontCabPes) {
+        this.statusApontCabPes = statusApontCabPes;
+    }
 }

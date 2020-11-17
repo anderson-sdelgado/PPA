@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.encode;
+package br.com.usinasantafe.ppa.zxing.encode;
 
 import java.util.Collection;
 import java.util.HashSet;

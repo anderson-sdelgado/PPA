@@ -1,6 +1,10 @@
 package br.com.usinasantafe.ppa.util;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,9 +19,8 @@ import br.com.usinasantafe.ppa.view.DigOSActivity;
 import br.com.usinasantafe.ppa.view.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.view.MenuInicialActivity;
 import br.com.usinasantafe.ppa.control.ConfigCTR;
-import br.com.usinasantafe.ppa.model.bean.variaveis.AtualAplicBean;
-import br.com.usinasantafe.ppa.model.dao.OSDAO;
-import br.com.usinasantafe.ppa.model.dao.VeiculoDAO;
+import br.com.usinasantafe.ppa.model.bean.AtualAplicBean;
+import br.com.usinasantafe.ppa.model.dao.OrgCarregDAO;
 import br.com.usinasantafe.ppa.util.conHttp.PostVerGenerico;
 import br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp;
 
@@ -30,12 +33,15 @@ public class VerifDadosServ {
     private static VerifDadosServ instance = null;
     private UrlsConexaoHttp urlsConexaoHttp;
     private ProgressDialog progressDialog;
+    private Context telaAtual;
+    private Class telaProx;
     private String dado;
     private String tipo;
     private MenuInicialActivity menuInicialActivity;
     private DigPlacaVeicActivity digPlacaVeicActivity;
     private DigOSActivity digOSActivity;
     private PostVerGenerico postVerGenerico;
+    private boolean verTerm;
 
     public static VerifDadosServ getInstance() {
         if (instance == null)
@@ -57,11 +63,8 @@ public class VerifDadosServ {
                         this.menuInicialActivity.startTimer();
                     }
                 } else if (this.tipo.equals("Veiculo")) {
-                    VeiculoDAO veiculoDAO = new VeiculoDAO();
-                    veiculoDAO.recDados(result, digPlacaVeicActivity);
-                } else if (this.tipo.equals("OS")) {
-                    OSDAO osdao = new OSDAO();
-                    osdao.recDados(result, digOSActivity);
+                    OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
+                    orgCarregDAO.recDados(result);
                 }
             }
 
@@ -81,7 +84,7 @@ public class VerifDadosServ {
         ConfigCTR configCTR = new ConfigCTR();
         AtualAplicBean atualAplicBean = new AtualAplicBean();
         atualAplicBean.setVersaoAtual(versaoAplic);
-        atualAplicBean.setMatricFunc(String.valueOf(configCTR.getConfig().getMatricFuncConfig()));
+        atualAplicBean.setIdEquip(String.valueOf(configCTR.getConfig().getIdEquipConfig()));
 
         JsonArray jsonArray = new JsonArray();
 
@@ -103,21 +106,13 @@ public class VerifDadosServ {
 
     }
 
-    public void verDados(String dado, String tipo, DigPlacaVeicActivity digPlacaVeicActivity) {
+    public void verDados(String dado, String tipo, Context telaAtual, Class telaProx, ProgressDialog progressDialog) {
 
         this.dado = dado;
         this.tipo = tipo;
-        this.digPlacaVeicActivity = digPlacaVeicActivity;
-
-        envioDados();
-
-    }
-
-    public void verDados(String dado, String tipo, DigOSActivity digOSActivity) {
-
-        this.dado = dado;
-        this.tipo = tipo;
-        this.digOSActivity = digOSActivity;
+        this.telaAtual = telaAtual;
+        this.telaProx = telaProx;
+        this.progressDialog = progressDialog;
 
         envioDados();
 
@@ -139,9 +134,63 @@ public class VerifDadosServ {
     }
 
     public void cancelVer() {
+        verTerm = true;
         if (postVerGenerico.getStatus() == AsyncTask.Status.RUNNING) {
             postVerGenerico.cancel(true);
         }
     }
+
+    public void pulaTelaSemTerm(){
+        this.progressDialog.dismiss();
+        Intent it = new Intent(telaAtual, telaProx);
+        telaAtual.startActivity(it);
+    }
+
+    public void msgSemTerm(String texto){
+        this.progressDialog.dismiss();
+        AlertDialog.Builder alerta = new AlertDialog.Builder(telaAtual);
+        alerta.setTitle("ATENÇÃO");
+        alerta.setMessage(texto);
+        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alerta.show();
+    }
+
+    public void pulaTelaComTerm(){
+        if(!verTerm){
+            this.progressDialog.dismiss();
+            this.verTerm = true;
+            Intent it = new Intent(telaAtual, telaProx);
+            telaAtual.startActivity(it);
+        }
+    }
+
+    public void msgComTerm(String texto){
+        if(!verTerm){
+            this.progressDialog.dismiss();
+            this.verTerm = true;
+            AlertDialog.Builder alerta = new AlertDialog.Builder(telaAtual);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage(texto);
+            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            alerta.show();
+        }
+    }
+
+    public boolean isVerTerm() {
+        return verTerm;
+    }
+
+    public void setVerTerm(boolean verTerm) {
+        this.verTerm = verTerm;
+    }
+
 
 }

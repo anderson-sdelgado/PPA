@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.result;
+package br.com.usinasantafe.ppa.zxing.result;
 
 import com.google.zxing.Result;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Contents;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Intents;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.LocaleManager;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.PreferencesActivity;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.book.SearchBookContentsActivity;
+import br.com.usinasantafe.ppa.zxing.Contents;
+import br.com.usinasantafe.ppa.zxing.Intents;
+import br.com.usinasantafe.ppa.zxing.LocaleManager;
+import br.com.usinasantafe.ppa.zxing.PreferencesActivity;
+import br.com.usinasantafe.ppa.R;
+import br.com.usinasantafe.ppa.zxing.book.SearchBookContentsActivity;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ParsedResultType;
 import com.google.zxing.client.result.ResultParser;

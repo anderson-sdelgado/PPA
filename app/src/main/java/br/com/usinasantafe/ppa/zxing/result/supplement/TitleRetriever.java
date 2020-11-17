@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.result.supplement;
+package br.com.usinasantafe.ppa.zxing.result.supplement;
 
 import android.text.Html;
 import android.widget.TextView;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.HttpHelper;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.history.HistoryManager;
+import br.com.usinasantafe.ppa.zxing.HttpHelper;
+import br.com.usinasantafe.ppa.zxing.history.HistoryManager;
 import com.google.zxing.client.result.URIParsedResult;
 
 import java.io.IOException;

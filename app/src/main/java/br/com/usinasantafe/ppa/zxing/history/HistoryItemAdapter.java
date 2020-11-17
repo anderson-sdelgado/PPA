@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.history;
+package br.com.usinasantafe.ppa.zxing.history;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,7 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.zxing.Result;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.R;
 
 import java.util.ArrayList;
 

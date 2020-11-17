@@ -14,23 +14,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
+import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
 import br.com.usinasantafe.ppa.model.dao.FuncDAO;
 import br.com.usinasantafe.ppa.util.AtualDadosServ;
-import br.com.usinasantafe.ppa.view.DigOSActivity;
-import br.com.usinasantafe.ppa.view.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 import br.com.usinasantafe.ppa.model.dao.CabPesagemDAO;
 import br.com.usinasantafe.ppa.model.dao.ItemPesagemDAO;
-import br.com.usinasantafe.ppa.model.dao.OSDAO;
-import br.com.usinasantafe.ppa.model.dao.VeiculoDAO;
+import br.com.usinasantafe.ppa.model.dao.OrgCarregDAO;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 import br.com.usinasantafe.ppa.util.Imagem;
 
 public class PesagemCTR {
 
-    private CabPesagemBean cabPesagemBean;
     private ItemPesagemBean itemPesagemBean;
 
     public PesagemCTR() {
@@ -48,9 +44,14 @@ public class PesagemCTR {
         return cabPesagemDAO.verCabecPesAberto();
     }
 
-    public boolean verMatricFunc(Long matricFunc){
-        FuncDAO funcDAO = new FuncDAO();
-        return funcDAO.verFunc(matricFunc);
+    public boolean verStatusConCabecPes(){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        if(cabPesagemDAO.getCabPesApont().getStatusConCabPes() == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,14 +61,22 @@ public class PesagemCTR {
     public void criarCabecPes(String placaVeicCabPes, Long statusCon){
         ConfigCTR configCTR = new ConfigCTR();
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        cabPesagemDAO.criarCabPesagem(placaVeicCabPes, configCTR.getConfig().getMatricFuncConfig(), statusCon);
+        cabPesagemDAO.criarCabPesagem(placaVeicCabPes, configCTR.getConfig().getIdEquipConfig(), configCTR.getConfig().getMatricFuncConfig(), statusCon);
     }
 
     public void insItemPes(Double peso, String comentario, Double latitude, Double logitude){
+        itemPesagemBean.setPesoItemPes(peso);
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesAberto().getIdCabPes(), itemPesagemBean, peso, comentario, latitude, logitude);
+        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), itemPesagemBean, comentario, latitude, logitude);
     }
+
+    public void insItemPes(String comentario, Double latitude, Double logitude){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), itemPesagemBean, comentario, latitude, logitude);
+    }
+
     public void fechCabPesagem(Bitmap bitmap){
         Imagem imagem = new Imagem();
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
@@ -79,24 +88,9 @@ public class PesagemCTR {
         return cabPesagemDAO.verCabPesFechado();
     }
 
-    public void verPlacaVeicServ(String dado, DigPlacaVeicActivity digPlacaVeicActivity){
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
-        veiculoDAO.verDados(dado, digPlacaVeicActivity);
-    }
-
-    public boolean verPlacaVeicBD(String placa){
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
-        return veiculoDAO.verBD(placa);
-    }
-
-    public void verOSServ(String dado, DigOSActivity digOSActivity){
-        OSDAO osDAO = new OSDAO();
-        osDAO.verDados(dado, digOSActivity);
-    }
-
-    public boolean verOSBD(String placa){
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
-        return veiculoDAO.verBD(placa);
+    public void verPlacaVeicServ(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
+        orgCarregDAO.verDados(dado, telaAtual, telaProx, progressDialog);
     }
 
     public boolean verStatusConPlacaVeic(){
@@ -108,34 +102,44 @@ public class PesagemCTR {
 
     ////////////////////////////////////// GET DADOS /////////////////////////////////////////////
 
+    public List<CabPesagemBean> cabPesagemApontList(){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        return cabPesagemDAO.cabPesagApontList();
+    }
+
     public ItemPesagemBean getItemPesagemBean() {
         return itemPesagemBean;
     }
 
-    public Long getStatusConVeicCabPes(){
+    public List<CabPesagemBean> cabPesagemAbertoList(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        return cabPesagemDAO.getStatusConVeicCabPes();
+        return cabPesagemDAO.cabPesagAbertList();
     }
 
-    public CabPesagemBean getCabPesagemBean() {
-        return cabPesagemBean;
-    }
-
-    public FuncBean getFunc(Long matricFunc){
-        FuncDAO funcDAO = new FuncDAO();
-        return funcDAO.getFunc(matricFunc);
-    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////// SET DADOS /////////////////////////////////////////////
 
-    public void setCabPesagemBean() {
-        this.cabPesagemBean = new CabPesagemBean();
-    }
-
     public void setItemPesagemBean() {
         this.itemPesagemBean = new ItemPesagemBean();
+    }
+
+    public void setStatusApontCabPes(CabPesagemBean cabPesagemBean){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        cabPesagemDAO.setStatusApontCabPes(cabPesagemBean);
+    }
+
+    public List<OrdCarregBean> osList(){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
+        return orgCarregDAO.osList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes());
+    }
+
+    public List<OrdCarregBean> produtoList(){
+        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
+        return orgCarregDAO.produtoList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes(), itemPesagemBean.getNroOSItemPes());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -197,7 +201,7 @@ public class PesagemCTR {
     public void deleteCabecAberto() {
 
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        CabPesagemBean cabPesagemBean = cabPesagemDAO.getCabPesAberto();
+        CabPesagemBean cabPesagemBean = cabPesagemDAO.getCabPesApont();
 
         ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
         List itemPesagemList = itemPesagemBean.get("idCabItemPes", cabPesagemBean.getIdCabPes());

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing;
+package br.com.usinasantafe.ppa.zxing;
 
 enum IntentSource {
 

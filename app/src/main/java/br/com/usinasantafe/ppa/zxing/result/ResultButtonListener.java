@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.result;
+package br.com.usinasantafe.ppa.zxing.result;
 
 import android.view.View;
 

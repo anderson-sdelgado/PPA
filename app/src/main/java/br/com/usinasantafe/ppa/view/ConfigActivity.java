@@ -18,8 +18,8 @@ import br.com.usinasantafe.ppa.util.AtualDadosServ;
 public class ConfigActivity extends ActivityGeneric {
 
     private ProgressDialog progressBar;
-    private EditText editTextMatricFunc;
-    private EditText editTextSenha;
+    private EditText equipEditText;
+    private EditText senhaEditText;
     private PPAContext ppaContext;
 
     @Override
@@ -29,31 +29,30 @@ public class ConfigActivity extends ActivityGeneric {
 
         ppaContext = (PPAContext) getApplication();
 
-        Button btOkConfig =  (Button) findViewById(R.id.buttonSalvarConfig );
-        Button btCancConfig = (Button) findViewById(R.id.buttonCancConfig);
-        Button btAtualBDConfig = (Button) findViewById(R.id.buttonAtualizarBD);
-        editTextMatricFunc = (EditText)  findViewById(R.id.editTextMatricFunc);
-        editTextSenha = (EditText)  findViewById(R.id.editTextSenha);
+        Button buttonOkConfig =  (Button) findViewById(R.id.buttonSalvarConfig );
+        Button buttonCancConfig = (Button) findViewById(R.id.buttonCancConfig);
+        Button buttonAtualBDConfig = (Button) findViewById(R.id.buttonAtualizarBD);
+        equipEditText = (EditText)  findViewById(R.id.editTextEquip);
+        senhaEditText = (EditText)  findViewById(R.id.editTextSenha);
 
         if(ppaContext.getConfigCTR().hasElements()){
 
             ConfigBean configBean = ppaContext.getConfigCTR().getConfig();
-            editTextMatricFunc.setText(String.valueOf(configBean.getMatricFuncConfig()));
-            editTextSenha.setText(configBean.getSenhaConfig());
+            equipEditText.setText(String.valueOf(configBean.getIdEquipConfig()));
+            senhaEditText.setText(configBean.getSenhaConfig());
 
         }
 
-
-        btOkConfig.setOnClickListener(new View.OnClickListener() {
+        buttonOkConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!editTextMatricFunc.getText().toString().equals("") &&
-                        !editTextSenha.getText().toString().equals("")){
+                if(!equipEditText.getText().toString().equals("") &&
+                        !senhaEditText.getText().toString().equals("")){
 
-                    if(ppaContext.getConfigCTR().verFunc(Long.valueOf(editTextMatricFunc.getText().toString()))){
+                    if(ppaContext.getConfigCTR().verEquip(Long.valueOf(equipEditText.getText().toString()))){
 
-                        ppaContext.getConfigCTR().insConfig(Long.valueOf(editTextMatricFunc.getText().toString()), editTextSenha.getText().toString());
+                        ppaContext.getConfigCTR().insConfig(Long.valueOf(equipEditText.getText().toString()), senhaEditText.getText().toString());
 
                         Intent it = new Intent(ConfigActivity.this, MenuInicialActivity.class);
                         startActivity(it);
@@ -66,7 +65,7 @@ public class ConfigActivity extends ActivityGeneric {
             }
         });
 
-        btCancConfig.setOnClickListener(new View.OnClickListener() {
+        buttonCancConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -77,14 +76,14 @@ public class ConfigActivity extends ActivityGeneric {
             }
         });
 
-        btAtualBDConfig.setOnClickListener(new View.OnClickListener() {
+        buttonAtualBDConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 ConexaoWeb conexaoWeb = new ConexaoWeb();
 
                 if(conexaoWeb.verificaConexao(ConfigActivity.this)){
+
                     progressBar = new ProgressDialog(v.getContext());
                     progressBar.setCancelable(true);
                     progressBar.setMessage("ATUALIZANDO ...");
@@ -92,10 +91,13 @@ public class ConfigActivity extends ActivityGeneric {
                     progressBar.setProgress(0);
                     progressBar.setMax(100);
                     progressBar.show();
+
                     AtualDadosServ.getInstance().atualizarBD(progressBar);
                     AtualDadosServ.getInstance().setContext(ConfigActivity.this);
+
                 }
                 else{
+
                     AlertDialog.Builder alerta = new AlertDialog.Builder(ConfigActivity.this);
                     alerta.setTitle("ATENÇÃO");
                     alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
@@ -106,6 +108,7 @@ public class ConfigActivity extends ActivityGeneric {
                         }
                     });
                     alerta.show();
+
                 }
             }
         });

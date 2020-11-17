@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.result;
+package br.com.usinasantafe.ppa.zxing.result;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,9 +23,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.CaptureActivity;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.wifi.WifiConfigManager;
+import br.com.usinasantafe.ppa.zxing.CaptureActivity;
+import br.com.usinasantafe.ppa.R;
+import br.com.usinasantafe.ppa.zxing.wifi.WifiConfigManager;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.WifiParsedResult;
 

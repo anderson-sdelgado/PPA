@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.result;
+package br.com.usinasantafe.ppa.zxing.result;
 
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.R;
 import com.google.zxing.client.result.EmailAddressParsedResult;
 import com.google.zxing.client.result.ParsedResult;
 

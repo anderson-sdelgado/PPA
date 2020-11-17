@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.camera.open;
+package br.com.usinasantafe.ppa.zxing.camera.open;
 
 /**
  * Enumeration of directions a camera may face: front or back.

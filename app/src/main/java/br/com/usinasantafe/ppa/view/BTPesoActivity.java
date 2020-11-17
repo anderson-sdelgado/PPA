@@ -99,7 +99,7 @@ public class BTPesoActivity extends ActivityGeneric {
 
                     closeCon();
 
-                    Intent it = new Intent(BTPesoActivity.this, MsgPesagemActivity.class);
+                    Intent it = new Intent(BTPesoActivity.this, MenuPesagemActivity.class);
                     startActivity(it);
                     finish();
 
@@ -128,7 +128,7 @@ public class BTPesoActivity extends ActivityGeneric {
 
                 closeCon();
 
-                Intent it = new Intent(BTPesoActivity.this, MenuPesagemActivity.class);
+                Intent it = new Intent(BTPesoActivity.this, MenuCaptPesagemActivity.class);
                 startActivity(it);
                 finish();
 

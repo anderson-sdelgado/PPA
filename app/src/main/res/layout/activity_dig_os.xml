@@ -12,43 +12,16 @@
     tools:context=".view.DigOSActivity">
 
     <TextView
-        android:id="@+id/textViewOS"
+        android:id="@+id/textViewPadrao"
         style="@style/TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/texto_os" />
+        android:text="@string/texto_titulo_os" />
 
     <EditText
-        android:id="@+id/editTextOS"
-        style="@style/EditView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal" >
-        <requestFocus />
-    </EditText>
+        android:id="@+id/editTextPadrao"
+        style="@style/EditView" />
 
-    <LinearLayout
-        android:id="@+id/rightRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/buttonCancOS"
-            style="@style/BotaoAvulso"
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/texto_padrao_cancelar" />
-
-        <Button
-            android:id="@+id/buttonOkOS"
-            style="@style/BotaoAvulso"
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/texto_padrao_ok" />
-
-    </LinearLayout>
+    <include
+        android:id="@+id/layout_novo_botoes"
+        layout="@layout/layout_botoes_s_atual" />
 
 </LinearLayout>

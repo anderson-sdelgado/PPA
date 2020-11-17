@@ -11,8 +11,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.MenuPesagemActivity">
 
+
     <TextView
-        android:id="@+id/textViewTitPesagemBT"
+        android:id="@+id/textViewPesagem"
         style="@style/TextViewTituloLista"
         android:text="@string/texto_menu_pesagem" />
 
@@ -23,10 +24,10 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/buttonRetCapturaPesagem"
+        android:id="@+id/buttonRetPesagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_padrao_retorna" />
+        android:text="@string/texto_padrao_retornar" />
 
 </LinearLayout>

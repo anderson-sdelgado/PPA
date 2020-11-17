@@ -18,8 +18,6 @@ public class ConfigBean extends Entidade {
     private Long matricFuncConfig;
     @DatabaseField
     private String senhaConfig;
-    @DatabaseField
-    private String dataClearConfig;
 
     public ConfigBean() {
     }
@@ -56,11 +54,4 @@ public class ConfigBean extends Entidade {
         this.senhaConfig = senhaConfig;
     }
 
-    public String getDataClearConfig() {
-        return dataClearConfig;
-    }
-
-    public void setDataClearConfig(String dataClearConfig) {
-        this.dataClearConfig = dataClearConfig;
-    }
 }

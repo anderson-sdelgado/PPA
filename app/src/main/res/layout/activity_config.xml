@@ -12,14 +12,14 @@
     tools:context=".view.ConfigActivity">
 
     <TextView
-        android:id="@+id/textViewMatricFunc"
+        android:id="@+id/textViewEquip"
         style="@style/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/texto_matric_func" />
 
     <EditText
-        android:id="@+id/editTextMatricFunc"
+        android:id="@+id/editTextEquip"
         style="@style/EditView"
         android:inputType="number" />
 

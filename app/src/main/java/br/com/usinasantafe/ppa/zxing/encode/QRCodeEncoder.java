@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.encode;
+package br.com.usinasantafe.ppa.zxing.encode;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Result;
 import com.google.zxing.WriterException;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Contents;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Intents;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.zxing.Contents;
+import br.com.usinasantafe.ppa.zxing.Intents;
+import br.com.usinasantafe.ppa.R;
 import com.google.zxing.client.result.AddressBookParsedResult;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ResultParser;

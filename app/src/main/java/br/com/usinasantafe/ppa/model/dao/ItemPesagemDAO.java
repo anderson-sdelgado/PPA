@@ -10,9 +10,8 @@ public class ItemPesagemDAO {
     public ItemPesagemDAO() {
     }
 
-    public void criarItemPesagem(Long idCab, ItemPesagemBean itemPesagemBean, Double pesagem, String coment, Double latitude, Double longitude){
+    public void criarItemPesagem(Long idCab, ItemPesagemBean itemPesagemBean, String coment, Double latitude, Double longitude){
         itemPesagemBean.setIdCabItemPes(idCab);
-        itemPesagemBean.setPesoItemPes(pesagem);
         itemPesagemBean.setComentFalhaItemPes(coment);
         itemPesagemBean.setDthrItemPes(Tempo.getInstance().dataComHora());
         itemPesagemBean.setLatitudeItemPes(latitude);

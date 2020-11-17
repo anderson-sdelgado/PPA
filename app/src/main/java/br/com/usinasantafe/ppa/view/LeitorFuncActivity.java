@@ -40,7 +40,7 @@ public class LeitorFuncActivity extends ActivityGeneric {
         funcBean.setMatricFunc(0L);
         funcBean.setNomeFunc("");
 
-        txtRetFunc.setText("Por Favor, realize a leitura do Cartão do Colaborador Mecânico.");
+        txtRetFunc.setText("Por Favor, realize a leitura do Cartão do Funcionário.");
 
         buttonOkFunc.setOnClickListener(new View.OnClickListener() {
 
@@ -49,12 +49,12 @@ public class LeitorFuncActivity extends ActivityGeneric {
 
                 if (funcBean.getMatricFunc() > 0) {
 
-                    ppaContext.getPesagemCTR().setCabPesagemBean();
-                    ppaContext.getPesagemCTR().getCabPesagemBean().setMatricFuncCabPes(funcBean.getMatricFunc());
+                    ppaContext.getConfigCTR().setFuncConfig(funcBean.getMatricFunc());
 
                     Intent it = new Intent(LeitorFuncActivity.this, ListaEquipPesagActivity.class);
                     startActivity(it);
                     finish();
+
                 }
 
             }
@@ -157,8 +157,8 @@ public class LeitorFuncActivity extends ActivityGeneric {
             String matricula = data.getStringExtra("SCAN_RESULT");
             if (matricula.length() == 8) {
                 matricula = matricula.substring(0, 7);
-                if (ppaContext.getPesagemCTR().verMatricFunc(Long.parseLong(matricula))) {
-                    funcBean = ppaContext.getPesagemCTR().getFunc(Long.parseLong(matricula));
+                if (ppaContext.getConfigCTR().verFunc(Long.parseLong(matricula))) {
+                    funcBean = ppaContext.getConfigCTR().getFunc(Long.parseLong(matricula));
                     txtRetFunc.setText(matricula + "\n" + funcBean.getNomeFunc());
                 } else {
                     txtRetFunc.setText("Funcionário Inexistente");

@@ -10,7 +10,6 @@ public class PPAContext extends Application {
     public static String versaoAplic = "1.00";
     private PesagemCTR pesagemCTR;
     private ConfigCTR configCTR;
-    private Double pesagem;
 
     @Override
     public void onCreate() {
@@ -29,11 +28,4 @@ public class PPAContext extends Application {
         return configCTR;
     }
 
-    public Double getPesagem() {
-        return pesagem;
-    }
-
-    public void setPesagem(Double pesagem) {
-        this.pesagem = pesagem;
-    }
 }

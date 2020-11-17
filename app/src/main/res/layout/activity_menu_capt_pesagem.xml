@@ -9,21 +9,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.ListaOSActivity">
+    tools:context=".view.MenuCaptPesagemActivity">
 
     <TextView
-        android:id="@+id/textViewTituloOS"
+        android:id="@+id/textViewTitPesagemBT"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_titulo_os" />
+        android:text="@string/texto_menu_pesagem" />
 
     <ListView
-        android:id="@+id/listViewOS"
+        android:id="@+id/listaMenuPesagem"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/buttonRetOS"
+        android:id="@+id/buttonRetCaptPesagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

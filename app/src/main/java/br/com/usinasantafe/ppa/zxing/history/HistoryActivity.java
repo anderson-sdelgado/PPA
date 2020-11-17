@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.usinasantafe.testeleitorcodigobarra.zxing.history;
+package br.com.usinasantafe.ppa.zxing.history;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,9 +34,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.CaptureActivity;
-import br.com.usinasantafe.testeleitorcodigobarra.zxing.Intents;
-import br.com.usinasantafe.testeleitorcodigobarra.R;
+import br.com.usinasantafe.ppa.zxing.CaptureActivity;
+import br.com.usinasantafe.ppa.zxing.Intents;
+import br.com.usinasantafe.ppa.R;
 
 /**
  * The activity for interacting with the scan history.

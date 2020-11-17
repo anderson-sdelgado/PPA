@@ -12,12 +12,12 @@
     tools:context=".view.ListaEquipPesagActivity">
 
     <TextView
-        android:id="@+id/textViewPrincipal"
+        android:id="@+id/textViewTituloEquip"
         style="@style/TextViewTituloLista"
         android:text="@string/texto_titulo_equip_passag" />
 
     <ListView
-        android:id="@+id/passageiroListView"
+        android:id="@+id/listViewEquipPesag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -25,28 +25,20 @@
     <TextView
         android:id="@+id/textViewProcesso"
         style="@style/TextViewItemList"
-        android:text="@string/texto_item_list" />
+        android:text="@string/texto_item_default" />
 
     <Button
-        android:id="@+id/buttonInserirPassageiro"
+        android:id="@+id/buttonInserirEquipPesagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_inserir_equip" />
+        android:text="@string/texto_ins_veiculo" />
 
     <Button
-        android:id="@+id/buttonFecharViagem"
+        android:id="@+id/buttonRetEquipPesagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_fechar_viagem" />
-
-    <Button
-        android:id="@+id/buttonAtualPadrao"
-        style="@style/BotaoAvulso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/texto_atual_colab" />
-
+        android:text="@string/texto_padrao_retornar" />
 
 </LinearLayout>

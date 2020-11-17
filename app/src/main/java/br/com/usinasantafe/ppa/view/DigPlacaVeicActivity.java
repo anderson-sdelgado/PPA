@@ -68,47 +68,27 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
 
                     placa = editTextPlaca.getText().toString().trim();
 
-                    if(ppaContext.getPesagemCTR().verPlacaVeicBD(placa)){
+                    ConexaoWeb conexaoWeb = new ConexaoWeb();
+                    if (conexaoWeb.verificaConexao(DigPlacaVeicActivity.this)) {
 
-                        Long statusCon;
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
-                        if (conexaoWeb.verificaConexao(DigPlacaVeicActivity.this)) {
-                            statusCon = 1L;
-                        }
-                        else{
-                            statusCon = 0L;
-                        }
+                        progressBar = new ProgressDialog(v.getContext());
+                        progressBar.setCancelable(true);
+                        progressBar.setMessage("PESQUISANDO PLACA...");
+                        progressBar.show();
 
-                        ppaContext.getPesagemCTR().criarCabecPes(placa, statusCon);
+                        customHandler.postDelayed(updateTimerThread, 10000);
 
-                        Intent it = new Intent(DigPlacaVeicActivity.this, ListaOSActivity.class);
-                        startActivity(it);
-                        finish();
+                        verDados = true;
+
+                        ppaContext.getPesagemCTR().verPlacaVeicServ(placa, DigPlacaVeicActivity.this, ListaEquipPesagActivity.class, progressBar);
 
                     }
                     else{
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
-                        if (conexaoWeb.verificaConexao(DigPlacaVeicActivity.this)) {
 
-                            progressBar = new ProgressDialog(v.getContext());
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("PESQUISANDO PLACA...");
-                            progressBar.show();
+                        ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
 
-                            customHandler.postDelayed(updateTimerThread, 10000);
+                        msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
 
-                            verDados = true;
-
-                            ppaContext.getPesagemCTR().verPlacaVeicServ(placa, DigPlacaVeicActivity.this);
-
-                        }
-                        else{
-
-                            ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
-
-                            msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
-
-                        }
                     }
 
                 }
@@ -132,17 +112,6 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
     public void onBackPressed()  {
     }
 
-    public void avancaSucesso(){
-        verDados = false;
-        if (progressBar.isShowing()) {
-            progressBar.dismiss();
-        }
-        ppaContext.getPesagemCTR().criarCabecPes(placa, 1L);
-        Intent it = new Intent(DigPlacaVeicActivity.this, ListaOSActivity.class);
-        startActivity(it);
-        finish();
-    }
-
     public void msg(String texto){
         verDados = false;
         this.progressBar.dismiss();
@@ -153,7 +122,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Intent it = new Intent(DigPlacaVeicActivity.this, ListaOSActivity.class);
+                Intent it = new Intent(DigPlacaVeicActivity.this, ListaEquipPesagActivity.class);
                 startActivity(it);
                 finish();
 

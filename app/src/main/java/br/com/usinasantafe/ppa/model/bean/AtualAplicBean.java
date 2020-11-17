@@ -1,4 +1,4 @@
-package br.com.usinasantafe.ppa.model.bean.variaveis;
+package br.com.usinasantafe.ppa.model.bean;
 
 /**
  * Created by anderson on 24/07/2017.
@@ -8,7 +8,7 @@ public class AtualAplicBean {
 
     private String versaoAtual;
     private String versaoNova;
-    private String matricFunc;
+    private String idEquip;
 
     public AtualAplicBean() {
     }
@@ -29,11 +29,11 @@ public class AtualAplicBean {
         this.versaoNova = versaoNova;
     }
 
-    public String getMatricFunc() {
-        return matricFunc;
+    public String getIdEquip() {
+        return idEquip;
     }
 
-    public void setMatricFunc(String matricFunc) {
-        this.matricFunc = matricFunc;
+    public void setIdEquip(String idEquip) {
+        this.idEquip = idEquip;
     }
 }

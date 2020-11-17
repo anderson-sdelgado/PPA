@@ -56,7 +56,7 @@ public class ListaBalancaBTActivity extends ActivityGeneric {
         buttonRetBalancaBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaBalancaBTActivity.this, MenuPesagemActivity.class);
+                Intent it = new Intent(ListaBalancaBTActivity.this, MenuCaptPesagemActivity.class);
                 startActivity(it);
                 finish();
             }

@@ -30,7 +30,8 @@ public class DigPesoActivity extends ActivityGeneric {
 
                     String pesagemString = editTextPadrao.getText().toString();
                     Double pesagem = Double.valueOf(pesagemString.replace(",", "."));
-                    ppaContext.setPesagem(pesagem);
+
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setPesoItemPes(pesagem);
 
                     Intent it = new Intent(DigPesoActivity.this, ComentFalhaActivity.class);
                     startActivity(it);
@@ -55,7 +56,7 @@ public class DigPesoActivity extends ActivityGeneric {
     }
 
     public void onBackPressed() {
-            Intent it = new Intent(DigPesoActivity.this, MenuPesagemActivity.class);
+            Intent it = new Intent(DigPesoActivity.this, MenuCaptPesagemActivity.class);
             startActivity(it);
             finish();
     }
