@@ -2,7 +2,6 @@ package br.com.usinasantafe.ppa.control;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -21,9 +20,9 @@ import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 import br.com.usinasantafe.ppa.model.dao.CabPesagemDAO;
 import br.com.usinasantafe.ppa.model.dao.ItemPesagemDAO;
-import br.com.usinasantafe.ppa.model.dao.OrgCarregDAO;
+import br.com.usinasantafe.ppa.model.dao.OrdCarregDAO;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
-import br.com.usinasantafe.ppa.util.Imagem;
+import br.com.usinasantafe.ppa.util.Tempo;
 
 public class PesagemCTR {
 
@@ -54,6 +53,11 @@ public class PesagemCTR {
         }
     }
 
+    public boolean verOrdCarreg(String placa){
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.verOrdCarreg(placa);
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////// SALVAR/ATUALIZAR/EXCLUIR DADOS /////////////////////////////////
@@ -77,10 +81,9 @@ public class PesagemCTR {
         itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), itemPesagemBean, comentario, latitude, logitude);
     }
 
-    public void fechCabPesagem(Bitmap bitmap){
-        Imagem imagem = new Imagem();
+    public void fechCabPesagem(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        cabPesagemDAO.fechCabPesagem(imagem.getBitmapString(bitmap));
+        cabPesagemDAO.fecharCabPesagem();
     }
 
     public boolean verEnvioDados() {
@@ -89,13 +92,18 @@ public class PesagemCTR {
     }
 
     public void verPlacaVeicServ(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-        OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
-        orgCarregDAO.verDados(dado, telaAtual, telaProx, progressDialog);
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        ordCarregDAO.verDados(dado, telaAtual, telaProx, progressDialog);
     }
 
     public boolean verStatusConPlacaVeic(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         return cabPesagemDAO.verStatusConPlacaVeic();
+    }
+
+    public void deleteDataDif(){
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        ordCarregDAO.deleteDataDif(Tempo.getInstance().dataSHora());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,6 +124,11 @@ public class PesagemCTR {
         return cabPesagemDAO.cabPesagAbertList();
     }
 
+    public OrdCarregBean getOrdCarregProd(String codProd){
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.getOrdCarregProd(codProd);
+    }
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -132,14 +145,14 @@ public class PesagemCTR {
 
     public List<OrdCarregBean> osList(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
-        return orgCarregDAO.osList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes());
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.ordCarregList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes());
     }
 
     public List<OrdCarregBean> produtoList(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
-        return orgCarregDAO.produtoList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes(), itemPesagemBean.getNroOSItemPes());
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.ordCarregList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes(), itemPesagemBean.getNroOSItemPes());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////

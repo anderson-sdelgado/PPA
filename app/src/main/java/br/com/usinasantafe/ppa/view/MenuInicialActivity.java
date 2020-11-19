@@ -3,8 +3,10 @@ package br.com.usinasantafe.ppa.view;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -48,48 +50,30 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         progressBar = new ProgressDialog(this);
 
-        if (!checkPermission(Manifest.permission.INTERNET)) {
-            String[] PERMISSIONS = {android.Manifest.permission.INTERNET};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
-        }
-
-        if (!checkPermission(Manifest.permission.ACCESS_NETWORK_STATE)) {
-            String[] PERMISSIONS = {android.Manifest.permission.ACCESS_NETWORK_STATE};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
-        }
-
         if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
             ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
         }
 
-        if (!checkPermission(Manifest.permission.CAMERA)) {
-            String[] PERMISSIONS = {Manifest.permission.CAMERA};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
-        }
-
         customHandler.postDelayed(updateTimerThread, 0);
 
-//        if(ppaContext.getPesagemCTR().verCabecPesAberto()){
-//            if(ppaContext.getPesagemCTR().getStatusConVeicCabPes() == 1L){
-//                Intent it = new Intent(MenuInicialActivity.this, ListaNotaFiscalActivity.class);
-//                startActivity(it);
-//                finish();
-//            }
-//            else{
-//                Intent it = new Intent(MenuInicialActivity.this, DigNotaFiscalActivity.class);
-//                startActivity(it);
-//                finish();
-//            }
-//        }
-//        else {
+        if(ppaContext.getPesagemCTR().verCabecPesAberto()){
+            startTimer();
+            Intent it = new Intent(MenuInicialActivity.this, ListaEquipPesagActivity.class);
+            startActivity(it);
+            finish();
+        }
+        else {
             atualizarAplic();
-//        }
+        }
+
+        clearBD();
 
         ArrayList<String> itens = new ArrayList<String>();
 
         itens.add("PESAGEM");
         itens.add("CONFIGURAÇÕES");
+        itens.add("ATUALIZAR DADOS");
         itens.add("SAIR");
 
         AdapterList adapterList = new AdapterList(this, itens);
@@ -121,7 +105,38 @@ public class MenuInicialActivity extends ActivityGeneric {
                     startActivity(it);
                     finish();
 
-                } else if (text.equals("SAIR")) {
+                }
+                else if (text.equals("ATUALIZAR DADOS")) {
+
+                    ConexaoWeb conexaoWeb = new ConexaoWeb();
+
+                    if (conexaoWeb.verificaConexao(MenuInicialActivity.this)) {
+                        progressBar = new ProgressDialog(v.getContext());
+                        progressBar.setCancelable(true);
+                        progressBar.setMessage("ATUALIZANDO ...");
+                        progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressBar.setProgress(0);
+                        progressBar.setMax(100);
+                        progressBar.show();
+
+                        ppaContext.getConfigCTR().atualTodasTabelas(MenuInicialActivity.this, progressBar);
+
+                    } else {
+                        AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
+                        alerta.setTitle("ATENÇÃO");
+                        alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                        alerta.show();
+                    }
+
+                }
+                else if (text.equals("SAIR")) {
 
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
@@ -201,5 +216,9 @@ public class MenuInicialActivity extends ActivityGeneric {
             customHandler.postDelayed(this, 10000);
         }
     };
+
+    public void clearBD(){
+        ppaContext.getPesagemCTR().deleteDataDif();
+    }
 
 }

@@ -23,6 +23,7 @@ public class CabPesagemDAO {
         cabPesagemBean.setIdEquipCabPes(idEquip);
         cabPesagemBean.setMatricFuncCabPes(matricFunc);
         cabPesagemBean.setStatusConCabPes(statusCon);
+        cabPesagemBean.setDthrInicialCabPes(Tempo.getInstance().dataComHora());
         cabPesagemBean.setStatusCabPes(1L);
         cabPesagemBean.setStatusApontCabPes(0L);
         cabPesagemBean.insert();
@@ -45,9 +46,9 @@ public class CabPesagemDAO {
         return cabPesagemBean.get("statusCabPes",1L);
     }
 
-    public void fechCabPesagem(String imagem){
+    public void fecharCabPesagem(){
         CabPesagemBean cabPesagemBean = getCabPesApont();
-        cabPesagemBean.setDthrCabPes(Tempo.getInstance().dataComHora());
+        cabPesagemBean.setDthrFinalCabPes(Tempo.getInstance().dataComHora());
         cabPesagemBean.setStatusCabPes(2L);
         cabPesagemBean.update();
     }
@@ -90,9 +91,9 @@ public class CabPesagemDAO {
     }
 
     public void setStatusApontCabPes(CabPesagemBean cabPesagemBean){
-        List<CabPesagemBean> cabPesagemList = cabPesagApontList();
+        List<CabPesagemBean> cabPesagemList = cabPesagAbertList();
         for(CabPesagemBean cabPesagemBD : cabPesagemList){
-            if(cabPesagemBean.getIdCabPes() == cabPesagemBD.getIdCabPes()){
+            if(cabPesagemBean.getIdCabPes().equals(cabPesagemBD.getIdCabPes())){
                 cabPesagemBD.setStatusApontCabPes(1L);
                 cabPesagemBD.update();
             }

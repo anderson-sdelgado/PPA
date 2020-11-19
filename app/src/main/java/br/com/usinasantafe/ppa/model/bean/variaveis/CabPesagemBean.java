@@ -19,7 +19,9 @@ public class CabPesagemBean extends Entidade {
     @DatabaseField
     private String placaVeicCabPes;
     @DatabaseField
-    private String dthrCabPes;
+    private String dthrInicialCabPes;
+    @DatabaseField
+    private String dthrFinalCabPes;
     @DatabaseField
     private Long statusConCabPes; //0 - OffLine; 1 - OnLine
     @DatabaseField
@@ -54,12 +56,12 @@ public class CabPesagemBean extends Entidade {
         this.placaVeicCabPes = placaVeicCabPes;
     }
 
-    public String getDthrCabPes() {
-        return dthrCabPes;
+    public String getDthrInicialCabPes() {
+        return dthrInicialCabPes;
     }
 
-    public void setDthrCabPes(String dthrCabPes) {
-        this.dthrCabPes = dthrCabPes;
+    public void setDthrInicialCabPes(String dthrInicialCabPes) {
+        this.dthrInicialCabPes = dthrInicialCabPes;
     }
 
     public Long getStatusCabPes() {
@@ -92,5 +94,13 @@ public class CabPesagemBean extends Entidade {
 
     public void setStatusApontCabPes(Long statusApontCabPes) {
         this.statusApontCabPes = statusApontCabPes;
+    }
+
+    public String getDthrFinalCabPes() {
+        return dthrFinalCabPes;
+    }
+
+    public void setDthrFinalCabPes(String dthrFinalCabPes) {
+        this.dthrFinalCabPes = dthrFinalCabPes;
     }
 }

@@ -16,16 +16,16 @@ import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
 import br.com.usinasantafe.ppa.model.pst.EspecificaPesquisa;
 import br.com.usinasantafe.ppa.util.VerifDadosServ;
 
-public class OrgCarregDAO {
+public class OrdCarregDAO {
 
-    public OrgCarregDAO() {
+    public OrdCarregDAO() {
     }
 
     public void verDados(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
         VerifDadosServ.getInstance().verDados(dado, "OrdCarreg", telaAtual, telaProx, progressDialog);
     }
 
-    public void recDados(String result){
+    public void recDados(String result, String placa){
 
         try {
 
@@ -36,17 +36,19 @@ public class OrgCarregDAO {
 
                 if (jsonArray.length() > 0) {
 
+                    OrdCarregBean ordCarregBean = new OrdCarregBean();
+
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject objeto = jsonArray.getJSONObject(i);
                         Gson gson = new Gson();
-                        OrdCarregBean ordCarregBean = gson.fromJson(objeto.toString(), OrdCarregBean.class);
+                        ordCarregBean = gson.fromJson(objeto.toString(), OrdCarregBean.class);
                         ordCarregBean.insert();
 
-                        PesagemCTR pesagemCTR = new PesagemCTR();
-                        pesagemCTR.criarCabecPes(ordCarregBean.getPlacaVeicOrdCarreg(), 1L);
-
                     }
+
+                    PesagemCTR pesagemCTR = new PesagemCTR();
+                    pesagemCTR.criarCabecPes(ordCarregBean.getPlacaVeicOrdCarreg(), 1L);
 
                     VerifDadosServ.getInstance().pulaTelaComTerm();
 
@@ -70,19 +72,56 @@ public class OrgCarregDAO {
 
     }
 
-    public List<OrdCarregBean> osList(String placa){
+    public boolean verOrdCarreg(String placa){
+        List<OrdCarregBean> ordCarregList = ordCarregList(placa);
+        boolean ret = (ordCarregList.size() > 0);
+        ordCarregList.clear();
+        return ret;
+    }
+
+    public void deleteDataDif(String data){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqDataDif(data));
+        OrdCarregBean ordCarregBean = new OrdCarregBean();
+        List<OrdCarregBean> ordCarregList = ordCarregBean.get(pesqArrayList);
+        for(OrdCarregBean ordCarregBD : ordCarregList){
+            ordCarregBD.delete();
+        }
+        ordCarregList.clear();
+    }
+
+    public OrdCarregBean getOrdCarregProd(String codProd){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCodProd(codProd));
+        OrdCarregBean ordCarregBean = new OrdCarregBean();
+        List<OrdCarregBean> ordCarregList = ordCarregBean.get(pesqArrayList);
+        ordCarregBean = ordCarregList.get(0);
+        pesqArrayList.clear();
+        ordCarregList.clear();
+        return ordCarregBean;
+    }
+
+    public List<OrdCarregBean> ordCarregList(String placa){
         ArrayList pesqArrayList = new ArrayList();
         pesqArrayList.add(getPesqPlaca(placa));
         OrdCarregBean ordCarregBean = new OrdCarregBean();
         return ordCarregBean.get(pesqArrayList);
     }
 
-    public List<OrdCarregBean> produtoList(String placa, Long nroOS){
+    public List<OrdCarregBean> ordCarregList(String placa, Long nroOS){
         ArrayList pesqArrayList = new ArrayList();
         pesqArrayList.add(getPesqPlaca(placa));
         pesqArrayList.add(getPesqNroOS(nroOS));
         OrdCarregBean ordCarregBean = new OrdCarregBean();
         return ordCarregBean.get(pesqArrayList);
+    }
+
+    private EspecificaPesquisa getPesqDataDif(String data){
+        EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+        pesquisa.setCampo("dataOrdCarreg");
+        pesquisa.setValor(data);
+        pesquisa.setTipo(2);
+        return pesquisa;
     }
 
     private EspecificaPesquisa getPesqPlaca(String placa){
@@ -97,6 +136,14 @@ public class OrgCarregDAO {
         EspecificaPesquisa pesquisa = new EspecificaPesquisa();
         pesquisa.setCampo("nroOSOrdCarreg");
         pesquisa.setValor(nroOS);
+        pesquisa.setTipo(1);
+        return pesquisa;
+    }
+
+    private EspecificaPesquisa getPesqCodProd(String codProd){
+        EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+        pesquisa.setCampo("codProdOrdCarreg");
+        pesquisa.setValor(codProd);
         pesquisa.setTipo(1);
         return pesquisa;
     }

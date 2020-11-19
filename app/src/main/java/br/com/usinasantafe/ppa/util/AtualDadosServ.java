@@ -76,12 +76,13 @@ public class AtualDadosServ {
 	}
 
 
-	public void atualizarBD(ProgressDialog progressDialog){
+	public void atualTodasTabelas(ProgressDialog progressDialog, Context context){
 
 		try {
 
 			this.tipoReceb = 1;
 			this.progressDialog = progressDialog;
+			this.context = context;
 			tabAtualArrayList = new ArrayList<String>();
 	        Class<?> retClasse = Class.forName(urlsConexaoHttp.localUrl);
 
@@ -225,10 +226,6 @@ public class AtualDadosServ {
 	    	classe = urlsConexaoHttp.localPSTEstatica + classe;
 	    }
 		return classe;
-	}
-
-	public void setContext(Context context){
-		this.context = context;
 	}
 	
 }

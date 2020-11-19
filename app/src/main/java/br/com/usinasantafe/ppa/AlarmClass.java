@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.j256.ormlite.field.DatabaseField;
-
 import java.util.List;
 
 import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
@@ -45,7 +43,7 @@ public class AlarmClass extends BroadcastReceiver {
 			Log.i("PPA", "idEquipCabPes = " + cabPesagemBD.getIdEquipCabPes());
 			Log.i("PPA", "matricFuncCabPes = " + cabPesagemBD.getMatricFuncCabPes());
 			Log.i("PPA", "placaVeicCabPes = " + cabPesagemBD.getPlacaVeicCabPes());
-			Log.i("PPA", "dthrCabPes = " + cabPesagemBD.getDthrCabPes());
+			Log.i("PPA", "dthrCabPes = " + cabPesagemBD.getDthrInicialCabPes());
 			Log.i("PPA", "statusConCabPes = " + cabPesagemBD.getStatusConCabPes());
 			Log.i("PPA", "statusApontCabPes = " + cabPesagemBD.getStatusApontCabPes());
 			Log.i("PPA", "statusCabPes = " + cabPesagemBD.getStatusCabPes());

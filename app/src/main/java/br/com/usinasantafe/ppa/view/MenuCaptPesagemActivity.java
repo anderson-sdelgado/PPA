@@ -15,8 +15,6 @@ import br.com.usinasantafe.ppa.R;
 
 public class MenuCaptPesagemActivity extends ActivityGeneric {
 
-    private PPAContext ppaContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +24,8 @@ public class MenuCaptPesagemActivity extends ActivityGeneric {
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        itens.add("CAPTURA PESAGEM VIA BLUETOOTH");
-        itens.add("DIGITAR VALOR DE PESAGEM");
+        itens.add("PESAGEM VIA BLUETOOTH");
+        itens.add("PESAGEM MANUAL");
 
         AdapterList adapterList = new AdapterList(this, itens);
         ListView menuListView = (ListView) findViewById(R.id.listaMenuPesagem);
@@ -42,13 +40,13 @@ public class MenuCaptPesagemActivity extends ActivityGeneric {
                 TextView textView = (TextView) v.findViewById(R.id.textViewItemList);
                 String text = textView.getText().toString();
 
-                if (text.equals("CAPTURA PESAGEM VIA BLUETOOTH")) {
+                if (text.equals("PESAGEM VIA BLUETOOTH")) {
 
                     Intent it = new Intent(MenuCaptPesagemActivity.this, ListaBalancaBTActivity.class);
                     startActivity(it);
                     finish();
 
-                } else if (text.equals("DIGITAR VALOR DE PESAGEM")) {
+                } else if (text.equals("PESAGEM MANUAL")) {
 
                     Intent it = new Intent(MenuCaptPesagemActivity.this, DigPesoActivity.class);
                     startActivity(it);

@@ -39,6 +39,6 @@
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_padrao_retornar" />
+        android:text="@string/texto_ret_menu_inicial" />
 
 </LinearLayout>

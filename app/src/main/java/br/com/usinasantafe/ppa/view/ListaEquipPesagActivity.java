@@ -1,5 +1,7 @@
 package br.com.usinasantafe.ppa.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
@@ -51,9 +53,25 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
         buttonRetEquipPesagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent it = new Intent(ListaEquipPesagActivity.this, MenuInicialActivity.class);
-//                startActivity(it);
-//                finish();
+
+                if(!ppaContext.getPesagemCTR().verCabecPesAberto()){
+                    Intent it = new Intent(ListaEquipPesagActivity.this, MenuInicialActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else{
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ListaEquipPesagActivity.this);
+                    alerta.setTitle("ATENÇÃO");
+                    alerta.setMessage("PESAGEM NÃO FINALIZADAS! POR FAVOR, FINALIZE TODAS AS PESAGENS ANTES DE RETORNAR AO MENU INICIAL.");
+                    alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+                    alerta.show();
+                }
+
             }
         });
 

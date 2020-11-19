@@ -19,7 +19,11 @@ public class OrdCarregBean extends Entidade {
     @DatabaseField
     private Long nroOSOrdCarreg;
     @DatabaseField
-    private String prodOrdCarreg;
+    private String codProdOrdCarreg;
+    @DatabaseField
+    private String descrProdOrdCarreg;
+    @DatabaseField
+    private String dataOrdCarreg;
 
     public OrdCarregBean() {
     }
@@ -56,11 +60,27 @@ public class OrdCarregBean extends Entidade {
         this.nroOSOrdCarreg = nroOSOrdCarreg;
     }
 
-    public String getProdOrdCarreg() {
-        return prodOrdCarreg;
+    public String getCodProdOrdCarreg() {
+        return codProdOrdCarreg;
     }
 
-    public void setProdOrdCarreg(String prodOrdCarreg) {
-        this.prodOrdCarreg = prodOrdCarreg;
+    public void setCodProdOrdCarreg(String codProdOrdCarreg) {
+        this.codProdOrdCarreg = codProdOrdCarreg;
+    }
+
+    public String getDataOrdCarreg() {
+        return dataOrdCarreg;
+    }
+
+    public void setDataOrdCarreg(String dataOrdCarreg) {
+        this.dataOrdCarreg = dataOrdCarreg;
+    }
+
+    public String getDescrProdOrdCarreg() {
+        return descrProdOrdCarreg;
+    }
+
+    public void setDescrProdOrdCarreg(String descrProdOrdCarreg) {
+        this.descrProdOrdCarreg = descrProdOrdCarreg;
     }
 }

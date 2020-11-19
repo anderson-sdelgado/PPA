@@ -92,8 +92,7 @@ public class ConfigActivity extends ActivityGeneric {
                     progressBar.setMax(100);
                     progressBar.show();
 
-                    AtualDadosServ.getInstance().atualizarBD(progressBar);
-                    AtualDadosServ.getInstance().setContext(ConfigActivity.this);
+                    ppaContext.getConfigCTR().atualTodasTabelas(ConfigActivity.this, progressBar);
 
                 }
                 else{

@@ -15,12 +15,10 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.usinasantafe.ppa.view.DigOSActivity;
-import br.com.usinasantafe.ppa.view.DigPlacaVeicActivity;
 import br.com.usinasantafe.ppa.view.MenuInicialActivity;
 import br.com.usinasantafe.ppa.control.ConfigCTR;
 import br.com.usinasantafe.ppa.model.bean.AtualAplicBean;
-import br.com.usinasantafe.ppa.model.dao.OrgCarregDAO;
+import br.com.usinasantafe.ppa.model.dao.OrdCarregDAO;
 import br.com.usinasantafe.ppa.util.conHttp.PostVerGenerico;
 import br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp;
 
@@ -38,8 +36,6 @@ public class VerifDadosServ {
     private String dado;
     private String tipo;
     private MenuInicialActivity menuInicialActivity;
-    private DigPlacaVeicActivity digPlacaVeicActivity;
-    private DigOSActivity digOSActivity;
     private PostVerGenerico postVerGenerico;
     private boolean verTerm;
 
@@ -62,9 +58,9 @@ public class VerifDadosServ {
                     } else {
                         this.menuInicialActivity.startTimer();
                     }
-                } else if (this.tipo.equals("Veiculo")) {
-                    OrgCarregDAO orgCarregDAO = new OrgCarregDAO();
-                    orgCarregDAO.recDados(result);
+                } else if (this.tipo.equals("OrdCarreg")) {
+                    OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+                    ordCarregDAO.recDados(result, dado);
                 }
             }
 

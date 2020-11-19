@@ -1,11 +1,15 @@
 package br.com.usinasantafe.ppa.control;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+
 import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.ppa.model.dao.ConfigDAO;
 import br.com.usinasantafe.ppa.model.dao.EquipDAO;
 import br.com.usinasantafe.ppa.model.dao.FuncDAO;
+import br.com.usinasantafe.ppa.util.AtualDadosServ;
 
 public class ConfigCTR {
 
@@ -60,6 +64,10 @@ public class ConfigCTR {
     public void setFuncConfig(Long matricFunc){
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.setMatricFuncConfig(matricFunc);
+    }
+
+    public void atualTodasTabelas(Context context, ProgressDialog progressDialog){
+        AtualDadosServ.getInstance().atualTodasTabelas(progressDialog, context);
     }
 
 }

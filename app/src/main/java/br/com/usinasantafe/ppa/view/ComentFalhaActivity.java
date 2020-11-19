@@ -35,7 +35,7 @@ public class ComentFalhaActivity extends ActivityGeneric {
 
                     ppaContext.getPesagemCTR().insItemPes(editTextComent.getText().toString(), getLatitude(), getLatitude());
 
-                    Intent it = new Intent(ComentFalhaActivity.this, MenuPesagemActivity.class);
+                    Intent it = new Intent(ComentFalhaActivity.this, ListaEquipPesagActivity.class);
                     startActivity(it);
                     finish();
 
@@ -43,7 +43,7 @@ public class ComentFalhaActivity extends ActivityGeneric {
                 else{
                     AlertDialog.Builder alerta = new AlertDialog.Builder( ComentFalhaActivity.this);
                     alerta.setTitle("ATENÇÃO");
-                    alerta.setMessage("POR FAVOR! COMENTE O MOTIVO QUE TE LEVOU A DIGITAR O VALOR DA PESAGEM E NÃO CAPTURA O MESMO VIA BLUETOOTH.");
+                    alerta.setMessage("POR FAVOR! COMENTE O MOTIVO DA PESAGEM MANUAL.");
                     alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

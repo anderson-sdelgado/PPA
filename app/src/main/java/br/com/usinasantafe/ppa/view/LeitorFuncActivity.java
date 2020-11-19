@@ -1,10 +1,15 @@
 package br.com.usinasantafe.ppa.view;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +18,7 @@ import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
 import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
+import br.com.usinasantafe.ppa.zxing.CaptureActivity;
 
 public class LeitorFuncActivity extends ActivityGeneric {
 
@@ -35,6 +41,11 @@ public class LeitorFuncActivity extends ActivityGeneric {
         Button buttonDigFunc = (Button) findViewById(R.id.buttonDigFunc);
         Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
         Button buttonCaptMatric = (Button) findViewById(R.id.buttonCaptMatric);
+
+        if (!checkPermission(Manifest.permission.CAMERA)) {
+            String[] PERMISSIONS = {Manifest.permission.CAMERA};
+            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
+        }
 
         funcBean = new FuncBean();
         funcBean.setMatricFunc(0L);
@@ -86,7 +97,7 @@ public class LeitorFuncActivity extends ActivityGeneric {
 
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(LeitorFuncActivity.this, br.com.usinasantafe.ppa.zxing.CaptureActivity.class);
+                Intent it = new Intent(LeitorFuncActivity.this, CaptureActivity.class);
                 startActivityForResult(it, REQUEST_CODE);
             }
 
@@ -172,6 +183,11 @@ public class LeitorFuncActivity extends ActivityGeneric {
         Intent it = new Intent(LeitorFuncActivity.this, MenuInicialActivity.class);
         startActivity(it);
         finish();
+    }
+
+    public boolean checkPermission(String permission) {
+        int check = ContextCompat.checkSelfPermission(this, permission);
+        return (check == PackageManager.PERMISSION_GRANTED);
     }
 
 }

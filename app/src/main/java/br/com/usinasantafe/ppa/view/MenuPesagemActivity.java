@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,11 +23,14 @@ public class MenuPesagemActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_pesagem);
 
+        ppaContext = (PPAContext) getApplication();
+        Button buttonRetPesagem = (Button) findViewById(R.id.buttonRetPesagem);
+
         ArrayList<String> itens = new ArrayList<String>();
 
         itens.add("PESAGEM");
         itens.add("HISTÓRICO");
-        itens.add("FECHAR");
+        itens.add("FINALIZAR PESAGEM");
 
         AdapterList adapterList = new AdapterList(this, itens);
         menuPesagemListView = (ListView) findViewById(R.id.listaMenuPesagem);
@@ -60,7 +64,9 @@ public class MenuPesagemActivity extends ActivityGeneric {
                     startActivity(it);
                     finish();
 
-                } else if (text.equals("FECHAR")) {
+                } else if (text.equals("FINALIZAR PESAGEM")) {
+
+                    ppaContext.getPesagemCTR().fechCabPesagem();
 
                     Intent it = new Intent(MenuPesagemActivity.this, ListaEquipPesagActivity.class);
                     startActivity(it);
@@ -70,6 +76,15 @@ public class MenuPesagemActivity extends ActivityGeneric {
 
             }
 
+        });
+
+        buttonRetPesagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(MenuPesagemActivity.this, ListaEquipPesagActivity.class);
+                startActivity(it);
+                finish();
+            }
         });
 
     }

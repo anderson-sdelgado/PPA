@@ -1,10 +1,10 @@
 package br.com.usinasantafe.ppa.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import br.com.usinasantafe.ppa.R;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
 
-public class ListaOSActivity extends AppCompatActivity {
+public class ListaOSActivity extends ActivityGeneric {
 
     private ListView osListView;
     private PPAContext ppaContext;
@@ -27,6 +27,7 @@ public class ListaOSActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_os);
 
         ppaContext = (PPAContext) getApplication();
+        Button buttonRetOS = (Button) findViewById(R.id.buttonRetOS);
 
         ArrayList<String> itens = new ArrayList<String>();
 
@@ -36,7 +37,7 @@ public class ListaOSActivity extends AppCompatActivity {
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        osListView = (ListView) findViewById(R.id.listaMenuInicial);
+        osListView = (ListView) findViewById(R.id.listViewOS);
         osListView.setAdapter(adapterList);
 
         osListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,6 +58,15 @@ public class ListaOSActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        buttonRetOS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(ListaOSActivity.this, MenuPesagemActivity.class);
+                startActivity(it);
+                finish();
+            }
         });
 
     }

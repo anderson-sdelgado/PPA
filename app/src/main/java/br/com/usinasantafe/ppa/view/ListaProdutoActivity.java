@@ -1,10 +1,10 @@
 package br.com.usinasantafe.ppa.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
 
-public class ListaProdutoActivity extends AppCompatActivity {
+public class ListaProdutoActivity extends ActivityGeneric {
 
     private ListView produtoListView;
     private PPAContext ppaContext;
@@ -26,16 +26,17 @@ public class ListaProdutoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_produto);
 
         ppaContext = (PPAContext) getApplication();
+        Button buttonRetProduto = (Button) findViewById(R.id.buttonRetProduto);
 
         ArrayList<String> itens = new ArrayList<String>();
 
         produtoList = ppaContext.getPesagemCTR().produtoList();
         for(OrdCarregBean ordCarregBean : produtoList){
-            itens.add(ordCarregBean.getProdOrdCarreg());
+            itens.add(ordCarregBean.getCodProdOrdCarreg());
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        produtoListView = (ListView) findViewById(R.id.listaMenuInicial);
+        produtoListView = (ListView) findViewById(R.id.listViewProduto);
         produtoListView.setAdapter(adapterList);
 
         produtoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -45,7 +46,7 @@ public class ListaProdutoActivity extends AppCompatActivity {
                                     long id) {
 
                 OrdCarregBean ordCarregBean = produtoList.get(position);
-                ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPes(ordCarregBean.getProdOrdCarreg());
+                ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPes(ordCarregBean.getCodProdOrdCarreg());
 
                 produtoList.clear();
 
@@ -55,6 +56,15 @@ public class ListaProdutoActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        buttonRetProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(ListaProdutoActivity.this, ListaOSActivity.class);
+                startActivity(it);
+                finish();
+            }
         });
 
     }
