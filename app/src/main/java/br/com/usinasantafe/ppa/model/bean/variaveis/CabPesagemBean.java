@@ -23,7 +23,7 @@ public class CabPesagemBean extends Entidade {
     @DatabaseField
     private String dthrFinalCabPes;
     @DatabaseField
-    private Long statusConCabPes; //0 - OffLine; 1 - OnLine
+    private Long statusConCabPes; //0 - OffLine; 1 - OnLine; 2 - Sem Informação
     @DatabaseField
     private Long statusApontCabPes; //0 - Aberto; 1 - Apont;
     @DatabaseField

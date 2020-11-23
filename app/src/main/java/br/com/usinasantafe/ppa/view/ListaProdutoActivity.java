@@ -32,7 +32,7 @@ public class ListaProdutoActivity extends ActivityGeneric {
 
         produtoList = ppaContext.getPesagemCTR().produtoList();
         for(OrdCarregBean ordCarregBean : produtoList){
-            itens.add(ordCarregBean.getCodProdOrdCarreg());
+            itens.add(ordCarregBean.getCodProdOrdCarreg() + " - " + ppaContext.getPesagemCTR().getOrdCarregProd(ordCarregBean.getCodProdOrdCarreg()).getDescrProdOrdCarreg());
         }
 
         AdapterList adapterList = new AdapterList(this, itens);

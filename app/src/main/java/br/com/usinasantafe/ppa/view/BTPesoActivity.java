@@ -1,6 +1,7 @@
 package br.com.usinasantafe.ppa.view;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import java.util.UUID;
 
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
+import br.com.usinasantafe.ppa.util.ConexaoWeb;
 
 public class BTPesoActivity extends ActivityGeneric {
 
@@ -99,9 +101,37 @@ public class BTPesoActivity extends ActivityGeneric {
 
                     closeCon();
 
-                    Intent it = new Intent(BTPesoActivity.this, ListaEquipPesagActivity.class);
-                    startActivity(it);
-                    finish();
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(  BTPesoActivity.this);
+                    alerta.setTitle("ATENÇÃO");
+                    alerta.setMessage("DESEJA INSERIR OUTRA PESAGEM NESSE CAMINHÃO?");
+                    alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if(ppaContext.getPesagemCTR().verStatusConCabecPes()){
+                                Intent it = new Intent(BTPesoActivity.this, ListaOSActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
+                            else{
+                                Intent it = new Intent(BTPesoActivity.this, DigOSActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
+
+                        }
+                    });
+
+                    alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent it = new Intent(BTPesoActivity.this, ListaEquipPesagActivity.class);
+                            startActivity(it);
+                            finish();
+
+                        }
+                    });
 
                 } else {
 

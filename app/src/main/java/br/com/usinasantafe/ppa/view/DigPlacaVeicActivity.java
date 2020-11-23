@@ -94,7 +94,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
 
                             ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
                             VerifDadosServ.getInstance().setVerTerm(true);
-                            msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
+                            msg("FALHA NA CONEXÃO! POR FAVOR, PARA INSERIR A PESAGEM NESSE CAMINHÃO TERÁ QUE SER INSERIDO OS DADOS MANUALMENTE.");
 
                         }
 

@@ -110,9 +110,19 @@ public class PesagemCTR {
 
     ////////////////////////////////////// GET DADOS /////////////////////////////////////////////
 
-    public List<CabPesagemBean> cabPesagemApontList(){
+//    public List<CabPesagemBean> cabPesagemApontList(){
+//        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+//        return cabPesagemDAO.cabPesagApontList();
+//    }
+
+    public List<ItemPesagemBean> itemPesagemApontList(){
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        return cabPesagemDAO.cabPesagApontList();
+        List<CabPesagemBean> cabPesagemList = cabPesagemDAO.cabPesagApontList();
+        CabPesagemBean cabPesagemBean = cabPesagemList.get(0);
+        ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+        List<ItemPesagemBean> itemPesagemList = itemPesagemDAO.getListItemCabec(cabPesagemBean.getIdCabPes());
+        cabPesagemList.clear();
+        return itemPesagemList;
     }
 
     public ItemPesagemBean getItemPesagemBean() {
@@ -181,26 +191,15 @@ public class PesagemCTR {
 
             for (int i = 0; i < cabecJsonArray.length(); i++) {
 
-                JSONObject objBol = cabecJsonArray.getJSONObject(i);
+                JSONObject objCabPesagem = cabecJsonArray.getJSONObject(i);
                 Gson gsonBol = new Gson();
-                CabPesagemBean cabPesagemBean = gsonBol.fromJson(objBol.toString(), CabPesagemBean.class);
+                CabPesagemBean cabPesagemBean = gsonBol.fromJson(objCabPesagem.toString(), CabPesagemBean.class);
 
-                List cabecList = cabPesagemBean.get("idCabPes", cabPesagemBean.getIdCabPes());
-                CabPesagemBean cabPesagemBeanDB = (CabPesagemBean) cabecList.get(0);
-                cabecList.clear();
+                ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+                itemPesagemDAO.delItemCabec(cabPesagemBean.getIdCabPes());
 
-                ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
-                List itemPesagemList = itemPesagemBean.get("idCabItemPes", cabPesagemBeanDB.getIdCabPes());
-
-                for (int j = 0; j < itemPesagemList.size(); j++) {
-
-                    itemPesagemBean = (ItemPesagemBean) itemPesagemList.get(j);
-                    itemPesagemBean.delete();
-
-                }
-
-                itemPesagemList.clear();
-                cabPesagemBeanDB.delete();
+                CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+                cabPesagemDAO.delCabec(cabPesagemBean.getIdCabPes());
 
             }
 
@@ -216,18 +215,10 @@ public class PesagemCTR {
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         CabPesagemBean cabPesagemBean = cabPesagemDAO.getCabPesApont();
 
-        ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
-        List itemPesagemList = itemPesagemBean.get("idCabItemPes", cabPesagemBean.getIdCabPes());
+        ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+        itemPesagemDAO.delItemCabec(cabPesagemBean.getIdCabPes());
 
-        for (int j = 0; j < itemPesagemList.size(); j++) {
-
-            itemPesagemBean = (ItemPesagemBean) itemPesagemList.get(j);
-            itemPesagemBean.delete();
-
-        }
-
-        itemPesagemList.clear();
-        cabPesagemBean.delete();
+        cabPesagemDAO.delCabec(cabPesagemBean.getIdCabPes());
 
     }
 

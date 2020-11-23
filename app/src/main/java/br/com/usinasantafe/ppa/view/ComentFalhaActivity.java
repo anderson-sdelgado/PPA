@@ -35,9 +35,37 @@ public class ComentFalhaActivity extends ActivityGeneric {
 
                     ppaContext.getPesagemCTR().insItemPes(editTextComent.getText().toString(), getLatitude(), getLatitude());
 
-                    Intent it = new Intent(ComentFalhaActivity.this, ListaEquipPesagActivity.class);
-                    startActivity(it);
-                    finish();
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ComentFalhaActivity.this);
+                    alerta.setTitle("ATENÇÃO");
+                    alerta.setMessage("DESEJA INSERIR OUTRA PESAGEM NESSE CAMINHÃO?");
+                    alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if(ppaContext.getPesagemCTR().verStatusConCabecPes()){
+                                Intent it = new Intent(ComentFalhaActivity.this, ListaOSActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
+                            else{
+                                Intent it = new Intent(ComentFalhaActivity.this, DigOSActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
+
+                        }
+                    });
+
+                    alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent it = new Intent(ComentFalhaActivity.this, ListaEquipPesagActivity.class);
+                            startActivity(it);
+                            finish();
+
+                        }
+                    });
 
                 }
                 else{

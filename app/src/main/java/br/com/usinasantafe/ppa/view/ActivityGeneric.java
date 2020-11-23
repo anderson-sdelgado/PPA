@@ -39,11 +39,9 @@ public class ActivityGeneric extends OrmLiteBaseActivity<DatabaseHelper>implemen
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private static final long UPDATE_INTERVAL = 60000, FASTEST_INTERVAL = 60000; // = 5 seconds
-    // lists for permissions
     private ArrayList<String> permissionsToRequest;
     private ArrayList<String> permissionsRejected = new ArrayList<>();
     private ArrayList<String> permissions = new ArrayList<>();
-    // integer for permissions results request
     private static final int ALL_PERMISSIONS_RESULT = 1011;
 
     @Override
@@ -171,8 +169,8 @@ public class ActivityGeneric extends OrmLiteBaseActivity<DatabaseHelper>implemen
         }
 
         if ((Button) findViewById(R.id.buttonLetraA) != null) {
-            Button buttonVirg = (Button) findViewById(R.id.buttonVirg);
-            buttonVirg.setOnClickListener(new EventoBotao("A"));
+            Button buttonLetraA = (Button) findViewById(R.id.buttonLetraA);
+            buttonLetraA.setOnClickListener(new EventoBotao("A"));
         }
 
     }

@@ -25,10 +25,9 @@ public class ItemPesagemDAO {
     }
 
     public void delItemCabec(Long idCabec){
-        ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
         List itemPesagemList = getListItemCabec(idCabec);
         for (int i = 0; i < itemPesagemList.size(); i++) {
-            itemPesagemBean = (ItemPesagemBean) itemPesagemList.get(i);
+            ItemPesagemBean itemPesagemBean = (ItemPesagemBean) itemPesagemList.get(i);
             itemPesagemBean.delete();
         }
     }

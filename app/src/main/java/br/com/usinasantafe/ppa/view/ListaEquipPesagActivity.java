@@ -24,7 +24,7 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
 
     private ListView equipPesagListView;
     private PPAContext ppaContext;
-    private List<CabPesagemBean> cabPesagemList;
+    private ArrayList<CabPesagemBean> cabPesagemList;
 
     private TextView textViewProcesso;
     private Handler customHandler = new Handler();
@@ -78,16 +78,17 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
         ArrayList<String> itens = new ArrayList<String>();
 
         if(ppaContext.getPesagemCTR().verCabecPesAberto()){
-            cabPesagemList = ppaContext.getPesagemCTR().cabPesagemAbertoList();
-            for(CabPesagemBean cabPesagemBean : cabPesagemList){
-                itens.add(cabPesagemBean.getPlacaVeicCabPes());
-            }
+            cabPesagemList = (ArrayList<CabPesagemBean>) ppaContext.getPesagemCTR().cabPesagemAbertoList();
         }
         else{
-            itens.add("NÃO CONTÉM VEÍCULO");
+            cabPesagemList = new ArrayList<CabPesagemBean>();
+            CabPesagemBean cabPesagemBean = new CabPesagemBean();
+            cabPesagemBean.setPlacaVeicCabPes("NÃO CONTÉM VEÍCULO");
+            cabPesagemBean.setStatusConCabPes(2L);
+            cabPesagemList.add(cabPesagemBean);
         }
 
-        AdapterList adapterList = new AdapterList(this, itens);
+        AdapterListEquip adapterList = new AdapterListEquip(this, cabPesagemList);
         equipPesagListView = (ListView) findViewById(R.id.listViewEquipPesag);
         equipPesagListView.setAdapter(adapterList);
 

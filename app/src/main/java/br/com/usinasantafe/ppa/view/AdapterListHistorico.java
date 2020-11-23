@@ -23,16 +23,14 @@ public class AdapterListHistorico extends BaseAdapter {
 
     private List<ItemPesagemBean> itens;
     private LayoutInflater layoutInflater;
-    private Long tipoEquip;
     private TextView textViewHistDataHora;
     private TextView textViewHistOS;
     private TextView textViewHistProd;
     private TextView textViewHistPeso;
 
-    public AdapterListHistorico(Context context, List itens, Long tipoEquip) {
+    public AdapterListHistorico(Context context, List itens) {
         this.itens = itens;
         layoutInflater = LayoutInflater.from(context);
-        this.tipoEquip = tipoEquip;
     }
 
     @Override
@@ -65,7 +63,7 @@ public class AdapterListHistorico extends BaseAdapter {
         textViewHistOS.setText("O.S.:" + itemPesagemBean.getNroOSItemPes());
         PesagemCTR pesagemCTR = new PesagemCTR();
         textViewHistProd.setText("PRODUTO: " + itemPesagemBean.getProdItemPes() + " - " + pesagemCTR.getOrdCarregProd(itemPesagemBean.getProdItemPes()).getDescrProdOrdCarreg());
-        textViewHistPeso.setText("PESO: " + itemPesagemBean.getProdItemPes());
+        textViewHistPeso.setText("PESO: " + itemPesagemBean.getPesoItemPes());
 
         return view;
 

@@ -10,7 +10,7 @@ import android.widget.EditText;
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
 
-public class DigProdutoActivity extends AppCompatActivity {
+public class DigProdutoActivity extends ActivityGeneric {
 
     private EditText editTextProd;
     private PPAContext ppaContext;
