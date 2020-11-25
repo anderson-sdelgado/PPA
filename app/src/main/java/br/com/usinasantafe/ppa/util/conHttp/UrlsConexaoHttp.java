@@ -4,8 +4,8 @@ import br.com.usinasantafe.ppa.PPAContext;
 
 public class UrlsConexaoHttp {
 
-    public static String urlPrincipal = "http://www.usinasantafe.com.br/ppadev/view/";
-    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/ppadev/view/";
+    public static String urlPrincipal = "http://www.usinasantafe.com.br/ppaqa/view/";
+    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/ppaqa/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.ppa.model.bean.estaticas.";
     public static String localUrl = "br.com.usinasantafe.ppa.util.conHttp.UrlsConexaoHttp";

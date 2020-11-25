@@ -15,6 +15,8 @@ public class ItemPesagemBean extends Entidade {
     @DatabaseField
     private Long idCabItemPes;
     @DatabaseField
+    private Long matricFuncItemPes;
+    @DatabaseField
     private String prodItemPes;
     @DatabaseField
     private Long nroOSItemPes;
@@ -46,6 +48,14 @@ public class ItemPesagemBean extends Entidade {
 
     public void setIdCabItemPes(Long idCabItemPes) {
         this.idCabItemPes = idCabItemPes;
+    }
+
+    public Long getMatricFuncItemPes() {
+        return matricFuncItemPes;
+    }
+
+    public void setMatricFuncItemPes(Long matricFuncItemPes) {
+        this.matricFuncItemPes = matricFuncItemPes;
     }
 
     public String getProdItemPes() {

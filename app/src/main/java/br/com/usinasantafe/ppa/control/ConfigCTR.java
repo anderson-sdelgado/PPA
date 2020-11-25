@@ -56,6 +56,11 @@ public class ConfigCTR {
         configDAO.insConfig(getEquip(nroEquip).getIdEquip(), senha);
     }
 
+    public FuncBean getFunc(){
+        FuncDAO funcDAO = new FuncDAO();
+        return funcDAO.getFunc(getConfig().getMatricFuncConfig());
+    }
+
     public FuncBean getFunc(Long matricFunc){
         FuncDAO funcDAO = new FuncDAO();
         return funcDAO.getFunc(matricFunc);

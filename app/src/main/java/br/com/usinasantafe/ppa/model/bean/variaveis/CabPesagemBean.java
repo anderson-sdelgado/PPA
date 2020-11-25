@@ -15,8 +15,6 @@ public class CabPesagemBean extends Entidade {
     @DatabaseField
     private Long idEquipCabPes;
     @DatabaseField
-    private Long matricFuncCabPes;
-    @DatabaseField
     private String placaVeicCabPes;
     @DatabaseField
     private String dthrInicialCabPes;
@@ -70,14 +68,6 @@ public class CabPesagemBean extends Entidade {
 
     public void setStatusCabPes(Long statusCabPes) {
         this.statusCabPes = statusCabPes;
-    }
-
-    public Long getMatricFuncCabPes() {
-        return matricFuncCabPes;
-    }
-
-    public void setMatricFuncCabPes(Long matricFuncCabPes) {
-        this.matricFuncCabPes = matricFuncCabPes;
     }
 
     public Long getStatusConCabPes() {

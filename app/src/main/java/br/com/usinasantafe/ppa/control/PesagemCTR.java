@@ -65,20 +65,22 @@ public class PesagemCTR {
     public void criarCabecPes(String placaVeicCabPes, Long statusCon){
         ConfigCTR configCTR = new ConfigCTR();
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        cabPesagemDAO.criarCabPesagem(placaVeicCabPes, configCTR.getConfig().getIdEquipConfig(), configCTR.getConfig().getMatricFuncConfig(), statusCon);
+        cabPesagemDAO.criarCabPesagem(placaVeicCabPes, configCTR.getConfig().getIdEquipConfig(), statusCon);
     }
 
     public void insItemPes(Double peso, String comentario, Double latitude, Double logitude){
         itemPesagemBean.setPesoItemPes(peso);
+        ConfigCTR configCTR = new ConfigCTR();
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), itemPesagemBean, comentario, latitude, logitude);
+        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), configCTR.getConfig().getMatricFuncConfig(), itemPesagemBean, comentario, latitude, logitude);
     }
 
     public void insItemPes(String comentario, Double latitude, Double logitude){
+        ConfigCTR configCTR = new ConfigCTR();
         CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), itemPesagemBean, comentario, latitude, logitude);
+        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), configCTR.getConfig().getMatricFuncConfig(), itemPesagemBean, comentario, latitude, logitude);
     }
 
     public void fechCabPesagem(){

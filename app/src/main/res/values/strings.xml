@@ -174,7 +174,8 @@
     <string name="texto_atualizar_bd">ATUALIZAR DADOS</string>
     <string name="texto_titulo_equip_passag">CAMINHÃO(ÕES)</string>
     <string name="texto_equip">NRO. EQUIPAMENTO</string>
-    <string name="texto_ins_veiculo">INSERIR VEÍCULO</string>
+    <string name="texto_add_veiculo">ADICIONAR VEÍCULO</string>
+    <string name="texto_add_operador">ADICIONAR OPERADOR</string>
     <string name="texto_titulo_os">ORDEM SERVIÇO</string>
     <string name="texto_titulo_prod">CÓDIGO ADUDO</string>
     <string name="texto_titulo_equip">EQUIPAMENTO</string>
@@ -184,4 +185,6 @@
     <string name="texto_hist_prod">PRODUTO: A23435 - TESTE</string>
     <string name="texto_hist_peso">PESO: 123.00</string>
     <string name="texto_titulo_historico">HISTÓRICO</string>
+    <string name="texto_menu_titulo_motorista">MOTORISTA</string>
+    <string name="texto_menu_motorista">1 - FUNCIONARIO FICTICIO</string>
 </resources>

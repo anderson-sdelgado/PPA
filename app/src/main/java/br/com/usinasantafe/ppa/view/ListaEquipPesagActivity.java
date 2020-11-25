@@ -17,6 +17,7 @@ import java.util.List;
 
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
+import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 
@@ -25,8 +26,8 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
     private ListView equipPesagListView;
     private PPAContext ppaContext;
     private ArrayList<CabPesagemBean> cabPesagemList;
-
     private TextView textViewProcesso;
+    private TextView textViewMotorista;
     private Handler customHandler = new Handler();
 
     @Override
@@ -36,15 +37,47 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
 
         ppaContext = (PPAContext) getApplication();
         textViewProcesso = (TextView) findViewById(R.id.textViewProcesso);
+        textViewMotorista = (TextView) findViewById(R.id.textViewMotorista);
         Button buttonInserirEquipPesagem = (Button) findViewById(R.id.buttonInserirEquipPesagem);
+        Button buttonInserirOperadorPesagem = (Button) findViewById(R.id.buttonInserirOperadorPesagem);
         Button buttonRetEquipPesagem = (Button) findViewById(R.id.buttonRetEquipPesagem);
 
         customHandler.postDelayed(updateTimerThread, 0);
 
+        if(ppaContext.getConfigCTR().getConfig().getMatricFuncConfig() > 0L){
+            FuncBean funcBean = ppaContext.getConfigCTR().getFunc();
+            textViewMotorista.setText(funcBean.getMatricFunc() + " - " + funcBean.getNomeFunc());
+        }
+        else{
+            textViewMotorista.setText("Por Favor, insira um operador!");
+        }
+
         buttonInserirEquipPesagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaEquipPesagActivity.this, DigPlacaVeicActivity.class);
+                if(ppaContext.getConfigCTR().getConfig().getMatricFuncConfig() > 0L) {
+                    Intent it = new Intent(ListaEquipPesagActivity.this, DigPlacaVeicActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else{
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ListaEquipPesagActivity.this);
+                    alerta.setTitle("ATENÇÃO");
+                    alerta.setMessage("POR FAVOR, INSIRA MATRÍCULA DO OPERADOR PARA APONTAR AS PESAGENS.");
+                    alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alerta.show();
+                }
+            }
+        });
+
+        buttonInserirOperadorPesagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(ListaEquipPesagActivity.this, LeitorFuncActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -139,4 +172,5 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
             customHandler.postDelayed(this, 10000);
         }
     };
+
 }

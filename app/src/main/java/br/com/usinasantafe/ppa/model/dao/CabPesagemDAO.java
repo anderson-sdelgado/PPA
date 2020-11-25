@@ -17,11 +17,10 @@ public class CabPesagemDAO {
         return ret;
     }
 
-    public void criarCabPesagem(String placaVeicCabPes, Long idEquip, Long matricFunc, Long statusCon){
+    public void criarCabPesagem(String placaVeicCabPes, Long idEquip, Long statusCon){
         CabPesagemBean cabPesagemBean = new CabPesagemBean();
         cabPesagemBean.setPlacaVeicCabPes(placaVeicCabPes);
         cabPesagemBean.setIdEquipCabPes(idEquip);
-        cabPesagemBean.setMatricFuncCabPes(matricFunc);
         cabPesagemBean.setStatusConCabPes(statusCon);
         cabPesagemBean.setDthrInicialCabPes(Tempo.getInstance().dataComHora());
         cabPesagemBean.setStatusCabPes(1L);

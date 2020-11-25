@@ -97,7 +97,7 @@ public class BTPesoActivity extends ActivityGeneric {
 
                 if (!capturaPeso) {
 
-                    ppaContext.getPesagemCTR().insItemPes(peso, "", getLatitude(), getLatitude());
+                    ppaContext.getPesagemCTR().insItemPes(peso, "", getLatitude(), getLongitude());
 
                     closeCon();
 
@@ -132,6 +132,8 @@ public class BTPesoActivity extends ActivityGeneric {
 
                         }
                     });
+
+                    alerta.show();
 
                 } else {
 

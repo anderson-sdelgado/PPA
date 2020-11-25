@@ -12,6 +12,16 @@
     tools:context=".view.ListaEquipPesagActivity">
 
     <TextView
+        android:id="@+id/textViewTituloMotorista"
+        style="@style/TextViewMenuNegrito"
+        android:text="@string/texto_menu_titulo_motorista" />
+
+    <TextView
+        android:id="@+id/textViewMotorista"
+        style="@style/TextViewMenuNormal"
+        android:text="@string/texto_menu_motorista" />
+
+    <TextView
         android:id="@+id/textViewTituloEquip"
         style="@style/TextViewTituloLista"
         android:text="@string/texto_titulo_equip_passag" />
@@ -28,11 +38,18 @@
         android:text="@string/texto_item_default" />
 
     <Button
+        android:id="@+id/buttonInserirOperadorPesagem"
+        style="@style/BotaoAvulso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_add_operador" />
+
+    <Button
         android:id="@+id/buttonInserirEquipPesagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_ins_veiculo" />
+        android:text="@string/texto_add_veiculo" />
 
     <Button
         android:id="@+id/buttonRetEquipPesagem"

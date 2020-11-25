@@ -33,7 +33,7 @@ public class ComentFalhaActivity extends ActivityGeneric {
 
                 if (!editTextComent.getText().toString().equals("")) {
 
-                    ppaContext.getPesagemCTR().insItemPes(editTextComent.getText().toString(), getLatitude(), getLatitude());
+                    ppaContext.getPesagemCTR().insItemPes(editTextComent.getText().toString(), getLatitude(), getLongitude());
 
                     AlertDialog.Builder alerta = new AlertDialog.Builder(ComentFalhaActivity.this);
                     alerta.setTitle("ATENÇÃO");
@@ -67,6 +67,8 @@ public class ComentFalhaActivity extends ActivityGeneric {
                         }
                     });
 
+                    alerta.show();
+
                 }
                 else{
                     AlertDialog.Builder alerta = new AlertDialog.Builder( ComentFalhaActivity.this);
@@ -75,7 +77,6 @@ public class ComentFalhaActivity extends ActivityGeneric {
                     alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                         }
                     });
                     alerta.show();

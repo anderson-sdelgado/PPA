@@ -41,7 +41,6 @@ public class AlarmClass extends BroadcastReceiver {
 		for(CabPesagemBean cabPesagemBD : cabPesagemList){
 			Log.i("PPA", "idCabPes = " + cabPesagemBD.getIdCabPes());
 			Log.i("PPA", "idEquipCabPes = " + cabPesagemBD.getIdEquipCabPes());
-			Log.i("PPA", "matricFuncCabPes = " + cabPesagemBD.getMatricFuncCabPes());
 			Log.i("PPA", "placaVeicCabPes = " + cabPesagemBD.getPlacaVeicCabPes());
 			Log.i("PPA", "dthrCabPes = " + cabPesagemBD.getDthrInicialCabPes());
 			Log.i("PPA", "statusConCabPes = " + cabPesagemBD.getStatusConCabPes());
@@ -57,6 +56,7 @@ public class AlarmClass extends BroadcastReceiver {
 		for(ItemPesagemBean itemPesagemBD : itemPesagemList){
 			Log.i("PPA", "idItemPes = " + itemPesagemBD.getIdItemPes());
 			Log.i("PPA", "idCabItemPes = " + itemPesagemBD.getIdCabItemPes());
+			Log.i("PPA", "matricFuncItemPes = " + itemPesagemBD.getMatricFuncItemPes());
 			Log.i("PPA", "prodItemPes = " + itemPesagemBD.getProdItemPes());
 			Log.i("PPA", "nroOSItemPes = " + itemPesagemBD.getNroOSItemPes());
 			Log.i("PPA", "pesoItemPes = " + itemPesagemBD.getPesoItemPes());

@@ -93,7 +93,7 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                     if(ppaContext.getPesagemCTR().hasElementsFunc() && ppaContext.getConfigCTR().hasElements()){
 
-                        Intent it = new Intent(MenuInicialActivity.this, LeitorFuncActivity.class);
+                        Intent it = new Intent(MenuInicialActivity.this, ListaEquipPesagActivity.class);
                         startActivity(it);
                         finish();
 
