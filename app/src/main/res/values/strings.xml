@@ -165,14 +165,14 @@
     <string name="texto_botao_camera">ACIONAR CAMERA</string>
     <string name="texto_foto">FOTO</string>
     <string name="texto_balanca">BALANÇA(S)</string>
-    <string name="texto_valor_peso">1000.00</string>
-    <string name="texto_status_peso">ESTÁVEL</string>
+    <string name="texto_valor_peso">0.0</string>
+    <string name="texto_status_peso">CONECTANDO A BALANÇA...</string>
     <string name="texto_menu_pesagem">MENU PESAGEM</string>
     <string name="texto_func_matric">19759</string>
     <string name="texto_pega_matric">CAPTURAR MATRICULA</string>
     <string name="texto_dig_matric">DIGITAR MATRICULA</string>
     <string name="texto_atualizar_bd">ATUALIZAR DADOS</string>
-    <string name="texto_titulo_equip_passag">CAMINHÃO(ÕES)</string>
+    <string name="texto_titulo_equip_passag">VEÍCULO(S)</string>
     <string name="texto_equip">NRO. EQUIPAMENTO</string>
     <string name="texto_add_veiculo">ADICIONAR VEÍCULO</string>
     <string name="texto_add_operador">ADICIONAR OPERADOR</string>
@@ -187,4 +187,6 @@
     <string name="texto_titulo_historico">HISTÓRICO</string>
     <string name="texto_menu_titulo_motorista">MOTORISTA</string>
     <string name="texto_menu_motorista">1 - FUNCIONARIO FICTICIO</string>
+    <string name="texto_zerar_bal">ZERAR BALANÇA</string>
+    <string name="texto_titulo_nota_fiscal">NOTA FISCAL</string>
 </resources>

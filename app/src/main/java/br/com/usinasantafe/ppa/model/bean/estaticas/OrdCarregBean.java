@@ -19,11 +19,15 @@ public class OrdCarregBean extends Entidade {
     @DatabaseField
     private Long nroOSOrdCarreg;
     @DatabaseField
+    private Long nroNFOrdCarreg;
+    @DatabaseField
     private String codProdOrdCarreg;
     @DatabaseField
     private String descrProdOrdCarreg;
     @DatabaseField
     private String dataOrdCarreg;
+    @DatabaseField
+    private Double pesoProdOrdCarreg;
 
     public OrdCarregBean() {
     }
@@ -60,12 +64,28 @@ public class OrdCarregBean extends Entidade {
         this.nroOSOrdCarreg = nroOSOrdCarreg;
     }
 
+    public Long getNroNFOrdCarreg() {
+        return nroNFOrdCarreg;
+    }
+
+    public void setNroNFOrdCarreg(Long nroNFOrdCarreg) {
+        this.nroNFOrdCarreg = nroNFOrdCarreg;
+    }
+
     public String getCodProdOrdCarreg() {
         return codProdOrdCarreg;
     }
 
     public void setCodProdOrdCarreg(String codProdOrdCarreg) {
         this.codProdOrdCarreg = codProdOrdCarreg;
+    }
+
+    public String getDescrProdOrdCarreg() {
+        return descrProdOrdCarreg;
+    }
+
+    public void setDescrProdOrdCarreg(String descrProdOrdCarreg) {
+        this.descrProdOrdCarreg = descrProdOrdCarreg;
     }
 
     public String getDataOrdCarreg() {
@@ -76,11 +96,11 @@ public class OrdCarregBean extends Entidade {
         this.dataOrdCarreg = dataOrdCarreg;
     }
 
-    public String getDescrProdOrdCarreg() {
-        return descrProdOrdCarreg;
+    public Double getPesoProdOrdCarreg() {
+        return pesoProdOrdCarreg;
     }
 
-    public void setDescrProdOrdCarreg(String descrProdOrdCarreg) {
-        this.descrProdOrdCarreg = descrProdOrdCarreg;
+    public void setPesoProdOrdCarreg(Double pesoProdOrdCarreg) {
+        this.pesoProdOrdCarreg = pesoProdOrdCarreg;
     }
 }

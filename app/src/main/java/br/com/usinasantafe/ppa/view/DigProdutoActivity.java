@@ -1,7 +1,6 @@
 package br.com.usinasantafe.ppa.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +33,7 @@ public class DigProdutoActivity extends ActivityGeneric {
 
                 if (!editTextProd.getText().toString().equals("")) {
 
-                    ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPes(editTextProd.getText().toString().trim());
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPesagem(editTextProd.getText().toString().trim());
 
                     Intent it = new Intent( DigProdutoActivity.this, MenuCaptPesagemActivity.class);
                     startActivity(it);

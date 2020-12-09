@@ -16,9 +16,9 @@ import java.util.List;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
 import br.com.usinasantafe.ppa.model.dao.FuncDAO;
 import br.com.usinasantafe.ppa.util.AtualDadosServ;
-import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.CabecPesagemBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
-import br.com.usinasantafe.ppa.model.dao.CabPesagemDAO;
+import br.com.usinasantafe.ppa.model.dao.CabecPesagemDAO;
 import br.com.usinasantafe.ppa.model.dao.ItemPesagemDAO;
 import br.com.usinasantafe.ppa.model.dao.OrdCarregDAO;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
@@ -38,14 +38,14 @@ public class PesagemCTR {
         return funcDAO.hasElements();
     }
 
-    public boolean verCabecPesAberto(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        return cabPesagemDAO.verCabecPesAberto();
+    public boolean verCabecPesagemAberto(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        return cabecPesagemDAO.verCabecPesAberto();
     }
 
-    public boolean verStatusConCabecPes(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        if(cabPesagemDAO.getCabPesApont().getStatusConCabPes() == 1){
+    public boolean verStatusConCabecPesagem(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        if(cabecPesagemDAO.getCabecPesagemApont().getStatusConCabecPesagem() == 1){
             return true;
         }
         else{
@@ -58,49 +58,95 @@ public class PesagemCTR {
         return ordCarregDAO.verOrdCarreg(placa);
     }
 
+    public boolean verItemPesManual(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+        return itemPesagemDAO.verItemPesagemManual(cabecPesagemDAO.getCabecPesagemApont().getIdCabecPesagem());
+    }
+
+    public boolean verPorcentualPesagem(){
+        boolean ret = true;
+        if(verStatusConCabecPesagem()){
+            CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+            ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+            OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+            List<OrdCarregBean> ordCarregList = ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getPlacaVeicCabecPesagem());
+            for(OrdCarregBean ordCarregBean : ordCarregList){
+                Double totalPesagem = itemPesagemDAO.verItemTotalPesagem(cabecPesagemDAO.getCabecPesagemApont().getIdCabecPesagem(), ordCarregBean.getIdBDOrdCarreg());
+                Double pesagemMinino = ordCarregBean.getPesoProdOrdCarreg() - ((ordCarregBean.getPesoProdOrdCarreg() / 100) * 10);
+                Double pesagemMaximo = ordCarregBean.getPesoProdOrdCarreg() + ((ordCarregBean.getPesoProdOrdCarreg() / 100) * 10);
+                if(totalPesagem > 0D){
+                    if((totalPesagem < pesagemMinino) || (totalPesagem > pesagemMaximo)){
+                        ret = false;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    public boolean verQtdeOrdCarreg(String placa){
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.verQtdeOrdCarreg(placa);
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////// SALVAR/ATUALIZAR/EXCLUIR DADOS /////////////////////////////////
 
-    public void criarCabecPes(String placaVeicCabPes, Long statusCon){
+    public void criarCabecPesagem(String placa, Long statusCon){
         ConfigCTR configCTR = new ConfigCTR();
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        cabPesagemDAO.criarCabPesagem(placaVeicCabPes, configCTR.getConfig().getIdEquipConfig(), statusCon);
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        cabecPesagemDAO.criarCabecPesagem(placa, configCTR.getConfig().getIdEquipConfig(), statusCon);
+        if(statusCon == 0L){
+            cabecPesagemDAO.abrirCabecPesagem(0L);
+        }
     }
 
-    public void insItemPes(Double peso, String comentario, Double latitude, Double logitude){
-        itemPesagemBean.setPesoItemPes(peso);
+    public void abrirCabecPesagem(){
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        cabecPesagemDAO.abrirCabecPesagem(ordCarregDAO.getOrdCarregPlaca(cabecPesagemDAO.getCabecPesagemCriado().getPlacaVeicCabecPesagem()).getIdOrdCarreg());
+    }
+
+    public void abrirCabecPesagem(Long idOrdCarreg){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        cabecPesagemDAO.abrirCabecPesagem(idOrdCarreg);
+    }
+
+    public void insItemPesagem(Double peso, String comentario, Double latitude, Double logitude){
+        itemPesagemBean.setPesoItemPesagem(peso);
         ConfigCTR configCTR = new ConfigCTR();
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), configCTR.getConfig().getMatricFuncConfig(), itemPesagemBean, comentario, latitude, logitude);
+        itemPesagemDAO.criarItemPesagem(cabecPesagemDAO.getCabecPesagemApont().getIdCabecPesagem(), configCTR.getConfig().getMatricFuncConfig(), itemPesagemBean, comentario, latitude, logitude);
     }
 
-    public void insItemPes(String comentario, Double latitude, Double logitude){
+    public void insItemPesagem(String comentario, Double latitude, Double logitude){
         ConfigCTR configCTR = new ConfigCTR();
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.criarItemPesagem(cabPesagemDAO.getCabPesApont().getIdCabPes(), configCTR.getConfig().getMatricFuncConfig(), itemPesagemBean, comentario, latitude, logitude);
+        itemPesagemDAO.criarItemPesagem(cabecPesagemDAO.getCabecPesagemApont().getIdCabecPesagem(), configCTR.getConfig().getMatricFuncConfig(), itemPesagemBean, comentario, latitude, logitude);
     }
 
-    public void fechCabPesagem(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        cabPesagemDAO.fecharCabPesagem();
+    public void fechCabecPesagem(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        cabecPesagemDAO.fecharCabecPesagem();
     }
 
     public boolean verEnvioDados() {
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        return cabPesagemDAO.verCabPesFechado();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        return cabecPesagemDAO.verCabecPesagemFechado();
     }
 
-    public void verPlacaVeicServ(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+    public void verPlacaVeicServ(String dado, Context telaAtual, Class telaProx1, Class telaProx2, ProgressDialog progressDialog){
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
-        ordCarregDAO.verDados(dado, telaAtual, telaProx, progressDialog);
+        ordCarregDAO.verDados(dado, telaAtual, telaProx1, telaProx2, progressDialog);
     }
 
     public boolean verStatusConPlacaVeic(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        return cabPesagemDAO.verStatusConPlacaVeic();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        return cabecPesagemDAO.verStatusConPlacaVeic();
     }
 
     public void deleteDataDif(){
@@ -108,21 +154,21 @@ public class PesagemCTR {
         ordCarregDAO.deleteDataDif(Tempo.getInstance().dataSHora());
     }
 
+    public void delCabecCriado(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        cabecPesagemDAO.delCabecCriado();
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////// GET DADOS /////////////////////////////////////////////
 
-//    public List<CabPesagemBean> cabPesagemApontList(){
-//        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-//        return cabPesagemDAO.cabPesagApontList();
-//    }
-
     public List<ItemPesagemBean> itemPesagemApontList(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        List<CabPesagemBean> cabPesagemList = cabPesagemDAO.cabPesagApontList();
-        CabPesagemBean cabPesagemBean = cabPesagemList.get(0);
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        List<CabecPesagemBean> cabPesagemList = cabecPesagemDAO.cabecPesagemApontList();
+        CabecPesagemBean cabecPesagemBean = cabPesagemList.get(0);
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        List<ItemPesagemBean> itemPesagemList = itemPesagemDAO.getListItemCabec(cabPesagemBean.getIdCabPes());
+        List<ItemPesagemBean> itemPesagemList = itemPesagemDAO.getListItem(cabecPesagemBean.getIdCabecPesagem());
         cabPesagemList.clear();
         return itemPesagemList;
     }
@@ -131,14 +177,22 @@ public class PesagemCTR {
         return itemPesagemBean;
     }
 
-    public List<CabPesagemBean> cabPesagemAbertoList(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        return cabPesagemDAO.cabPesagAbertList();
+    public List<CabecPesagemBean> cabPesagemAbertoList(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        return cabecPesagemDAO.cabecPesagemAbertList();
     }
 
     public OrdCarregBean getOrdCarregProd(String codProd){
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
         return ordCarregDAO.getOrdCarregProd(codProd);
+    }
+
+    public CabecPesagemBean getCabecPesagemApont(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        List<CabecPesagemBean> cabPesagemList = cabecPesagemDAO.cabecPesagemApontList();
+        CabecPesagemBean cabecPesagemBean = cabPesagemList.get(0);
+        cabPesagemList.clear();
+        return cabecPesagemBean;
     }
 
 
@@ -150,21 +204,27 @@ public class PesagemCTR {
         this.itemPesagemBean = new ItemPesagemBean();
     }
 
-    public void setStatusApontCabPes(CabPesagemBean cabPesagemBean){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        cabPesagemDAO.setStatusApontCabPes(cabPesagemBean);
+    public void setStatusApontCabPes(CabecPesagemBean cabecPesagemBean){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        cabecPesagemDAO.setStatusApontCabecPesagem(cabecPesagemBean);
     }
 
     public List<OrdCarregBean> osList(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
-        return ordCarregDAO.ordCarregList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes());
+        return ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getPlacaVeicCabecPesagem());
     }
 
     public List<OrdCarregBean> produtoList(){
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
-        return ordCarregDAO.ordCarregList(cabPesagemDAO.getCabPesApont().getPlacaVeicCabPes(), itemPesagemBean.getNroOSItemPes());
+        return ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getPlacaVeicCabecPesagem(), itemPesagemBean.getNroOSItemPesagem());
+    }
+
+    public ArrayList<OrdCarregBean> ordCarregArrayList(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.ordCarregArrayList(cabecPesagemDAO.getCabecPesagemCriado().getPlacaVeicCabecPesagem());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -195,13 +255,13 @@ public class PesagemCTR {
 
                 JSONObject objCabPesagem = cabecJsonArray.getJSONObject(i);
                 Gson gsonBol = new Gson();
-                CabPesagemBean cabPesagemBean = gsonBol.fromJson(objCabPesagem.toString(), CabPesagemBean.class);
+                CabecPesagemBean cabecPesagemBean = gsonBol.fromJson(objCabPesagem.toString(), CabecPesagemBean.class);
 
                 ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-                itemPesagemDAO.delItemCabec(cabPesagemBean.getIdCabPes());
+                itemPesagemDAO.delItemCabec(cabecPesagemBean.getIdCabecPesagem());
 
-                CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-                cabPesagemDAO.delCabec(cabPesagemBean.getIdCabPes());
+                CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+                cabecPesagemDAO.delCabec(cabecPesagemBean.getIdCabecPesagem());
 
             }
 
@@ -212,15 +272,15 @@ public class PesagemCTR {
 
     }
 
-    public void deleteCabecAberto() {
+    public void deleteCabecApont() {
 
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        CabPesagemBean cabPesagemBean = cabPesagemDAO.getCabPesApont();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        CabecPesagemBean cabecPesagemBean = cabecPesagemDAO.getCabecPesagemApont();
 
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        itemPesagemDAO.delItemCabec(cabPesagemBean.getIdCabPes());
+        itemPesagemDAO.delItemCabec(cabecPesagemBean.getIdCabecPesagem());
 
-        cabPesagemDAO.delCabec(cabPesagemBean.getIdCabPes());
+        cabecPesagemDAO.delCabec(cabecPesagemBean.getIdCabecPesagem());
 
     }
 
@@ -229,20 +289,20 @@ public class PesagemCTR {
     ///////////////////////////////// ENVIO DADOS SERVIDOR ///////////////////////////////////////
 
     public String dadosCabecFechEnvio() {
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
-        CabPesagemBean cabPesagemBean = cabPesagemDAO.getCabPesFechado();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        CabecPesagemBean cabecPesagemBean = cabecPesagemDAO.getCabecPesagemFechado();
         JsonArray jsonArrayCabec = new JsonArray();
         Gson gsonCabec = new Gson();
-        jsonArrayCabec.add(gsonCabec.toJsonTree(cabPesagemBean, cabPesagemBean.getClass()));
+        jsonArrayCabec.add(gsonCabec.toJsonTree(cabecPesagemBean, cabecPesagemBean.getClass()));
         JsonObject jsonCabec = new JsonObject();
         jsonCabec.add("cabec", jsonArrayCabec);
         return jsonCabec.toString();
     }
 
     public String dadosItemFechEnvio() {
-        CabPesagemDAO cabPesagemDAO = new CabPesagemDAO();
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
-        List itemAbordList = itemPesagemDAO.getListItemCabec(cabPesagemDAO.getCabPesFechado().getIdCabPes());
+        List itemAbordList = itemPesagemDAO.getListItem(cabecPesagemDAO.getCabecPesagemFechado().getIdCabecPesagem());
 
         JsonArray jsonArrayItem = new JsonArray();
         for (int i = 0; i < itemAbordList.size(); i++) {

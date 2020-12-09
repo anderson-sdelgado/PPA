@@ -1,7 +1,6 @@
 package br.com.usinasantafe.ppa.view;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
@@ -15,11 +14,11 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
-import br.com.usinasantafe.ppa.util.ConexaoWeb;
 
 public class BTPesoActivity extends ActivityGeneric {
 
@@ -27,14 +26,17 @@ public class BTPesoActivity extends ActivityGeneric {
     private BluetoothDevice device;
     private BluetoothSocket socket;
     private InputStream in;
+    private OutputStream out;
     private TextView textViewPeso;
     private TextView textViewStatus;
     private Button buttonCapturaPeso;
     private Button buttonAvancaBTPesagem;
     private Button buttonRetBTPesagem;
+    private Button buttonZerarPeso;
     private boolean capturaPeso;
     private PPAContext ppaContext;
     private Double peso;
+    private String pesoString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +48,11 @@ public class BTPesoActivity extends ActivityGeneric {
         buttonCapturaPeso = (Button) findViewById(R.id.buttonCapturaPeso);
         buttonAvancaBTPesagem = (Button) findViewById(R.id.buttonAvancaBTPesagem);
         buttonRetBTPesagem = (Button) findViewById(R.id.buttonRetBTPesagem);
-        textViewPeso = (TextView) findViewById(R.id.textViewPeso);
-        textViewStatus = (TextView) findViewById(R.id.textViewStatus);
-
-        textViewStatus.setText("CONECTANDO A BALANÇA...");
-        textViewStatus.setTextColor(Color.BLACK);
+        buttonZerarPeso = (Button) findViewById(R.id.buttonZerarPeso);
 
         device = getIntent().getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         TextView textViewTitBTPesagem = (TextView) findViewById(R.id.textViewTitBTPesagem);
         textViewTitBTPesagem.setText(device.getName());
-
-        textViewPeso.setText("0.0");
 
         capturaPeso = true;
 
@@ -66,7 +62,7 @@ public class BTPesoActivity extends ActivityGeneric {
 
                 if (capturaPeso) {
 
-                    String pesoString = textViewPeso.getText().toString();
+//                    String pesoString = textViewPeso.getText().toString();
                     peso = Double.valueOf(pesoString);
 
                     if(textViewStatus.getText().equals("ESTÁVEL") && (peso > 0D)){
@@ -91,15 +87,31 @@ public class BTPesoActivity extends ActivityGeneric {
 
         });
 
+        buttonZerarPeso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    String msg = "#ZERO\r\n";
+                    if (out != null) {
+                        out.write(msg.getBytes());
+                    }
+
+                } catch (IOException e) {
+                    error(e);
+                }
+
+            }
+
+        });
+
         buttonAvancaBTPesagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (!capturaPeso) {
 
-                    ppaContext.getPesagemCTR().insItemPes(peso, "", getLatitude(), getLongitude());
-
-                    closeCon();
+                    ppaContext.getPesagemCTR().insItemPesagem(peso, "", getLatitude(), getLongitude());
 
                     AlertDialog.Builder alerta = new AlertDialog.Builder(  BTPesoActivity.this);
                     alerta.setTitle("ATENÇÃO");
@@ -108,12 +120,14 @@ public class BTPesoActivity extends ActivityGeneric {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            if(ppaContext.getPesagemCTR().verStatusConCabecPes()){
+                            if(ppaContext.getPesagemCTR().verStatusConCabecPesagem()){
+                                closeCon();
                                 Intent it = new Intent(BTPesoActivity.this, ListaOSActivity.class);
                                 startActivity(it);
                                 finish();
                             }
                             else{
+                                closeCon();
                                 Intent it = new Intent(BTPesoActivity.this, DigOSActivity.class);
                                 startActivity(it);
                                 finish();
@@ -125,7 +139,7 @@ public class BTPesoActivity extends ActivityGeneric {
                     alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            closeCon();
                             Intent it = new Intent(BTPesoActivity.this, ListaEquipPesagActivity.class);
                             startActivity(it);
                             finish();
@@ -202,41 +216,59 @@ public class BTPesoActivity extends ActivityGeneric {
         public void run() {
             try {
 
-                socket = device.createRfcommSocketToServiceRecord(uuid);
-                socket.connect();
+                    socket = device.createRfcommSocketToServiceRecord(uuid);
+                    socket.connect();
 
-                in = socket.getInputStream();
+                    in = socket.getInputStream();
+                    out = socket.getOutputStream();
 
-                byte[] bytes = new byte[1024];
-                int length;
+                    byte[] bytes = new byte[1024];
+                    int length;
 
-                String peso = "";
+                    String peso = "";
 
-                while (in != null) {
-                    length = in.read(bytes);
-                    String stringRec = new String(bytes, 0, length);
-                    peso = peso + stringRec ;
-                    if(peso.contains("\n")){
-                        if((peso.length() > 12) && (capturaPeso)) {
-                            peso = peso.trim() + ",";
-                            String[] array = peso.split(",");
-                            textViewPeso.setText(array[2]);
-                            if (array[3].equals("E")) {
-                                textViewStatus.setText("ESTÁVEL");
-                                textViewStatus.setTextColor(Color.BLUE);
-                            } else {
-                                textViewStatus.setText("INSTÁVEL");
-                                textViewStatus.setTextColor(Color.RED);
+                    while ((in != null) && (capturaPeso)) {
+                        length = in.read(bytes);
+                        String stringRec = new String(bytes, 0, length);
+                        peso = peso + stringRec ;
+                        if(peso.contains("\n") && !peso.contains("ACK")){
+                            if((peso.length() > 12)) {
+                                peso = peso.trim() + ",";
+                                String[] array = peso.split(",");
+                                pesoString = array[2];
+                                updateTextViewPeso(array[2]);
+                                updateTextViewStatus(array[3]);
                             }
+                            peso = "";
                         }
-                        peso = "";
+                        else if(peso.contains("ACK")){
+                            msgZerado();
+                            peso = "";
+                        }
                     }
-                }
 
             } catch (IOException e) {
                 error(e);
             }
         }
+    }
+
+    private void msgZerado() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder alerta = new AlertDialog.Builder(BTPesoActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("A BALANÇA FOI ZERADA!");
+                alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alerta.show();
+            }
+        });
     }
 
     private void error(final IOException e) {
@@ -260,5 +292,30 @@ public class BTPesoActivity extends ActivityGeneric {
         });
     }
 
+    private void updateTextViewPeso(final String s){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textViewPeso = (TextView) findViewById(R.id.textViewPeso);
+                textViewPeso.setText(s);
+            }
+        });
+    }
+
+    private void updateTextViewStatus(final String s){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textViewStatus = (TextView) findViewById(R.id.textViewStatus);
+                if (s.equals("E")) {
+                    textViewStatus.setText("ESTÁVEL");
+                    textViewStatus.setTextColor(Color.BLUE);
+                } else {
+                    textViewStatus.setText("INSTÁVEL");
+                    textViewStatus.setTextColor(Color.RED);
+                }
+            }
+        });
+    }
 
 }

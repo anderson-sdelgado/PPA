@@ -33,7 +33,7 @@ public class ComentFalhaActivity extends ActivityGeneric {
 
                 if (!editTextComent.getText().toString().equals("")) {
 
-                    ppaContext.getPesagemCTR().insItemPes(editTextComent.getText().toString(), getLatitude(), getLongitude());
+                    ppaContext.getPesagemCTR().insItemPesagem(editTextComent.getText().toString(), getLatitude(), getLongitude());
 
                     AlertDialog.Builder alerta = new AlertDialog.Builder(ComentFalhaActivity.this);
                     alerta.setTitle("ATENÇÃO");
@@ -42,7 +42,7 @@ public class ComentFalhaActivity extends ActivityGeneric {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            if(ppaContext.getPesagemCTR().verStatusConCabecPes()){
+                            if(ppaContext.getPesagemCTR().verStatusConCabecPesagem()){
                                 Intent it = new Intent(ComentFalhaActivity.this, ListaOSActivity.class);
                                 startActivity(it);
                                 finish();

@@ -46,7 +46,7 @@ public class ListaProdutoActivity extends ActivityGeneric {
                                     long id) {
 
                 OrdCarregBean ordCarregBean = produtoList.get(position);
-                ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPes(ordCarregBean.getCodProdOrdCarreg());
+                ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPesagem(ordCarregBean.getCodProdOrdCarreg());
 
                 produtoList.clear();
 

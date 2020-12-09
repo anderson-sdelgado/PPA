@@ -21,11 +21,11 @@ public class OrdCarregDAO {
     public OrdCarregDAO() {
     }
 
-    public void verDados(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-        VerifDadosServ.getInstance().verDados(dado, "OrdCarreg", telaAtual, telaProx, progressDialog);
+    public void verDados(String dado, Context telaAtual, Class telaProx1, Class telaProx2, ProgressDialog progressDialog){
+        VerifDadosServ.getInstance().verDados(dado, "OrdCarreg", telaAtual, telaProx1, telaProx2, progressDialog);
     }
 
-    public void recDados(String result, String placa){
+    public void recDados(String result){
 
         try {
 
@@ -48,9 +48,16 @@ public class OrdCarregDAO {
                     }
 
                     PesagemCTR pesagemCTR = new PesagemCTR();
-                    pesagemCTR.criarCabecPes(ordCarregBean.getPlacaVeicOrdCarreg(), 1L);
+                    pesagemCTR.criarCabecPesagem(ordCarregBean.getPlacaVeicOrdCarreg(), 1L);
 
-                    VerifDadosServ.getInstance().pulaTelaComTerm();
+                    if(pesagemCTR.verQtdeOrdCarreg(ordCarregBean.getPlacaVeicOrdCarreg())){
+                        VerifDadosServ.getInstance().pulaTelaComTerm(2);
+                    }
+                    else{
+                        pesagemCTR.abrirCabecPesagem();
+                        VerifDadosServ.getInstance().pulaTelaComTerm(1);
+                    }
+
 
                 } else {
 
@@ -101,11 +108,50 @@ public class OrdCarregDAO {
         return ordCarregBean;
     }
 
+    public ArrayList<OrdCarregBean> ordCarregArrayList(String placa){
+        List<OrdCarregBean> ordCarregList = ordCarregList(placa);
+        ArrayList<OrdCarregBean> ordCarregArrayList = new ArrayList<>();
+        Long nroNF = 0L;
+        for(OrdCarregBean ordCarregBean : ordCarregList){
+            if(!nroNF.equals(ordCarregBean.getNroNFOrdCarreg())){
+                ordCarregArrayList.add(ordCarregBean);
+            }
+            nroNF = ordCarregBean.getNroNFOrdCarreg();
+        }
+        ordCarregList.clear();
+        return ordCarregArrayList;
+    }
+
+    public OrdCarregBean getOrdCarregPlaca(String placa){
+        List<OrdCarregBean> ordCarregList = ordCarregList(placa);
+        OrdCarregBean ordCarregBean = ordCarregList.get(0);
+        ordCarregList.clear();
+        return ordCarregBean;
+    }
+
     public List<OrdCarregBean> ordCarregList(String placa){
         ArrayList pesqArrayList = new ArrayList();
         pesqArrayList.add(getPesqPlaca(placa));
         OrdCarregBean ordCarregBean = new OrdCarregBean();
         return ordCarregBean.get(pesqArrayList);
+    }
+
+    public boolean verQtdeOrdCarreg(String placa){
+        List<OrdCarregBean> ordCarregList = ordCarregList(placa);
+        Long nroNF = 0L;
+        int cont = 0;
+        for(OrdCarregBean ordCarregBean : ordCarregList){
+            if(!nroNF.equals(ordCarregBean.getNroNFOrdCarreg())){
+                cont++;
+            }
+            nroNF = ordCarregBean.getNroNFOrdCarreg();
+        }
+        if(cont > 1){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public List<OrdCarregBean> ordCarregList(String placa, Long nroOS){

@@ -28,7 +28,6 @@ import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
 import br.com.usinasantafe.ppa.util.ConexaoWeb;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
-import br.com.usinasantafe.ppa.util.Tempo;
 import br.com.usinasantafe.ppa.util.VerifDadosServ;
 
 public class MenuInicialActivity extends ActivityGeneric {
@@ -57,7 +56,7 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         customHandler.postDelayed(updateTimerThread, 0);
 
-        if(ppaContext.getPesagemCTR().verCabecPesAberto()){
+        if(ppaContext.getPesagemCTR().verCabecPesagemAberto()){
             startTimer();
             Intent it = new Intent(MenuInicialActivity.this, ListaEquipPesagActivity.class);
             startActivity(it);

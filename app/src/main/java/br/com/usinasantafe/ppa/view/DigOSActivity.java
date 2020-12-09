@@ -34,7 +34,7 @@ public class DigOSActivity extends ActivityGeneric {
                 if (!editTextOS.getText().toString().equals("")) {
 
                     ppaContext.getPesagemCTR().setItemPesagemBean();
-                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPes(Long.parseLong(editTextOS.getText().toString().trim()));
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(Long.parseLong(editTextOS.getText().toString().trim()));
 
                     Intent it = new Intent(DigOSActivity.this, DigProdutoActivity.class);
                     startActivity(it);

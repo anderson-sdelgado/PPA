@@ -31,7 +31,7 @@ public class DigPesoActivity extends ActivityGeneric {
                     String pesagemString = editTextPadrao.getText().toString();
                     Double pesagem = Double.valueOf(pesagemString.replace(",", "."));
 
-                    ppaContext.getPesagemCTR().getItemPesagemBean().setPesoItemPes(pesagem);
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setPesoItemPesagem(pesagem);
 
                     Intent it = new Intent(DigPesoActivity.this, ComentFalhaActivity.class);
                     startActivity(it);

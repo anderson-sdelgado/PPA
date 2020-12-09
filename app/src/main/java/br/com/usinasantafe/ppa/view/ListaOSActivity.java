@@ -13,7 +13,6 @@ import java.util.List;
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
-import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
 
 public class ListaOSActivity extends ActivityGeneric {
 
@@ -48,7 +47,7 @@ public class ListaOSActivity extends ActivityGeneric {
 
             OrdCarregBean ordCarregBean = osList.get(position);
             ppaContext.getPesagemCTR().setItemPesagemBean();
-            ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPes(ordCarregBean.getNroOSOrdCarreg());
+            ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(ordCarregBean.getNroOSOrdCarreg());
 
             osList.clear();
 

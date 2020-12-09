@@ -11,7 +11,7 @@ import com.j256.ormlite.table.TableUtils;
 import br.com.usinasantafe.ppa.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.OrdCarregBean;
 import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
-import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.CabecPesagemBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 
@@ -55,7 +55,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, EquipBean.class);
 
 			TableUtils.createTable(cs, ConfigBean.class);
-			TableUtils.createTable(cs, CabPesagemBean.class);
+			TableUtils.createTable(cs, CabecPesagemBean.class);
 			TableUtils.createTable(cs, ItemPesagemBean.class);
 
 		}

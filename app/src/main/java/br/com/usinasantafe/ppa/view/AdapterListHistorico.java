@@ -1,7 +1,6 @@
 package br.com.usinasantafe.ppa.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,11 +58,11 @@ public class AdapterListHistorico extends BaseAdapter {
 
         ItemPesagemBean itemPesagemBean = itens.get(position);
 
-        textViewHistDataHora.setText("DATA/HORA: " + itemPesagemBean.getDthrItemPes());
-        textViewHistOS.setText("O.S.:" + itemPesagemBean.getNroOSItemPes());
+        textViewHistDataHora.setText("DATA/HORA: " + itemPesagemBean.getDthrItemPesagem());
+        textViewHistOS.setText("O.S.:" + itemPesagemBean.getNroOSItemPesagem());
         PesagemCTR pesagemCTR = new PesagemCTR();
-        textViewHistProd.setText("PRODUTO: " + itemPesagemBean.getProdItemPes() + " - " + pesagemCTR.getOrdCarregProd(itemPesagemBean.getProdItemPes()).getDescrProdOrdCarreg());
-        textViewHistPeso.setText("PESO: " + itemPesagemBean.getPesoItemPes());
+        textViewHistProd.setText("PRODUTO: " + itemPesagemBean.getProdItemPesagem() + " - " + pesagemCTR.getOrdCarregProd(itemPesagemBean.getProdItemPesagem()).getDescrProdOrdCarreg());
+        textViewHistPeso.setText("PESO: " + itemPesagemBean.getPesoItemPesagem());
 
         return view;
 

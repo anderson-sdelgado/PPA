@@ -13,19 +13,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.com.usinasantafe.ppa.PPAContext;
 import br.com.usinasantafe.ppa.R;
 import br.com.usinasantafe.ppa.model.bean.estaticas.FuncBean;
-import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.CabecPesagemBean;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
 
 public class ListaEquipPesagActivity extends ActivityGeneric {
 
     private ListView equipPesagListView;
     private PPAContext ppaContext;
-    private ArrayList<CabPesagemBean> cabPesagemList;
+    private ArrayList<CabecPesagemBean> cabPesagemList;
     private TextView textViewProcesso;
     private TextView textViewMotorista;
     private Handler customHandler = new Handler();
@@ -87,7 +86,7 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
-                if(!ppaContext.getPesagemCTR().verCabecPesAberto()){
+                if(!ppaContext.getPesagemCTR().verCabecPesagemAberto()){
                     Intent it = new Intent(ListaEquipPesagActivity.this, MenuInicialActivity.class);
                     startActivity(it);
                     finish();
@@ -110,15 +109,15 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        if(ppaContext.getPesagemCTR().verCabecPesAberto()){
-            cabPesagemList = (ArrayList<CabPesagemBean>) ppaContext.getPesagemCTR().cabPesagemAbertoList();
+        if(ppaContext.getPesagemCTR().verCabecPesagemAberto()){
+            cabPesagemList = (ArrayList<CabecPesagemBean>) ppaContext.getPesagemCTR().cabPesagemAbertoList();
         }
         else{
-            cabPesagemList = new ArrayList<CabPesagemBean>();
-            CabPesagemBean cabPesagemBean = new CabPesagemBean();
-            cabPesagemBean.setPlacaVeicCabPes("NÃO CONTÉM VEÍCULO");
-            cabPesagemBean.setStatusConCabPes(2L);
-            cabPesagemList.add(cabPesagemBean);
+            cabPesagemList = new ArrayList<CabecPesagemBean>();
+            CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
+            cabecPesagemBean.setPlacaVeicCabecPesagem("NÃO CONTÉM VEÍCULO");
+            cabecPesagemBean.setStatusConCabecPesagem(2L);
+            cabPesagemList.add(cabecPesagemBean);
         }
 
         AdapterListEquip adapterList = new AdapterListEquip(this, cabPesagemList);
@@ -131,12 +130,12 @@ public class ListaEquipPesagActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                if(ppaContext.getPesagemCTR().verCabecPesAberto()) {
+                if(ppaContext.getPesagemCTR().verCabecPesagemAberto()) {
 
-                    CabPesagemBean cabPesagemBean = (CabPesagemBean) cabPesagemList.get(position);
+                    CabecPesagemBean cabecPesagemBean = (CabecPesagemBean) cabPesagemList.get(position);
                     cabPesagemList.clear();
 
-                    ppaContext.getPesagemCTR().setStatusApontCabPes(cabPesagemBean);
+                    ppaContext.getPesagemCTR().setStatusApontCabPes(cabecPesagemBean);
 
                     Intent it = new Intent(ListaEquipPesagActivity.this, MenuPesagemActivity.class);
                     startActivity(it);

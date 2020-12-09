@@ -11,17 +11,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.usinasantafe.ppa.R;
-import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.CabecPesagemBean;
 
 /**
  * Created by anderson on 19/10/2015.
  */
 public class AdapterListEquip extends BaseAdapter {
 
-    private ArrayList<CabPesagemBean> itens;
+    private ArrayList<CabecPesagemBean> itens;
     private LayoutInflater layoutInflater;
 
-    public AdapterListEquip(Context context, ArrayList<CabPesagemBean> itens) {
+    public AdapterListEquip(Context context, ArrayList<CabecPesagemBean> itens) {
         this.itens = itens;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -45,15 +45,15 @@ public class AdapterListEquip extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.activity_item_lista, null);
         TextView textView = (TextView) convertView.findViewById(R.id.textViewItemList);
-        CabPesagemBean cabPesagemBean = itens.get(position);
-        textView.setText(cabPesagemBean.getPlacaVeicCabPes());
-        if(cabPesagemBean.getStatusConCabPes() == 0L){
+        CabecPesagemBean cabecPesagemBean = itens.get(position);
+        textView.setText(cabecPesagemBean.getPlacaVeicCabecPesagem());
+        if(cabecPesagemBean.getStatusConCabecPesagem() == 0L){
             textView.setTextColor(Color.RED);
         }
-        else if(cabPesagemBean.getStatusConCabPes() == 1L){
+        else if(cabecPesagemBean.getStatusConCabecPesagem() == 1L){
             textView.setTextColor(Color.BLUE);
         }
-        else if(cabPesagemBean.getStatusConCabPes() == 2L){
+        else if(cabecPesagemBean.getStatusConCabecPesagem() == 2L){
             textView.setTextColor(Color.BLACK);
         }
 

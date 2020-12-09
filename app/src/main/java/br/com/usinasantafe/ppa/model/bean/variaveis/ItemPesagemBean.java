@@ -5,112 +5,112 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import br.com.usinasantafe.ppa.model.pst.Entidade;
 
-@DatabaseTable(tableName="tbitempesvar")
+@DatabaseTable(tableName="tbitempesagemvar")
 public class ItemPesagemBean extends Entidade {
 
     private static final long serialVersionUID = 1L;
 
     @DatabaseField(generatedId=true)
-    private Long idItemPes;
+    private Long idItemPesagem;
     @DatabaseField
-    private Long idCabItemPes;
+    private Long idCabItemPesagem;
     @DatabaseField
-    private Long matricFuncItemPes;
+    private Long matricFuncItemPesagem;
     @DatabaseField
-    private String prodItemPes;
+    private String prodItemPesagem;
     @DatabaseField
-    private Long nroOSItemPes;
+    private Long nroOSItemPesagem;
     @DatabaseField
-    private Double pesoItemPes;
+    private Double pesoItemPesagem;
     @DatabaseField
-    private String comentFalhaItemPes;
+    private String comentFalhaItemPesagem;
     @DatabaseField
-    private String dthrItemPes;
+    private String dthrItemPesagem;
     @DatabaseField
-    private Double latitudeItemPes;
+    private Double latitudeItemPesagem;
     @DatabaseField
-    private Double longitudeItemPes;
+    private Double longitudeItemPesagem;
 
     public ItemPesagemBean() {
     }
 
-    public Long getIdItemPes() {
-        return idItemPes;
+    public Long getIdItemPesagem() {
+        return idItemPesagem;
     }
 
-    public void setIdItemPes(Long idItemPes) {
-        this.idItemPes = idItemPes;
+    public void setIdItemPesagem(Long idItemPesagem) {
+        this.idItemPesagem = idItemPesagem;
     }
 
-    public Long getIdCabItemPes() {
-        return idCabItemPes;
+    public Long getIdCabItemPesagem() {
+        return idCabItemPesagem;
     }
 
-    public void setIdCabItemPes(Long idCabItemPes) {
-        this.idCabItemPes = idCabItemPes;
+    public void setIdCabItemPesagem(Long idCabItemPesagem) {
+        this.idCabItemPesagem = idCabItemPesagem;
     }
 
-    public Long getMatricFuncItemPes() {
-        return matricFuncItemPes;
+    public Long getMatricFuncItemPesagem() {
+        return matricFuncItemPesagem;
     }
 
-    public void setMatricFuncItemPes(Long matricFuncItemPes) {
-        this.matricFuncItemPes = matricFuncItemPes;
+    public void setMatricFuncItemPesagem(Long matricFuncItemPesagem) {
+        this.matricFuncItemPesagem = matricFuncItemPesagem;
     }
 
-    public String getProdItemPes() {
-        return prodItemPes;
+    public String getProdItemPesagem() {
+        return prodItemPesagem;
     }
 
-    public void setProdItemPes(String prodItemPes) {
-        this.prodItemPes = prodItemPes;
+    public void setProdItemPesagem(String prodItemPesagem) {
+        this.prodItemPesagem = prodItemPesagem;
     }
 
-    public Double getPesoItemPes() {
-        return pesoItemPes;
+    public Double getPesoItemPesagem() {
+        return pesoItemPesagem;
     }
 
-    public void setPesoItemPes(Double pesoItemPes) {
-        this.pesoItemPes = pesoItemPes;
+    public void setPesoItemPesagem(Double pesoItemPesagem) {
+        this.pesoItemPesagem = pesoItemPesagem;
     }
 
-    public String getComentFalhaItemPes() {
-        return comentFalhaItemPes;
+    public String getComentFalhaItemPesagem() {
+        return comentFalhaItemPesagem;
     }
 
-    public void setComentFalhaItemPes(String comentFalhaItemPes) {
-        this.comentFalhaItemPes = comentFalhaItemPes;
+    public void setComentFalhaItemPesagem(String comentFalhaItemPesagem) {
+        this.comentFalhaItemPesagem = comentFalhaItemPesagem;
     }
 
-    public String getDthrItemPes() {
-        return dthrItemPes;
+    public String getDthrItemPesagem() {
+        return dthrItemPesagem;
     }
 
-    public void setDthrItemPes(String dthrItemPes) {
-        this.dthrItemPes = dthrItemPes;
+    public void setDthrItemPesagem(String dthrItemPesagem) {
+        this.dthrItemPesagem = dthrItemPesagem;
     }
 
-    public Double getLatitudeItemPes() {
-        return latitudeItemPes;
+    public Double getLatitudeItemPesagem() {
+        return latitudeItemPesagem;
     }
 
-    public void setLatitudeItemPes(Double latitudeItemPes) {
-        this.latitudeItemPes = latitudeItemPes;
+    public void setLatitudeItemPesagem(Double latitudeItemPesagem) {
+        this.latitudeItemPesagem = latitudeItemPesagem;
     }
 
-    public Double getLongitudeItemPes() {
-        return longitudeItemPes;
+    public Double getLongitudeItemPesagem() {
+        return longitudeItemPesagem;
     }
 
-    public void setLongitudeItemPes(Double longitudeItemPes) {
-        this.longitudeItemPes = longitudeItemPes;
+    public void setLongitudeItemPesagem(Double longitudeItemPesagem) {
+        this.longitudeItemPesagem = longitudeItemPesagem;
     }
 
-    public Long getNroOSItemPes() {
-        return nroOSItemPes;
+    public Long getNroOSItemPesagem() {
+        return nroOSItemPesagem;
     }
 
-    public void setNroOSItemPes(Long nroOSItemPes) {
-        this.nroOSItemPes = nroOSItemPes;
+    public void setNroOSItemPesagem(Long nroOSItemPesagem) {
+        this.nroOSItemPesagem = nroOSItemPesagem;
     }
 }

@@ -75,7 +75,7 @@ public class LeitorFuncActivity extends ActivityGeneric {
 
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(LeitorFuncActivity.this, MenuInicialActivity.class);
+                Intent it = new Intent(LeitorFuncActivity.this, ListaEquipPesagActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -180,7 +180,7 @@ public class LeitorFuncActivity extends ActivityGeneric {
     }
 
     public void onBackPressed() {
-        Intent it = new Intent(LeitorFuncActivity.this, MenuInicialActivity.class);
+        Intent it = new Intent(LeitorFuncActivity.this, ListaEquipPesagActivity.class);
         startActivity(it);
         finish();
     }

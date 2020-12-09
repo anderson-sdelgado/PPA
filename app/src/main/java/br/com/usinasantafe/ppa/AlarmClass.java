@@ -7,7 +7,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import br.com.usinasantafe.ppa.model.bean.variaveis.CabPesagemBean;
+import br.com.usinasantafe.ppa.model.bean.variaveis.CabecPesagemBean;
 import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 import br.com.usinasantafe.ppa.model.pst.DatabaseHelper;
 import br.com.usinasantafe.ppa.util.EnvioDadosServ;
@@ -35,17 +35,18 @@ public class AlarmClass extends BroadcastReceiver {
 
 	public void exibir(){
 
-		CabPesagemBean cabPesagemBean = new CabPesagemBean();
-		List<CabPesagemBean> cabPesagemList = cabPesagemBean.all();
+		CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
+		List<CabecPesagemBean> cabPesagemList = cabecPesagemBean.all();
 
-		for(CabPesagemBean cabPesagemBD : cabPesagemList){
-			Log.i("PPA", "idCabPes = " + cabPesagemBD.getIdCabPes());
-			Log.i("PPA", "idEquipCabPes = " + cabPesagemBD.getIdEquipCabPes());
-			Log.i("PPA", "placaVeicCabPes = " + cabPesagemBD.getPlacaVeicCabPes());
-			Log.i("PPA", "dthrCabPes = " + cabPesagemBD.getDthrInicialCabPes());
-			Log.i("PPA", "statusConCabPes = " + cabPesagemBD.getStatusConCabPes());
-			Log.i("PPA", "statusApontCabPes = " + cabPesagemBD.getStatusApontCabPes());
-			Log.i("PPA", "statusCabPes = " + cabPesagemBD.getStatusCabPes());
+		for(CabecPesagemBean cabPesagemBD : cabPesagemList){
+			Log.i("PPA", "idCabPes = " + cabPesagemBD.getIdCabecPesagem());
+			Log.i("PPA", "idEquipCabPes = " + cabPesagemBD.getIdEquipCabecPesagem());
+			Log.i("PPA", "idOrdCarregItemPes = " + cabecPesagemBean.getIdOrdCarregCabecPesagem());
+			Log.i("PPA", "placaVeicCabPes = " + cabPesagemBD.getPlacaVeicCabecPesagem());
+			Log.i("PPA", "dthrCabPes = " + cabPesagemBD.getDthrInicialCabecPesagem());
+			Log.i("PPA", "statusConCabPes = " + cabPesagemBD.getStatusConCabecPesagem());
+			Log.i("PPA", "statusApontCabPes = " + cabPesagemBD.getStatusApontCabecPesagem());
+			Log.i("PPA", "statusCabPes = " + cabPesagemBD.getStatusCabecPesagem());
 		}
 
 		cabPesagemList.clear();
@@ -54,16 +55,16 @@ public class AlarmClass extends BroadcastReceiver {
 		List<ItemPesagemBean> itemPesagemList = itemPesagemBean.all();
 
 		for(ItemPesagemBean itemPesagemBD : itemPesagemList){
-			Log.i("PPA", "idItemPes = " + itemPesagemBD.getIdItemPes());
-			Log.i("PPA", "idCabItemPes = " + itemPesagemBD.getIdCabItemPes());
-			Log.i("PPA", "matricFuncItemPes = " + itemPesagemBD.getMatricFuncItemPes());
-			Log.i("PPA", "prodItemPes = " + itemPesagemBD.getProdItemPes());
-			Log.i("PPA", "nroOSItemPes = " + itemPesagemBD.getNroOSItemPes());
-			Log.i("PPA", "pesoItemPes = " + itemPesagemBD.getPesoItemPes());
-			Log.i("PPA", "comentFalhaItemPes = " + itemPesagemBD.getComentFalhaItemPes());
-			Log.i("PST", "dthrItemPes = " + itemPesagemBD.getDthrItemPes());
-			Log.i("PST", "latitudeItemPes = " + itemPesagemBD.getLatitudeItemPes());
-			Log.i("PST", "longitudeItemPes = " + itemPesagemBD.getLongitudeItemPes());
+			Log.i("PPA", "idItemPes = " + itemPesagemBD.getIdItemPesagem());
+			Log.i("PPA", "idCabItemPes = " + itemPesagemBD.getIdCabItemPesagem());
+			Log.i("PPA", "matricFuncItemPes = " + itemPesagemBD.getMatricFuncItemPesagem());
+			Log.i("PPA", "prodItemPes = " + itemPesagemBD.getProdItemPesagem());
+			Log.i("PPA", "nroOSItemPes = " + itemPesagemBD.getNroOSItemPesagem());
+			Log.i("PPA", "pesoItemPes = " + itemPesagemBD.getPesoItemPesagem());
+			Log.i("PPA", "comentFalhaItemPes = " + itemPesagemBD.getComentFalhaItemPesagem());
+			Log.i("PST", "dthrItemPes = " + itemPesagemBD.getDthrItemPesagem());
+			Log.i("PST", "latitudeItemPes = " + itemPesagemBD.getLatitudeItemPesagem());
+			Log.i("PST", "longitudeItemPes = " + itemPesagemBD.getLongitudeItemPesagem());
 		}
 
 		itemPesagemList.clear();

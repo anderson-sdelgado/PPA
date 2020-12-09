@@ -32,7 +32,8 @@ public class VerifDadosServ {
     private UrlsConexaoHttp urlsConexaoHttp;
     private ProgressDialog progressDialog;
     private Context telaAtual;
-    private Class telaProx;
+    private Class telaProx1;
+    private Class telaProx2;
     private String dado;
     private String tipo;
     private MenuInicialActivity menuInicialActivity;
@@ -46,6 +47,7 @@ public class VerifDadosServ {
     }
 
     public void manipularDadosHttp(String result) {
+
         try {
 
             if (!result.equals("")) {
@@ -60,7 +62,7 @@ public class VerifDadosServ {
                     }
                 } else if (this.tipo.equals("OrdCarreg")) {
                     OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
-                    ordCarregDAO.recDados(result, dado);
+                    ordCarregDAO.recDados(result);
                 }
             }
 
@@ -107,7 +109,20 @@ public class VerifDadosServ {
         this.dado = dado;
         this.tipo = tipo;
         this.telaAtual = telaAtual;
-        this.telaProx = telaProx;
+        this.telaProx1 = telaProx;
+        this.progressDialog = progressDialog;
+
+        envioDados();
+
+    }
+
+    public void verDados(String dado, String tipo, Context telaAtual, Class telaProx1, Class telaProx2, ProgressDialog progressDialog) {
+
+        this.dado = dado;
+        this.tipo = tipo;
+        this.telaAtual = telaAtual;
+        this.telaProx1 = telaProx1;
+        this.telaProx2 = telaProx2;
         this.progressDialog = progressDialog;
 
         envioDados();
@@ -138,7 +153,7 @@ public class VerifDadosServ {
 
     public void pulaTelaSemTerm(){
         this.progressDialog.dismiss();
-        Intent it = new Intent(telaAtual, telaProx);
+        Intent it = new Intent(telaAtual, telaProx1);
         telaAtual.startActivity(it);
     }
 
@@ -159,8 +174,23 @@ public class VerifDadosServ {
         if(!verTerm){
             this.progressDialog.dismiss();
             this.verTerm = true;
-            Intent it = new Intent(telaAtual, telaProx);
+            Intent it = new Intent(telaAtual, telaProx1);
             telaAtual.startActivity(it);
+        }
+    }
+
+    public void pulaTelaComTerm(int tela){
+        if(!verTerm){
+            this.progressDialog.dismiss();
+            this.verTerm = true;
+            if(tela == 1){
+                Intent it = new Intent(telaAtual, telaProx1);
+                telaAtual.startActivity(it);
+            }
+            else if(tela == 2){
+                Intent it = new Intent(telaAtual, telaProx2);
+                telaAtual.startActivity(it);
+            }
         }
     }
 

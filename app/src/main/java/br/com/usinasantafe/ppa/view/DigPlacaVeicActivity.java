@@ -35,17 +35,19 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
         Button buttonCancPlaca =  (Button) findViewById(R.id.buttonCancPlaca);
 
         ppaContext = (PPAContext) getApplication();
+        ppaContext.getPesagemCTR().delCabecCriado();
 
         editTextPlaca.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
             }
+
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3) {
             }
+
             @Override
             public void afterTextChanged(Editable et) {
                 String s = et.toString();
@@ -55,6 +57,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
                     editTextPlaca.setSelection(editTextPlaca.length());
                 }
             }
+
         });
 
         buttonOkPlaca.setOnClickListener(new View.OnClickListener() {
@@ -70,11 +73,19 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
                     ConexaoWeb conexaoWeb = new ConexaoWeb();
                     if (ppaContext.getPesagemCTR().verOrdCarreg(placa)) {
 
-                        ppaContext.getPesagemCTR().criarCabecPes(placa, 1L);
+                        ppaContext.getPesagemCTR().criarCabecPesagem(placa, 1L);
 
-                        Intent it = new Intent(DigPlacaVeicActivity.this, ListaEquipPesagActivity.class);
-                        startActivity(it);
-                        finish();
+                        if(ppaContext.getPesagemCTR().verQtdeOrdCarreg(placa)){
+                            Intent it = new Intent(DigPlacaVeicActivity.this, ListaNotaFiscalActivity.class);
+                            startActivity(it);
+                            finish();
+                        }
+                        else{
+                            ppaContext.getPesagemCTR().abrirCabecPesagem();
+                            Intent it = new Intent(DigPlacaVeicActivity.this, ListaEquipPesagActivity.class);
+                            startActivity(it);
+                            finish();
+                        }
 
                     } else {
 
@@ -88,11 +99,11 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
                             customHandler.postDelayed(updateTimerThread, 10000);
 
                             VerifDadosServ.getInstance().setVerTerm(false);
-                            ppaContext.getPesagemCTR().verPlacaVeicServ(placa, DigPlacaVeicActivity.this, ListaEquipPesagActivity.class, progressBar);
+                            ppaContext.getPesagemCTR().verPlacaVeicServ(placa, DigPlacaVeicActivity.this, ListaEquipPesagActivity.class, ListaNotaFiscalActivity.class, progressBar);
 
                         } else {
 
-                            ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
+                            ppaContext.getPesagemCTR().criarCabecPesagem(placa, 0L);
                             VerifDadosServ.getInstance().setVerTerm(true);
                             msg("FALHA NA CONEXÃO! POR FAVOR, PARA INSERIR A PESAGEM NESSE CAMINHÃO TERÁ QUE SER INSERIDO OS DADOS MANUALMENTE.");
 
@@ -129,9 +140,17 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Intent it = new Intent(DigPlacaVeicActivity.this, ListaEquipPesagActivity.class);
-                startActivity(it);
-                finish();
+                if(ppaContext.getPesagemCTR().verQtdeOrdCarreg(placa)){
+                    Intent it = new Intent(DigPlacaVeicActivity.this, ListaNotaFiscalActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else{
+                    ppaContext.getPesagemCTR().abrirCabecPesagem();
+                    Intent it = new Intent(DigPlacaVeicActivity.this, ListaEquipPesagActivity.class);
+                    startActivity(it);
+                    finish();
+                }
 
             }
         });
@@ -150,8 +169,7 @@ public class DigPlacaVeicActivity extends ActivityGeneric {
                     progressBar.dismiss();
                 }
 
-                ppaContext.getPesagemCTR().criarCabecPes(placa, 0L);
-
+                ppaContext.getPesagemCTR().criarCabecPesagem(placa, 0L);
                 msg("FALHA NA CONEXÃO! POR FAVOR, DIGITE O RESTANTE DAS INFORMAÇÕES PARA DÁ CONTINUIDADE A PESAGEM SEM SINAL.");
 
             }
