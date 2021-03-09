@@ -1,8 +1,12 @@
 package br.com.usinasantafe.ppa.model.dao;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.usinasantafe.ppa.model.bean.variaveis.CabecPesagemBean;
+import br.com.usinasantafe.ppa.model.pst.EspecificaPesquisa;
 import br.com.usinasantafe.ppa.util.Tempo;
 
 public class CabecPesagemDAO {
@@ -21,6 +25,7 @@ public class CabecPesagemDAO {
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
         cabecPesagemBean.setPlacaVeicCabecPesagem(placa);
         cabecPesagemBean.setIdEquipCabecPesagem(idEquip);
+        cabecPesagemBean.setIdOrdCarregCabecPesagem(0L);
         cabecPesagemBean.setStatusConCabecPesagem(statusCon);
         cabecPesagemBean.setDthrInicialCabecPesagem(Tempo.getInstance().dataComHora());
         cabecPesagemBean.setStatusCabecPesagem(0L);
@@ -50,18 +55,25 @@ public class CabecPesagemDAO {
     }
 
     public List<CabecPesagemBean> cabecPesagemCriadoList(){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCabecCriado());
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
-        return cabecPesagemBean.get("statusCabecPesagem",0L);
+        return cabecPesagemBean.get(pesqArrayList);
     }
 
     public List<CabecPesagemBean> cabecPesagemApontList(){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCabecAberto());
+        pesqArrayList.add(getPesqCabecApont());
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
-        return cabecPesagemBean.get("statusApontCabecPesagem",1L);
+        return cabecPesagemBean.get(pesqArrayList);
     }
 
     public List<CabecPesagemBean> cabecPesagemAbertList(){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCabecAberto());
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
-        return cabecPesagemBean.get("statusCabecPesagem",1L);
+        return cabecPesagemBean.get(pesqArrayList);
     }
 
     public void fecharCabecPesagem(){
@@ -72,18 +84,22 @@ public class CabecPesagemDAO {
     }
 
     public CabecPesagemBean getCabecPesagemFechado(){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCabecFechado());
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
-        List cabPesagemList = cabecPesagemBean.get("statusCabecPesagem",2L);
-        cabecPesagemBean = (CabecPesagemBean) cabPesagemList.get(0);
-        cabPesagemList.clear();
+        List<CabecPesagemBean> cabecPesagemList = cabecPesagemBean.get(pesqArrayList);
+        cabecPesagemBean = cabecPesagemList.get(0);
+        cabecPesagemList.clear();
         return cabecPesagemBean;
     }
 
     public boolean verCabecPesagemFechado(){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCabecFechado());
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
-        List cabPesagemList = cabecPesagemBean.get("statusCabecPesagem",2L);
-        boolean retorno = cabPesagemList.size() > 0;
-        cabPesagemList.clear();
+        List<CabecPesagemBean> cabecPesagemList = cabecPesagemBean.get(pesqArrayList);
+        boolean retorno = cabecPesagemList.size() > 0;
+        cabecPesagemList.clear();
         return retorno;
     }
 
@@ -104,10 +120,12 @@ public class CabecPesagemDAO {
     }
 
     public boolean verStatusConPlacaVeic(){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqCabecAberto());
         CabecPesagemBean cabecPesagemBean = new CabecPesagemBean();
-        List cabPesagemList = cabecPesagemBean.get("statusCabecPesagem",1L);
-        cabecPesagemBean = (CabecPesagemBean) cabPesagemList.get(0);
-        cabPesagemList.clear();
+        List<CabecPesagemBean> cabecPesagemList = cabecPesagemBean.get(pesqArrayList);
+        cabecPesagemBean = (CabecPesagemBean) cabecPesagemList.get(0);
+        cabecPesagemList.clear();
         if(cabecPesagemBean.getStatusConCabecPesagem() == 1L){
             return true;
         }
@@ -128,6 +146,38 @@ public class CabecPesagemDAO {
                 cabPesagemBD.update();
             }
         }
+    }
+
+    private EspecificaPesquisa getPesqCabecCriado(){
+        EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+        pesquisa.setCampo("statusCabecPesagem");
+        pesquisa.setValor(0L);
+        pesquisa.setTipo(1);
+        return pesquisa;
+    }
+
+    private EspecificaPesquisa getPesqCabecAberto(){
+        EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+        pesquisa.setCampo("statusCabecPesagem");
+        pesquisa.setValor(1L);
+        pesquisa.setTipo(1);
+        return pesquisa;
+    }
+
+    private EspecificaPesquisa getPesqCabecFechado(){
+        EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+        pesquisa.setCampo("statusCabecPesagem");
+        pesquisa.setValor(2L);
+        pesquisa.setTipo(1);
+        return pesquisa;
+    }
+
+    private EspecificaPesquisa getPesqCabecApont(){
+        EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+        pesquisa.setCampo("statusApontCabecPesagem");
+        pesquisa.setValor(1L);
+        pesquisa.setTipo(1);
+        return pesquisa;
     }
 
 }

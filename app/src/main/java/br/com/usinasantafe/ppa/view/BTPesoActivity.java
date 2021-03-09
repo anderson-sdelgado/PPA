@@ -122,13 +122,13 @@ public class BTPesoActivity extends ActivityGeneric {
 
                             if(ppaContext.getPesagemCTR().verStatusConCabecPesagem()){
                                 closeCon();
-                                Intent it = new Intent(BTPesoActivity.this, ListaOSActivity.class);
+                                Intent it = new Intent(BTPesoActivity.this, ListaProdutoActivity.class);
                                 startActivity(it);
                                 finish();
                             }
                             else{
                                 closeCon();
-                                Intent it = new Intent(BTPesoActivity.this, DigOSActivity.class);
+                                Intent it = new Intent(BTPesoActivity.this, DigProdutoActivity.class);
                                 startActivity(it);
                                 finish();
                             }

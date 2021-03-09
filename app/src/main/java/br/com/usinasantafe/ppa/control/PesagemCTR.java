@@ -72,7 +72,7 @@ public class PesagemCTR {
             OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
             List<OrdCarregBean> ordCarregList = ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getPlacaVeicCabecPesagem());
             for(OrdCarregBean ordCarregBean : ordCarregList){
-                Double totalPesagem = itemPesagemDAO.verItemTotalPesagem(cabecPesagemDAO.getCabecPesagemApont().getIdCabecPesagem(), ordCarregBean.getIdBDOrdCarreg());
+                Double totalPesagem = itemPesagemDAO.verItemTotalPesagem(cabecPesagemDAO.getCabecPesagemApont().getIdCabecPesagem(), ordCarregBean.getCodProdOrdCarreg());
                 Double pesagemMinino = ordCarregBean.getPesoProdOrdCarreg() - ((ordCarregBean.getPesoProdOrdCarreg() / 100) * 10);
                 Double pesagemMaximo = ordCarregBean.getPesoProdOrdCarreg() + ((ordCarregBean.getPesoProdOrdCarreg() / 100) * 10);
                 if(totalPesagem > 0D){
@@ -88,6 +88,12 @@ public class PesagemCTR {
     public boolean verQtdeOrdCarreg(String placa){
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
         return ordCarregDAO.verQtdeOrdCarreg(placa);
+    }
+
+    public boolean verOSOrdCarreg(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
+        return ordCarregDAO.verOSOrdCarreg(cabecPesagemDAO.getCabecPesagemApont().getIdOrdCarregCabecPesagem(), itemPesagemBean.getProdItemPesagem());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +112,7 @@ public class PesagemCTR {
     public void abrirCabecPesagem(){
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
         CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
-        cabecPesagemDAO.abrirCabecPesagem(ordCarregDAO.getOrdCarregPlaca(cabecPesagemDAO.getCabecPesagemCriado().getPlacaVeicCabecPesagem()).getIdOrdCarreg());
+        cabecPesagemDAO.abrirCabecPesagem(ordCarregDAO.getOrdCarregPlaca(cabecPesagemDAO.getCabecPesagemCriado().getPlacaVeicCabecPesagem()).getIdBDOrdCarreg());
     }
 
     public void abrirCabecPesagem(Long idOrdCarreg){
@@ -212,13 +218,13 @@ public class PesagemCTR {
     public List<OrdCarregBean> osList(){
         CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
-        return ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getPlacaVeicCabecPesagem());
+        return ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getIdOrdCarregCabecPesagem(), itemPesagemBean.getProdItemPesagem());
     }
 
-    public List<OrdCarregBean> produtoList(){
+    public ArrayList<OrdCarregBean> produtoList(){
         CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         OrdCarregDAO ordCarregDAO = new OrdCarregDAO();
-        return ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getPlacaVeicCabecPesagem(), itemPesagemBean.getNroOSItemPesagem());
+        return ordCarregDAO.ordCarregList(cabecPesagemDAO.getCabecPesagemApont().getIdOrdCarregCabecPesagem());
     }
 
     public ArrayList<OrdCarregBean> ordCarregArrayList(){

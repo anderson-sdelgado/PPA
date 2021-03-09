@@ -136,6 +136,41 @@ public class OrdCarregDAO {
         return ordCarregBean.get(pesqArrayList);
     }
 
+    public List<OrdCarregBean> ordCarregList(Long idBDOrdCarreg, String codProd){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqIdBDOrdCarreg(idBDOrdCarreg));
+        pesqArrayList.add(getPesqCodProd(codProd));
+        OrdCarregBean ordCarregBean = new OrdCarregBean();
+        return ordCarregBean.get(pesqArrayList);
+    }
+
+    public ArrayList<OrdCarregBean> ordCarregList(Long idBDOrdCarreg){
+        ArrayList pesqArrayList = new ArrayList();
+        pesqArrayList.add(getPesqIdBDOrdCarreg(idBDOrdCarreg));
+        OrdCarregBean ordCarregBean = new OrdCarregBean();
+        ArrayList<OrdCarregBean> ordCarregArrayList = new ArrayList<>();
+        List<OrdCarregBean> ordCarregList = ordCarregBean.getAndOrderBy(pesqArrayList, "codProdOrdCarreg", true);
+        String codProd = "";
+        for(OrdCarregBean ordCarregBeanBD : ordCarregList){
+            if(!codProd.equals(ordCarregBeanBD.getCodProdOrdCarreg())){
+                ordCarregArrayList.add(ordCarregBeanBD);
+            }
+            codProd = ordCarregBeanBD.getCodProdOrdCarreg();
+        }
+        return ordCarregArrayList;
+    }
+
+    public boolean verOSOrdCarreg(Long idBDOrdCarreg, String codProd){
+        List<OrdCarregBean> ordCarregList = ordCarregList(idBDOrdCarreg, codProd);
+        boolean ret = false;
+        for(OrdCarregBean ordCarregBean : ordCarregList){
+            if(ordCarregBean.getNroOSOrdCarreg() > 0L){
+                ret = true;
+            }
+        }
+        return ret;
+    }
+
     public boolean verQtdeOrdCarreg(String placa){
         List<OrdCarregBean> ordCarregList = ordCarregList(placa);
         Long nroNF = 0L;
@@ -154,14 +189,6 @@ public class OrdCarregDAO {
         }
     }
 
-    public List<OrdCarregBean> ordCarregList(String placa, Long nroOS){
-        ArrayList pesqArrayList = new ArrayList();
-        pesqArrayList.add(getPesqPlaca(placa));
-        pesqArrayList.add(getPesqNroOS(nroOS));
-        OrdCarregBean ordCarregBean = new OrdCarregBean();
-        return ordCarregBean.get(pesqArrayList);
-    }
-
     private EspecificaPesquisa getPesqDataDif(String data){
         EspecificaPesquisa pesquisa = new EspecificaPesquisa();
         pesquisa.setCampo("dataOrdCarreg");
@@ -178,10 +205,10 @@ public class OrdCarregDAO {
         return pesquisa;
     }
 
-    private EspecificaPesquisa getPesqNroOS(Long nroOS){
+    private EspecificaPesquisa getPesqIdBDOrdCarreg(Long idBDOrdCarreg){
         EspecificaPesquisa pesquisa = new EspecificaPesquisa();
-        pesquisa.setCampo("nroOSOrdCarreg");
-        pesquisa.setValor(nroOS);
+        pesquisa.setCampo("idBDOrdCarreg");
+        pesquisa.setValor(idBDOrdCarreg);
         pesquisa.setTipo(1);
         return pesquisa;
     }

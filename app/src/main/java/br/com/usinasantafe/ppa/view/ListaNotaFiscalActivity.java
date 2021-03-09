@@ -2,6 +2,7 @@ package br.com.usinasantafe.ppa.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -45,7 +46,8 @@ public class ListaNotaFiscalActivity extends ActivityGeneric {
                                     long id) {
 
                 OrdCarregBean ordCarregBean = nfList.get(position);
-                ppaContext.getPesagemCTR().abrirCabecPesagem(ordCarregBean.getIdOrdCarreg());
+                Log.i("PPA", "IdBDOrdCarreg = " + ordCarregBean.getIdBDOrdCarreg());
+                ppaContext.getPesagemCTR().abrirCabecPesagem(ordCarregBean.getIdBDOrdCarreg());
 
                 nfList.clear();
 

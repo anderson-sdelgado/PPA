@@ -15,6 +15,8 @@ public class ItemPesagemBean extends Entidade {
     @DatabaseField
     private Long idCabItemPesagem;
     @DatabaseField
+    private Long seqItemPesagem;
+    @DatabaseField
     private Long matricFuncItemPesagem;
     @DatabaseField
     private String prodItemPesagem;
@@ -50,6 +52,14 @@ public class ItemPesagemBean extends Entidade {
         this.idCabItemPesagem = idCabItemPesagem;
     }
 
+    public Long getSeqItemPesagem() {
+        return seqItemPesagem;
+    }
+
+    public void setSeqItemPesagem(Long seqItemPesagem) {
+        this.seqItemPesagem = seqItemPesagem;
+    }
+
     public Long getMatricFuncItemPesagem() {
         return matricFuncItemPesagem;
     }
@@ -64,6 +74,14 @@ public class ItemPesagemBean extends Entidade {
 
     public void setProdItemPesagem(String prodItemPesagem) {
         this.prodItemPesagem = prodItemPesagem;
+    }
+
+    public Long getNroOSItemPesagem() {
+        return nroOSItemPesagem;
+    }
+
+    public void setNroOSItemPesagem(Long nroOSItemPesagem) {
+        this.nroOSItemPesagem = nroOSItemPesagem;
     }
 
     public Double getPesoItemPesagem() {
@@ -104,13 +122,5 @@ public class ItemPesagemBean extends Entidade {
 
     public void setLongitudeItemPesagem(Double longitudeItemPesagem) {
         this.longitudeItemPesagem = longitudeItemPesagem;
-    }
-
-    public Long getNroOSItemPesagem() {
-        return nroOSItemPesagem;
-    }
-
-    public void setNroOSItemPesagem(Long nroOSItemPesagem) {
-        this.nroOSItemPesagem = nroOSItemPesagem;
     }
 }

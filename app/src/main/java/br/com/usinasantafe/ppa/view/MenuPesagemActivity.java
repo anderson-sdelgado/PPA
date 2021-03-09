@@ -55,12 +55,12 @@ public class MenuPesagemActivity extends ActivityGeneric {
                 if (text.equals("PESAGEM")) {
 
                     if(ppaContext.getPesagemCTR().verStatusConCabecPesagem()){
-                        Intent it = new Intent(MenuPesagemActivity.this, ListaOSActivity.class);
+                        Intent it = new Intent(MenuPesagemActivity.this, ListaProdutoActivity.class);
                         startActivity(it);
                         finish();
                     }
                     else{
-                        Intent it = new Intent(MenuPesagemActivity.this, DigOSActivity.class);
+                        Intent it = new Intent(MenuPesagemActivity.this, DigProdutoActivity.class);
                         startActivity(it);
                         finish();
                     }

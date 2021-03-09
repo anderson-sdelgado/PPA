@@ -31,16 +31,17 @@ public class DigOSActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
+                ppaContext.getPesagemCTR().setItemPesagemBean();
                 if (!editTextOS.getText().toString().equals("")) {
-
-                    ppaContext.getPesagemCTR().setItemPesagemBean();
-                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(Long.parseLong(editTextOS.getText().toString().trim()));
-
-                    Intent it = new Intent(DigOSActivity.this, DigProdutoActivity.class);
-                    startActivity(it);
-                    finish();
-
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(0L);
                 }
+                else{
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(Long.parseLong(editTextOS.getText().toString().trim()));
+                }
+
+                Intent it = new Intent(DigOSActivity.this, DigProdutoActivity.class);
+                startActivity(it);
+                finish();
 
             }
         });

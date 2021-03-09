@@ -14,6 +14,8 @@ public class ItemPesagemDAO {
 
     public void criarItemPesagem(Long idCab, Long matricFunc, ItemPesagemBean itemPesagemBean, String coment, Double latitude, Double longitude){
         itemPesagemBean.setIdCabItemPesagem(idCab);
+        Long qtde = getListItem(idCab).size() + 1L;
+        itemPesagemBean.setSeqItemPesagem(qtde);
         itemPesagemBean.setMatricFuncItemPesagem(matricFunc);
         itemPesagemBean.setComentFalhaItemPesagem(coment);
         itemPesagemBean.setDthrItemPesagem(Tempo.getInstance().dataComHora());
@@ -24,13 +26,13 @@ public class ItemPesagemDAO {
 
     public List<ItemPesagemBean> getListItem(Long idCabec){
         ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
-        return itemPesagemBean.get("idCabItemPes", idCabec);
+        return itemPesagemBean.get("idCabItemPesagem", idCabec);
     }
 
-    public List<ItemPesagemBean> getListItem(Long idCabec, Long idBDOrdCarreg){
+    public List<ItemPesagemBean> getListItem(Long idCabec,String codProd){
         ArrayList pesqArrayList = new ArrayList();
         pesqArrayList.add(getPesqCabec(idCabec));
-        pesqArrayList.add(getPesqOrdCarreg(idBDOrdCarreg));
+        pesqArrayList.add(getPesqProd(codProd));
         ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
         return itemPesagemBean.get(pesqArrayList);
     }
@@ -53,9 +55,9 @@ public class ItemPesagemDAO {
         return ver;
     }
 
-    public Double verItemTotalPesagem(Long idCabec, Long idBDOrdCarreg){
+    public Double verItemTotalPesagem(Long idCabec, String codProd){
         Double totalPes = 0D;
-        List<ItemPesagemBean> itemPesagemList = getListItem(idCabec, idBDOrdCarreg);
+        List<ItemPesagemBean> itemPesagemList = getListItem(idCabec, codProd);
         if(itemPesagemList.size() > 0){
             for (ItemPesagemBean itemPesagemBean : itemPesagemList) {
                 totalPes = itemPesagemBean.getPesoItemPesagem() + totalPes;
@@ -67,16 +69,16 @@ public class ItemPesagemDAO {
 
     private EspecificaPesquisa getPesqCabec(Long idCabec){
         EspecificaPesquisa pesquisa = new EspecificaPesquisa();
-        pesquisa.setCampo("idCabItemPes");
+        pesquisa.setCampo("idCabItemPesagem");
         pesquisa.setValor(idCabec);
         pesquisa.setTipo(1);
         return pesquisa;
     }
 
-    private EspecificaPesquisa getPesqOrdCarreg(Long idBDOrdCarreg){
+    private EspecificaPesquisa getPesqProd(String codProd){
         EspecificaPesquisa pesquisa = new EspecificaPesquisa();
-        pesquisa.setCampo("idOrdCarregItemPes");
-        pesquisa.setValor(idBDOrdCarreg);
+        pesquisa.setCampo("prodItemPesagem");
+        pesquisa.setValor(codProd);
         pesquisa.setTipo(1);
         return pesquisa;
     }

@@ -46,14 +46,22 @@ public class ListaProdutoActivity extends ActivityGeneric {
                                     long id) {
 
                 OrdCarregBean ordCarregBean = produtoList.get(position);
+                ppaContext.getPesagemCTR().setItemPesagemBean();
                 ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPesagem(ordCarregBean.getCodProdOrdCarreg());
 
                 produtoList.clear();
 
-                Intent it = new Intent(ListaProdutoActivity.this, MenuCaptPesagemActivity.class);
-                startActivity(it);
-                finish();
-
+                if(ppaContext.getPesagemCTR().verOSOrdCarreg()){
+                    Intent it = new Intent(ListaProdutoActivity.this, ListaOSActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else{
+                    ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(0L);
+                    Intent it = new Intent(ListaProdutoActivity.this, MenuCaptPesagemActivity.class);
+                    startActivity(it);
+                    finish();
+                }
             }
 
         });
@@ -61,7 +69,7 @@ public class ListaProdutoActivity extends ActivityGeneric {
         buttonRetProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaProdutoActivity.this, ListaOSActivity.class);
+                Intent it = new Intent(ListaProdutoActivity.this, MenuPesagemActivity.class);
                 startActivity(it);
                 finish();
             }

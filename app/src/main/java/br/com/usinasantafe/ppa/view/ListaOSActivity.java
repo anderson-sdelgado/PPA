@@ -46,12 +46,11 @@ public class ListaOSActivity extends ActivityGeneric {
                                     long id) {
 
             OrdCarregBean ordCarregBean = osList.get(position);
-            ppaContext.getPesagemCTR().setItemPesagemBean();
             ppaContext.getPesagemCTR().getItemPesagemBean().setNroOSItemPesagem(ordCarregBean.getNroOSOrdCarreg());
 
             osList.clear();
 
-            Intent it = new Intent(ListaOSActivity.this, ListaProdutoActivity.class);
+            Intent it = new Intent(ListaOSActivity.this, MenuCaptPesagemActivity.class);
             startActivity(it);
             finish();
 
@@ -62,7 +61,7 @@ public class ListaOSActivity extends ActivityGeneric {
         buttonRetOS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaOSActivity.this, MenuPesagemActivity.class);
+                Intent it = new Intent(ListaOSActivity.this, ListaProdutoActivity.class);
                 startActivity(it);
                 finish();
             }

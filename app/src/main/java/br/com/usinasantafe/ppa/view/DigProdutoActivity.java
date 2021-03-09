@@ -35,7 +35,7 @@ public class DigProdutoActivity extends ActivityGeneric {
 
                     ppaContext.getPesagemCTR().getItemPesagemBean().setProdItemPesagem(editTextProd.getText().toString().trim());
 
-                    Intent it = new Intent( DigProdutoActivity.this, MenuCaptPesagemActivity.class);
+                    Intent it = new Intent( DigProdutoActivity.this, DigOSActivity.class);
                     startActivity(it);
                     finish();
 

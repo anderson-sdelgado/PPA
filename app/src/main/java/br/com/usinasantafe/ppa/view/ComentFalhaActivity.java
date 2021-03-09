@@ -43,12 +43,12 @@ public class ComentFalhaActivity extends ActivityGeneric {
                         public void onClick(DialogInterface dialog, int which) {
 
                             if(ppaContext.getPesagemCTR().verStatusConCabecPesagem()){
-                                Intent it = new Intent(ComentFalhaActivity.this, ListaOSActivity.class);
+                                Intent it = new Intent(ComentFalhaActivity.this, ListaProdutoActivity.class);
                                 startActivity(it);
                                 finish();
                             }
                             else{
-                                Intent it = new Intent(ComentFalhaActivity.this, DigOSActivity.class);
+                                Intent it = new Intent(ComentFalhaActivity.this, DigProdutoActivity.class);
                                 startActivity(it);
                                 finish();
                             }
