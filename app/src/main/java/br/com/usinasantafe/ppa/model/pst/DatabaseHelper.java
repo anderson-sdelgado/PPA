@@ -18,7 +18,7 @@ import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	public static final String FORCA_DB_NAME = "ppa_db";
-	public static final int FORCA_BD_VERSION = 2;
+	public static final int FORCA_BD_VERSION = 3;
 
 	private static DatabaseHelper instance;
 	
@@ -47,16 +47,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db, ConnectionSource cs) {
 
-		
 		try{
-			
-			TableUtils.createTable(cs, OrdCarregBean.class);
-			TableUtils.createTable(cs, FuncBean.class);
-			TableUtils.createTable(cs, EquipBean.class);
 
-			TableUtils.createTable(cs, ConfigBean.class);
-			TableUtils.createTable(cs, CabecPesagemBean.class);
-			TableUtils.createTable(cs, ItemPesagemBean.class);
+				TableUtils.createTable(cs, OrdCarregBean.class);
+				TableUtils.createTable(cs, FuncBean.class);
+				TableUtils.createTable(cs, EquipBean.class);
+
+				TableUtils.createTable(cs, ConfigBean.class);
+				TableUtils.createTable(cs, CabecPesagemBean.class);
+				TableUtils.createTable(cs, ItemPesagemBean.class);
 
 		}
 		catch(Exception e){
@@ -74,8 +73,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			int newVersion) {
 		
 		try {
-			
-			if(oldVersion != newVersion){
+
+			if((oldVersion <= 2) && (newVersion > 2)) {
 
 				TableUtils.dropTable(cs, EquipBean.class, true);
 				TableUtils.dropTable(cs, OrdCarregBean.class, true);

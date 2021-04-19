@@ -24,7 +24,7 @@ public class ListaHistoricoActivity extends ActivityGeneric {
         Button buttonRetHistorico = (Button) findViewById(R.id.buttonRetHistorico);
 
         ListView listaHistorico = (ListView) findViewById(R.id.listaHistorico);
-        AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, ppaContext.getPesagemCTR().itemPesagemApontList());
+        AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, ppaContext.getPesagemCTR().itemPesagemApontArrayList());
         listaHistorico.setAdapter(adapterListHistorico);
 
         buttonRetHistorico.setOnClickListener(new View.OnClickListener() {

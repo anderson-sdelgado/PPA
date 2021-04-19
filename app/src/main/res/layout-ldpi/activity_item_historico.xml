@@ -5,20 +5,16 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewHistDataHora"
-        style="@style/TextViewItemList"
-        android:text="@string/texto_hist_dthr"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/textViewHistOrdemServico"
         style="@style/TextViewItemList"
-        android:text="@string/texto_hist_os" />
+        android:text="@string/texto_hist_os"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewHistProd"
         style="@style/TextViewItemList"
-        android:text="@string/texto_hist_prod" />
+        android:text="@string/texto_hist_prod"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewHistPeso"

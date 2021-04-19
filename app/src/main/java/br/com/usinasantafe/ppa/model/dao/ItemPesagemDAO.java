@@ -29,6 +29,32 @@ public class ItemPesagemDAO {
         return itemPesagemBean.get("idCabItemPesagem", idCabec);
     }
 
+    public ArrayList<ItemPesagemBean> getListItemArrayList(Long idCabec){
+        ItemPesagemBean itemPesagemBean = new ItemPesagemBean();
+        List<ItemPesagemBean> itemPesagemList = itemPesagemBean.get("idCabItemPesagem", idCabec);
+        ArrayList<ItemPesagemBean> itemPesagemArrayList = new ArrayList<>();
+        for(ItemPesagemBean itemPesagemBD : itemPesagemList){
+            if(itemPesagemArrayList.size() == 0){
+                itemPesagemArrayList.add(itemPesagemBD);
+            }
+            else{
+                boolean ver = true;
+                for(ItemPesagemBean itemPesagemAux : itemPesagemArrayList){
+                    if(itemPesagemBD.getNroOSItemPesagem().equals(itemPesagemAux.getNroOSItemPesagem())
+                        && itemPesagemBD.getProdItemPesagem().equals(itemPesagemAux.getProdItemPesagem())){
+                        ver = false;
+                        Double pesagem = itemPesagemAux.getPesoItemPesagem() + itemPesagemBD.getPesoItemPesagem();
+                        itemPesagemAux.setPesoItemPesagem(pesagem);
+                    }
+                }
+                if(ver){
+                    itemPesagemArrayList.add(itemPesagemBD);
+                }
+            }
+        }
+        return itemPesagemArrayList;
+    }
+
     public List<ItemPesagemBean> getListItem(Long idCabec,String codProd){
         ArrayList pesqArrayList = new ArrayList();
         pesqArrayList.add(getPesqCabec(idCabec));

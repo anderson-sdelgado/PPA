@@ -7,7 +7,7 @@ import br.com.usinasantafe.ppa.control.PesagemCTR;
 
 public class PPAContext extends Application {
 
-    public static String versaoAplic = "1.00";
+    public static String versaoAplic = "1.01";
     private PesagemCTR pesagemCTR;
     private ConfigCTR configCTR;
 

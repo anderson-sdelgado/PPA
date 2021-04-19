@@ -18,21 +18,15 @@ public abstract class Entidade implements Serializable {
 	private Dao dao;
 	
 	private Dao daoImpl(){
-		
 		try {
-			
 			if(dao == null){
 				DatabaseHelper instance = DatabaseHelper.getInstance();
 				dao = instance.getDao(getClass());
 			}
-			
 			return dao;
-			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
-		
 	}
 	
 	public void insert() {
@@ -44,7 +38,6 @@ public abstract class Entidade implements Serializable {
 	}
 	
 	public void update() {
-		
 		try {
 			this.daoImpl().update(this);
 		} catch (SQLException e) {
@@ -109,7 +102,6 @@ public abstract class Entidade implements Serializable {
 	}
 
 	public List getAndOrderBy(String campo, Object valor, String campOrder, boolean order) {
-
 		try {
 			QueryBuilder<String, Object> queryBuilder =
 					this.daoImpl().queryBuilder();
@@ -149,13 +141,11 @@ public abstract class Entidade implements Serializable {
 	
 	public List orderBy(String campo, boolean order){
 		try {
-			
 			QueryBuilder<String, Object> queryBuilder =
 					this.daoImpl().queryBuilder();
 			queryBuilder.orderBy(campo, order);
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
-			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -175,12 +165,10 @@ public abstract class Entidade implements Serializable {
 	
 	
 	public boolean hasElements() {
-
 		return all().size() > 0;
 	}
 
 	public int count() {
-
 		return all().size();
 	}
 	

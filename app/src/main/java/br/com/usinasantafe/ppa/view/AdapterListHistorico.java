@@ -51,14 +51,12 @@ public class AdapterListHistorico extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
 
         view = layoutInflater.inflate(R.layout.activity_item_historico, null);
-        textViewHistDataHora = (TextView) view.findViewById(R.id.textViewHistDataHora);
         textViewHistOS = (TextView) view.findViewById(R.id.textViewHistOrdemServico);
         textViewHistProd = (TextView) view.findViewById(R.id.textViewHistProd);
         textViewHistPeso = (TextView) view.findViewById(R.id.textViewHistPeso);
 
         ItemPesagemBean itemPesagemBean = itens.get(position);
 
-        textViewHistDataHora.setText("DATA/HORA: " + itemPesagemBean.getDthrItemPesagem());
         textViewHistOS.setText("O.S.:" + itemPesagemBean.getNroOSItemPesagem());
         PesagemCTR pesagemCTR = new PesagemCTR();
         textViewHistProd.setText("PRODUTO: " + itemPesagemBean.getProdItemPesagem() + " - " + pesagemCTR.getOrdCarregProd(itemPesagemBean.getProdItemPesagem()).getDescrProdOrdCarreg());

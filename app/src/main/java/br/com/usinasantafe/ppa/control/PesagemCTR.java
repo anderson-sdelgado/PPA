@@ -169,6 +169,16 @@ public class PesagemCTR {
 
     ////////////////////////////////////// GET DADOS /////////////////////////////////////////////
 
+    public List<ItemPesagemBean> itemPesagemApontArrayList(){
+        CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
+        List<CabecPesagemBean> cabPesagemList = cabecPesagemDAO.cabecPesagemApontList();
+        CabecPesagemBean cabecPesagemBean = cabPesagemList.get(0);
+        ItemPesagemDAO itemPesagemDAO = new ItemPesagemDAO();
+        List<ItemPesagemBean> itemPesagemList = itemPesagemDAO.getListItemArrayList(cabecPesagemBean.getIdCabecPesagem());
+        cabPesagemList.clear();
+        return itemPesagemList;
+    }
+
     public List<ItemPesagemBean> itemPesagemApontList(){
         CabecPesagemDAO cabecPesagemDAO = new CabecPesagemDAO();
         List<CabecPesagemBean> cabPesagemList = cabecPesagemDAO.cabecPesagemApontList();
