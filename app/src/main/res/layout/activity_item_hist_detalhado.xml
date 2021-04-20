@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewHistDataHora"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_hist_dthr"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewHistOrdemServico"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_hist_os" />
+
+    <TextView
+        android:id="@+id/textViewHistProd"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_hist_prod" />
+
+    <TextView
+        android:id="@+id/textViewHistPeso"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_hist_peso" />
+
+</LinearLayout>

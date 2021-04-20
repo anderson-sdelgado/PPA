@@ -22,10 +22,21 @@ public class ListaHistoricoActivity extends ActivityGeneric {
         ppaContext = (PPAContext) getApplication();
 
         Button buttonRetHistorico = (Button) findViewById(R.id.buttonRetHistorico);
+        Button buttonAvancarHistorico = (Button) findViewById(R.id.buttonAvancarHistorico);
 
         ListView listaHistorico = (ListView) findViewById(R.id.listaHistorico);
         AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, ppaContext.getPesagemCTR().itemPesagemApontArrayList());
         listaHistorico.setAdapter(adapterListHistorico);
+
+        buttonAvancarHistorico.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(ListaHistoricoActivity.this, ListaHistDetalhadoActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
         buttonRetHistorico.setOnClickListener(new View.OnClickListener() {
 

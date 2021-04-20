@@ -18,7 +18,7 @@ import br.com.usinasantafe.ppa.model.bean.variaveis.ItemPesagemBean;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	public static final String FORCA_DB_NAME = "ppa_db";
-	public static final int FORCA_BD_VERSION = 3;
+	public static final int FORCA_BD_VERSION = 4;
 
 	private static DatabaseHelper instance;
 	
@@ -74,7 +74,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		
 		try {
 
-			if((oldVersion <= 2) && (newVersion > 2)) {
+			if((oldVersion < 4) && (newVersion == 4)) {
 
 				TableUtils.dropTable(cs, EquipBean.class, true);
 				TableUtils.dropTable(cs, OrdCarregBean.class, true);

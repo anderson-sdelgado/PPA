@@ -9,29 +9,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.ListaHistoricoActivity">
+    tools:context=".view.ListaHistDetalhadoActivity">
 
     <TextView
-        android:id="@+id/textViewHistorico"
+        android:id="@+id/textViewHistDetalhado"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_titulo_historico" />
+        android:text="@string/texto_titulo_hist_detalhado" />
 
     <ListView
-        android:id="@+id/listaHistorico"
+        android:id="@+id/listaHistDetalhado"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         />
 
     <Button
-        android:id="@+id/buttonAvancarHistorico"
+        android:id="@+id/buttonAvancarHistDetalhado"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/texto_padrao_avancar" />
 
     <Button
-        android:id="@+id/buttonRetHistorico"
+        android:id="@+id/buttonRetHistDetalhado"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

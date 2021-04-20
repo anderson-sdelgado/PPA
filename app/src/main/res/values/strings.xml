@@ -161,6 +161,7 @@
     <string name="texto_os">OS</string>
     <string name="texto_coment_falha">POR FAVOR, COMENTE O MOTIVO DA PESAGEM MANUAL.</string>
     <string name="texto_padrao_retornar">RETORNAR</string>
+    <string name="texto_padrao_avancar">AVANÇAR</string>
     <string name="texto_msg_pesagem">DESEJA INSERIR OUTRA PESAGEM?</string>
     <string name="texto_botao_camera">ACIONAR CAMERA</string>
     <string name="texto_foto">FOTO</string>
@@ -185,6 +186,7 @@
     <string name="texto_hist_prod">PRODUTO: A23435 - TESTE</string>
     <string name="texto_hist_peso">PESO: 123.00</string>
     <string name="texto_titulo_historico">HISTÓRICO</string>
+    <string name="texto_titulo_hist_detalhado">HISTÓRICO DETALHADO</string>
     <string name="texto_menu_titulo_motorista">MOTORISTA</string>
     <string name="texto_menu_motorista">1 - FUNCIONARIO FICTICIO</string>
     <string name="texto_zerar_bal">ZERAR BALANÇA</string>
